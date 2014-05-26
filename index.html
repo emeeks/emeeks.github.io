@@ -1,0 +1,112 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Elijah Meeks</title>
+  <meta charset="utf-8" />
+</head>
+<script src="http://d3js.org/d3.v3.min.js" type="text/javascript"></script>
+<script src="http://d3js.org/colorbrewer.v1.min.js"></script>
+<style>
+ 
+
+div.gallery {
+  position: relative;
+  height:50%;
+  overflow: scroll;
+  border: 2px solid black;
+}
+
+div.infinite {
+  position: absolute;
+  background: rgba(255,255,255,0);
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(0,0,0,0);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+div.infinite:hover > div {
+  display: block;
+}
+
+div.info {
+  position: absolute;
+  bottom:10;
+  background: rgba(255,255,255,0.75);
+  height: 25%;
+  width: 75%;
+  left: 12.5%;
+  text-align: center;
+  padding: 5px;
+  display:none;
+  pointer-events: none;
+}
+
+img.infinite {
+  height:100%;
+}
+</style>
+<body onload="gallery()">
+<div id="controls">
+</div>
+</body>
+<footer>    
+<script>
+imPerPage = 6;
+function gallery() {
+  imageArray = [{data: "d3introspect.png", x: 0, desc: "d3.introspect talk", link: "introspect/"},{data: "blocks.png", x: 1, desc: "my blocks", link: "http://bl.ocks.org/emeeks"},{data: "isw.png", x: 2, desc: "interactive scholarly works", link: "isw/"},{data: "digitalhumanities.png", x: 3, desc: "digital humanities", link: "https://digitalhumanities.stanford.edu/"},{data: "d3ia.png", x: 4,desc:"",link:"http://www.manning.com/meeks/"}];
+
+  imDivs = d3.select("#controls")
+  .append("div").attr("class", "gallery")
+  .selectAll("div").data(imageArray).enter().append("div")
+  .attr("class", "infinite")
+  .on("mouseover", highlightImage)
+  .on("mouseout", dehighlightImage)
+  .attr("onclick", function(d) {return "location.href='" + d.link + "'"});
+  
+  imDivs.append("img").attr("class","infinite")
+  .attr("src", function(d) {return d.data})
+  
+  imDivs.append("div").attr("class", "info").html(function(d) {return d.desc})
+  
+  redrawGallery();
+  
+  function highlightImage(d) {
+      var newWidth = parseFloat(d3.select("div.gallery").node().clientWidth);
+      var imageSize = newWidth / imPerPage;
+    d3.select(this).transition().duration(500).style("width", imageSize * 2).style("height", imageSize * 2)
+    .style("background", "rgba(255,255,255,1)")
+    .style("border-color", "rgba(0,0,0,1)");
+    this.parentNode.appendChild(this)
+
+  }
+
+  function dehighlightImage(d) {
+      var newWidth = parseFloat(d3.select("div.gallery").node().clientWidth);
+      var imageSize = newWidth / imPerPage;
+    d3.select(this).transition().duration(500).style("width", imageSize).style("height", imageSize)
+    .style("background", "rgba(255,255,255,0)")
+    .style("border-color", "rgba(0,0,0,0)")
+  }
+  
+  function redrawGallery() {
+      var newHeight = parseFloat(d3.select("div.gallery").node().clientHeight);
+      var newWidth = parseFloat(d3.select("div.gallery").node().clientWidth);
+      var imageSize = newWidth / imPerPage;
+      d3.selectAll("div.infinite")
+      .style("width", newWidth / imPerPage)
+      .style("height", newWidth / imPerPage)
+      .style("top", function(d) {return Math.floor(d.x / imPerPage) * imageSize})
+      .style("left", function(d) {return d.x%imPerPage * imageSize})
+      
+  }
+  
+  window.onresize = function(event) {
+	redrawGallery();
+}
+
+}
+</script>
+</footer>
+ 
+</html>

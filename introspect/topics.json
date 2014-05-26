@@ -1,0 +1,3163 @@
+{
+    "topics": [
+        {
+            "label": "Topic 0",
+            "totaltokens": 131,
+            "uniquetokens": 7,
+            "words": [
+                {
+                    "diabetes": 0.0153
+                },
+                {
+                    "track": 0.0153
+                },
+                {
+                    "future": 0.0382
+                },
+                {
+                    "math": 0.0611
+                },
+                {
+                    "java": 0.0382
+                },
+                {
+                    "understanding": 0.0229
+                },
+                {
+                    "wannabe": 0.0153
+                },
+                {
+                    "keen": 0.0305
+                },
+                {
+                    "travel": 0.0153
+                },
+                {
+                    "products": 0.0153
+                },
+                {
+                    "interests": 0.0916
+                },
+                {
+                    "languages": 0.0229
+                },
+                {
+                    "founder": 0.145
+                },
+                {
+                    "product": 0.145
+                },
+                {
+                    "manufacturing": 0.0153
+                },
+                {
+                    "partner": 0.0305
+                },
+                {
+                    "knowledge": 0.0153
+                },
+                {
+                    "ca": 0.0382
+                },
+                {
+                    "interest": 0.0534
+                },
+                {
+                    "linkedin": 0.0382
+                },
+                {
+                    "microsoft": 0.0153
+                },
+                {
+                    "zignal": 0.0153
+                },
+                {
+                    "apps": 0.1221
+                },
+                {
+                    "specialist": 0.0229
+                },
+                {
+                    "play": 0.0229
+                },
+                {
+                    "biology": 0.0153
+                },
+                {
+                    "educational": 0.0229
+                },
+                {
+                    "industrial": 0.0153
+                },
+                {
+                    "left": 0.0153
+                },
+                {
+                    "turn": 0.0229
+                },
+                {
+                    "days": 0.0458
+                },
+                {
+                    "ways": 0.0382
+                },
+                {
+                    "tool": 0.1069
+                },
+                {
+                    "design": 0.3053
+                },
+                {
+                    "open": 0.084
+                },
+                {
+                    "academic": 0.0305
+                }
+            ]
+        },
+        {
+            "label": "Topic 1",
+            "totaltokens": 162,
+            "uniquetokens": 5,
+            "words": [
+                {
+                    "mozilla": 0.0185
+                },
+                {
+                    "trained": 0.0123
+                },
+                {
+                    "reno": 0.0123
+                },
+                {
+                    "group": 0.1111
+                },
+                {
+                    "bi": 0.0309
+                },
+                {
+                    "gears": 0.0185
+                },
+                {
+                    "js": 0.5494
+                },
+                {
+                    "bay": 0.037
+                },
+                {
+                    "diverse": 0.0123
+                },
+                {
+                    "django": 0.0247
+                },
+                {
+                    "graduate": 0.0309
+                },
+                {
+                    "graph": 0.0617
+                },
+                {
+                    "networks": 0.0123
+                },
+                {
+                    "coding": 0.0123
+                },
+                {
+                    "industry": 0.0247
+                },
+                {
+                    "year": 0.0309
+                },
+                {
+                    "visualizer": 0.0185
+                },
+                {
+                    "html": 0.1111
+                },
+                {
+                    "types": 0.0123
+                },
+                {
+                    "move": 0.0247
+                },
+                {
+                    "nodexl": 0.0123
+                },
+                {
+                    "francisco": 0.037
+                },
+                {
+                    "decent": 0.0123
+                },
+                {
+                    "graduating": 0.0123
+                },
+                {
+                    "long": 0.037
+                },
+                {
+                    "observe": 0.0123
+                },
+                {
+                    "clinical": 0.0123
+                },
+                {
+                    "building": 0.0556
+                },
+                {
+                    "potential": 0.0247
+                },
+                {
+                    "ly": 0.0185
+                },
+                {
+                    "time": 0.1667
+                }
+            ]
+        },
+        {
+            "label": "Topic 2",
+            "totaltokens": 184,
+            "uniquetokens": 4,
+            "words": [
+                {
+                    "programming": 0.038
+                },
+                {
+                    "arts": 0.0109
+                },
+                {
+                    "aspiring": 0.0326
+                },
+                {
+                    "level": 0.0109
+                },
+                {
+                    "mathematics": 0.0163
+                },
+                {
+                    "generative": 0.0109
+                },
+                {
+                    "email": 0.0109
+                },
+                {
+                    "guy": 0.087
+                },
+                {
+                    "visualization": 0.7826
+                },
+                {
+                    "computational": 0.0109
+                },
+                {
+                    "employee": 0.0163
+                },
+                {
+                    "mateo": 0.0163
+                },
+                {
+                    "elasticsearch": 0.0163
+                },
+                {
+                    "environmental": 0.0163
+                },
+                {
+                    "lab": 0.0109
+                },
+                {
+                    "art": 0.0707
+                },
+                {
+                    "gif": 0.0109
+                },
+                {
+                    "interfaces": 0.0109
+                },
+                {
+                    "innovation": 0.0109
+                },
+                {
+                    "primarily": 0.0163
+                },
+                {
+                    "computer": 0.0109
+                },
+                {
+                    "write": 0.0272
+                },
+                {
+                    "digital": 0.0163
+                },
+                {
+                    "clean": 0.0163
+                },
+                {
+                    "reading": 0.0109
+                },
+                {
+                    "graphics": 0.038
+                },
+                {
+                    "man": 0.0217
+                },
+                {
+                    "gis": 0.0109
+                },
+                {
+                    "private": 0.0109
+                },
+                {
+                    "numbers": 0.0163
+                },
+                {
+                    "bit": 0.0598
+                },
+                {
+                    "data": 0.0163
+                },
+                {
+                    "degree": 0.0163
+                }
+            ]
+        },
+        {
+            "label": "Topic 3",
+            "totaltokens": 137,
+            "uniquetokens": 3,
+            "words": [
+                {
+                    "aware": 0.0146
+                },
+                {
+                    "intro": 0.0219
+                },
+                {
+                    "advocate": 0.0365
+                },
+                {
+                    "visiting": 0.0292
+                },
+                {
+                    "biotech": 0.0219
+                },
+                {
+                    "time": 0.0219
+                },
+                {
+                    "host": 0.0219
+                },
+                {
+                    "businesses": 0.0146
+                },
+                {
+                    "focused": 0.0219
+                },
+                {
+                    "development": 0.2117
+                },
+                {
+                    "web": 0.6715
+                },
+                {
+                    "ways": 0.0438
+                },
+                {
+                    "keen": 0.0146
+                },
+                {
+                    "thought": 0.0292
+                },
+                {
+                    "graphs": 0.0146
+                },
+                {
+                    "department": 0.0365
+                },
+                {
+                    "explain": 0.0146
+                },
+                {
+                    "ios": 0.0365
+                },
+                {
+                    "complexity": 0.0219
+                },
+                {
+                    "represent": 0.0146
+                },
+                {
+                    "draw": 0.0219
+                },
+                {
+                    "members": 0.0146
+                },
+                {
+                    "app": 0.1168
+                },
+                {
+                    "game": 0.0511
+                },
+                {
+                    "technologies": 0.0657
+                },
+                {
+                    "attend": 0.0219
+                },
+                {
+                    "junkie": 0.0292
+                },
+                {
+                    "halftone": 0.0219
+                },
+                {
+                    "share": 0.0292
+                },
+                {
+                    "consultant": 0.0584
+                },
+                {
+                    "workshop": 0.0146
+                },
+                {
+                    "cid": 0.0146
+                }
+            ]
+        },
+        {
+            "label": "Topic 4",
+            "totaltokens": 172,
+            "uniquetokens": 9,
+            "words": [
+                {
+                    "publishing": 0.0116
+                },
+                {
+                    "researcher": 0.0872
+                },
+                {
+                    "interested": 0.2442
+                },
+                {
+                    "coder": 0.0291
+                },
+                {
+                    "mobile": 0.0349
+                },
+                {
+                    "stanford": 0.0116
+                },
+                {
+                    "startup": 0.1395
+                },
+                {
+                    "display": 0.0116
+                },
+                {
+                    "bart": 0.0116
+                },
+                {
+                    "family": 0.0116
+                },
+                {
+                    "devs": 0.0116
+                },
+                {
+                    "code": 0.1163
+                },
+                {
+                    "blogger": 0.0116
+                },
+                {
+                    "internet": 0.0407
+                },
+                {
+                    "technologies": 0.0814
+                },
+                {
+                    "loving": 0.0116
+                },
+                {
+                    "likes": 0.0116
+                },
+                {
+                    "klein": 0.0116
+                },
+                {
+                    "teaching": 0.0233
+                },
+                {
+                    "gaming": 0.0116
+                },
+                {
+                    "involved": 0.0116
+                },
+                {
+                    "graphic": 0.0233
+                },
+                {
+                    "monitoring": 0.0116
+                },
+                {
+                    "project": 0.0465
+                },
+                {
+                    "hear": 0.0116
+                },
+                {
+                    "leading": 0.0116
+                },
+                {
+                    "america": 0.064
+                },
+                {
+                    "system": 0.0116
+                },
+                {
+                    "labs": 0.0291
+                },
+                {
+                    "technology": 0.1163
+                },
+                {
+                    "media": 0.0756
+                },
+                {
+                    "global": 0.0116
+                },
+                {
+                    "activity": 0.0116
+                },
+                {
+                    "fellow": 0.0756
+                },
+                {
+                    "patterns": 0.0116
+                },
+                {
+                    "free": 0.0233
+                },
+                {
+                    "dude": 0.0116
+                }
+            ]
+        },
+        {
+            "label": "Topic 5",
+            "totaltokens": 203,
+            "uniquetokens": 8,
+            "words": [
+                {
+                    "wanting": 0.0246
+                },
+                {
+                    "frameworks": 0.0394
+                },
+                {
+                    "student": 0.3005
+                },
+                {
+                    "websites": 0.0148
+                },
+                {
+                    "uc": 0.1232
+                },
+                {
+                    "phd": 0.0936
+                },
+                {
+                    "sensors": 0.0148
+                },
+                {
+                    "cs": 0.0493
+                },
+                {
+                    "planning": 0.0197
+                },
+                {
+                    "journalism": 0.0246
+                },
+                {
+                    "research": 0.0985
+                },
+                {
+                    "school": 0.0591
+                },
+                {
+                    "berkeley": 0.2217
+                },
+                {
+                    "communicate": 0.0148
+                },
+                {
+                    "user": 0.0148
+                },
+                {
+                    "university": 0.0542
+                }
+            ]
+        },
+        {
+            "label": "Topic 6",
+            "totaltokens": 129,
+            "uniquetokens": 4,
+            "words": [
+                {
+                    "computing": 0.0155
+                },
+                {
+                    "frontend": 0.0233
+                },
+                {
+                    "developer": 0.4574
+                },
+                {
+                    "college": 0.062
+                },
+                {
+                    "street": 0.031
+                },
+                {
+                    "automation": 0.0155
+                },
+                {
+                    "loving": 0.0155
+                },
+                {
+                    "job": 0.0775
+                },
+                {
+                    "technologist": 0.031
+                },
+                {
+                    "backbone": 0.031
+                },
+                {
+                    "things": 0.0233
+                },
+                {
+                    "wild": 0.0155
+                },
+                {
+                    "skill": 0.0233
+                },
+                {
+                    "ideo": 0.0233
+                },
+                {
+                    "makes": 0.0233
+                },
+                {
+                    "twitter": 0.0465
+                },
+                {
+                    "lib": 0.0155
+                },
+                {
+                    "related": 0.0233
+                },
+                {
+                    "ve": 0.062
+                },
+                {
+                    "scholarly": 0.0155
+                },
+                {
+                    "reader": 0.0155
+                },
+                {
+                    "programmer": 0.2326
+                },
+                {
+                    "sound": 0.0155
+                },
+                {
+                    "include": 0.0233
+                },
+                {
+                    "teach": 0.031
+                },
+                {
+                    "dude": 0.0155
+                },
+                {
+                    "passion": 0.062
+                },
+                {
+                    "experts": 0.0233
+                },
+                {
+                    "reactor": 0.031
+                },
+                {
+                    "humanities": 0.031
+                },
+                {
+                    "ad": 0.0155
+                },
+                {
+                    "artists": 0.0155
+                },
+                {
+                    "teacher": 0.0388
+                },
+                {
+                    "worked": 0.0465
+                },
+                {
+                    "started": 0.2326
+                },
+                {
+                    "yummly": 0.0155
+                },
+                {
+                    "california": 0.031
+                }
+            ]
+        },
+        {
+            "label": "Topic 7",
+            "totaltokens": 139,
+            "uniquetokens": 6,
+            "words": [
+                {
+                    "quantum": 0.0144
+                },
+                {
+                    "projects": 0.2374
+                },
+                {
+                    "artist": 0.0144
+                },
+                {
+                    "statistics": 0.0647
+                },
+                {
+                    "crazy": 0.0216
+                },
+                {
+                    "museum": 0.0144
+                },
+                {
+                    "smart": 0.0288
+                },
+                {
+                    "mountain": 0.0216
+                },
+                {
+                    "cofounder": 0.0216
+                },
+                {
+                    "evangelist": 0.0144
+                },
+                {
+                    "infoviz": 0.0144
+                },
+                {
+                    "powerful": 0.0144
+                },
+                {
+                    "arch": 0.0216
+                },
+                {
+                    "estate": 0.0144
+                },
+                {
+                    "context": 0.0144
+                },
+                {
+                    "browser": 0.036
+                },
+                {
+                    "believer": 0.0144
+                },
+                {
+                    "audio": 0.0216
+                },
+                {
+                    "test": 0.0216
+                },
+                {
+                    "information": 0.0144
+                },
+                {
+                    "biologist": 0.0288
+                },
+                {
+                    "business": 0.0432
+                },
+                {
+                    "week": 0.0288
+                },
+                {
+                    "system": 0.0144
+                },
+                {
+                    "real": 0.0791
+                },
+                {
+                    "access": 0.0144
+                },
+                {
+                    "thinking": 0.0144
+                },
+                {
+                    "background": 0.1439
+                },
+                {
+                    "physics": 0.0432
+                },
+                {
+                    "tech": 0.2446
+                },
+                {
+                    "er": 0.0216
+                },
+                {
+                    "built": 0.0288
+                },
+                {
+                    "frisbee": 0.0144
+                },
+                {
+                    "public": 0.0504
+                },
+                {
+                    "playing": 0.0791
+                },
+                {
+                    "database": 0.036
+                },
+                {
+                    "profession": 0.0216
+                },
+                {
+                    "online": 0.0144
+                },
+                {
+                    "immersive": 0.036
+                },
+                {
+                    "noob": 0.036
+                },
+                {
+                    "people": 0.2158
+                }
+            ]
+        },
+        {
+            "label": "Topic 8",
+            "totaltokens": 217,
+            "uniquetokens": 4,
+            "words": [
+                {
+                    "learning": 0.5115
+                },
+                {
+                    "source": 0.0276
+                },
+                {
+                    "developer": 0.0276
+                },
+                {
+                    "machine": 0.1014
+                },
+                {
+                    "year": 0.023
+                },
+                {
+                    "scientist": 0.0138
+                },
+                {
+                    "medical": 0.0138
+                },
+                {
+                    "mobile": 0.023
+                },
+                {
+                    "interested": 0.2627
+                },
+                {
+                    "online": 0.0138
+                },
+                {
+                    "fan": 0.0415
+                },
+                {
+                    "things": 0.1244
+                },
+                {
+                    "bike": 0.0138
+                },
+                {
+                    "cloud": 0.0323
+                }
+            ]
+        },
+        {
+            "label": "Topic 9",
+            "totaltokens": 181,
+            "uniquetokens": 6,
+            "words": [
+                {
+                    "marketing": 0.0331
+                },
+                {
+                    "small": 0.0497
+                },
+                {
+                    "ideas": 0.0331
+                },
+                {
+                    "experimental": 0.011
+                },
+                {
+                    "director": 0.0773
+                },
+                {
+                    "maps": 0.0718
+                },
+                {
+                    "startups": 0.0166
+                },
+                {
+                    "investor": 0.011
+                },
+                {
+                    "joining": 0.0166
+                },
+                {
+                    "dabbling": 0.011
+                },
+                {
+                    "talks": 0.011
+                },
+                {
+                    "zynga": 0.011
+                },
+                {
+                    "technologist": 0.0166
+                },
+                {
+                    "grad": 0.105
+                },
+                {
+                    "data": 0.0166
+                },
+                {
+                    "candidate": 0.011
+                },
+                {
+                    "excited": 0.0221
+                },
+                {
+                    "software": 0.221
+                },
+                {
+                    "developed": 0.011
+                },
+                {
+                    "depth": 0.011
+                },
+                {
+                    "dojo": 0.011
+                },
+                {
+                    "developer": 0.0829
+                },
+                {
+                    "engineer": 0.442
+                },
+                {
+                    "curious": 0.0497
+                }
+            ]
+        },
+        {
+            "label": "Topic 10",
+            "totaltokens": 141,
+            "uniquetokens": 3,
+            "words": [
+                {
+                    "undergrad": 0.0142
+                },
+                {
+                    "devops": 0.0142
+                },
+                {
+                    "https": 0.0142
+                },
+                {
+                    "visual": 0.0142
+                },
+                {
+                    "beer": 0.0142
+                },
+                {
+                    "innovative": 0.0142
+                },
+                {
+                    "sector": 0.0213
+                },
+                {
+                    "supporting": 0.0142
+                },
+                {
+                    "datafist": 0.0142
+                },
+                {
+                    "im": 0.0213
+                },
+                {
+                    "ge": 0.0284
+                },
+                {
+                    "interactive": 0.0567
+                },
+                {
+                    "org": 0.0426
+                },
+                {
+                    "diagrams": 0.0142
+                },
+                {
+                    "twilio": 0.0142
+                },
+                {
+                    "stared": 0.0142
+                },
+                {
+                    "government": 0.0213
+                },
+                {
+                    "analyze": 0.0284
+                },
+                {
+                    "live": 0.0426
+                },
+                {
+                    "apple": 0.0284
+                },
+                {
+                    "start": 0.0709
+                },
+                {
+                    "insights": 0.0426
+                },
+                {
+                    "patterns": 0.0142
+                },
+                {
+                    "data": 0.7801
+                },
+                {
+                    "pc": 0.0142
+                },
+                {
+                    "bring": 0.0284
+                },
+                {
+                    "info": 0.0284
+                },
+                {
+                    "mobile": 0.1489
+                },
+                {
+                    "attending": 0.0142
+                }
+            ]
+        },
+        {
+            "label": "Topic 11",
+            "totaltokens": 201,
+            "uniquetokens": 3,
+            "words": [
+                {
+                    "website": 0.0199
+                },
+                {
+                    "data": 0.5274
+                },
+                {
+                    "writer": 0.0199
+                },
+                {
+                    "interface": 0.0199
+                },
+                {
+                    "datavis": 0.0149
+                },
+                {
+                    "digital": 0.0448
+                },
+                {
+                    "interactive": 0.0249
+                },
+                {
+                    "visualization": 0.3682
+                },
+                {
+                    "facebook": 0.0199
+                },
+                {
+                    "information": 0.1045
+                },
+                {
+                    "coder": 0.0249
+                },
+                {
+                    "fan": 0.0199
+                }
+            ]
+        },
+        {
+            "label": "Topic 12",
+            "totaltokens": 141,
+            "uniquetokens": 6,
+            "words": [
+                {
+                    "adventurer": 0.0142
+                },
+                {
+                    "bay": 0.1915
+                },
+                {
+                    "vc": 0.0213
+                },
+                {
+                    "zoomdata": 0.0142
+                },
+                {
+                    "lover": 0.0355
+                },
+                {
+                    "nerd": 0.0496
+                },
+                {
+                    "experiences": 0.0355
+                },
+                {
+                    "organizing": 0.0142
+                },
+                {
+                    "order": 0.0142
+                },
+                {
+                    "investment": 0.0142
+                },
+                {
+                    "bioinformatics": 0.0284
+                },
+                {
+                    "flex": 0.0142
+                },
+                {
+                    "moved": 0.1135
+                },
+                {
+                    "good": 0.0213
+                },
+                {
+                    "run": 0.0567
+                },
+                {
+                    "university": 0.0213
+                },
+                {
+                    "avid": 0.0284
+                },
+                {
+                    "photography": 0.0142
+                },
+                {
+                    "www": 0.0922
+                },
+                {
+                    "insight": 0.0213
+                },
+                {
+                    "paris": 0.0213
+                },
+                {
+                    "practitioner": 0.0213
+                },
+                {
+                    "advisor": 0.0142
+                },
+                {
+                    "heart": 0.0213
+                },
+                {
+                    "basic": 0.0213
+                },
+                {
+                    "enthusiast": 0.2553
+                },
+                {
+                    "startup": 0.0851
+                },
+                {
+                    "interesting": 0.0567
+                },
+                {
+                    "strategy": 0.0142
+                },
+                {
+                    "serial": 0.0142
+                },
+                {
+                    "scene": 0.0142
+                },
+                {
+                    "computing": 0.0355
+                },
+                {
+                    "fairly": 0.0142
+                },
+                {
+                    "java": 0.0142
+                },
+                {
+                    "advertising": 0.0213
+                },
+                {
+                    "area": 0.2624
+                },
+                {
+                    "newbie": 0.0355
+                },
+                {
+                    "algorithms": 0.0213
+                },
+                {
+                    "node": 0.0567
+                }
+            ]
+        },
+        {
+            "label": "Topic 13",
+            "totaltokens": 200,
+            "uniquetokens": 8,
+            "words": [
+                {
+                    "heard": 0.015
+                },
+                {
+                    "javascript": 0.245
+                },
+                {
+                    "rails": 0.075
+                },
+                {
+                    "build": 0.1
+                },
+                {
+                    "client": 0.02
+                },
+                {
+                    "developer": 0.29
+                },
+                {
+                    "full": 0.08
+                },
+                {
+                    "python": 0.065
+                },
+                {
+                    "stack": 0.09
+                },
+                {
+                    "ruby": 0.03
+                },
+                {
+                    "side": 0.055
+                },
+                {
+                    "creative": 0.035
+                },
+                {
+                    "including": 0.025
+                }
+            ]
+        },
+        {
+            "label": "Topic 14",
+            "totaltokens": 198,
+            "uniquetokens": 6,
+            "words": [
+                {
+                    "public": 0.0202
+                },
+                {
+                    "kind": 0.0101
+                },
+                {
+                    "easy": 0.0101
+                },
+                {
+                    "easier": 0.0152
+                },
+                {
+                    "meetup": 0.0606
+                },
+                {
+                    "technology": 0.0101
+                },
+                {
+                    "passionate": 0.0354
+                },
+                {
+                    "datapad": 0.0101
+                },
+                {
+                    "switzerland": 0.0152
+                },
+                {
+                    "amazing": 0.0253
+                },
+                {
+                    "swissnex": 0.0152
+                },
+                {
+                    "adobe": 0.0101
+                },
+                {
+                    "wanting": 0.0152
+                },
+                {
+                    "cfa": 0.0101
+                },
+                {
+                    "general": 0.0404
+                },
+                {
+                    "crowdflower": 0.0152
+                },
+                {
+                    "find": 0.0152
+                },
+                {
+                    "protovis": 0.0202
+                },
+                {
+                    "analyst": 0.0505
+                },
+                {
+                    "data": 0.596
+                },
+                {
+                    "fields": 0.0101
+                },
+                {
+                    "clients": 0.0253
+                },
+                {
+                    "unstructured": 0.0101
+                },
+                {
+                    "interested": 0.0152
+                },
+                {
+                    "discovered": 0.0101
+                },
+                {
+                    "rubyist": 0.0101
+                },
+                {
+                    "repertoire": 0.0101
+                },
+                {
+                    "aficionado": 0.0101
+                },
+                {
+                    "communication": 0.0101
+                },
+                {
+                    "survivor": 0.0101
+                },
+                {
+                    "accessible": 0.0152
+                },
+                {
+                    "analysis": 0.1263
+                },
+                {
+                    "visualizations": 0.1111
+                },
+                {
+                    "airpr": 0.0101
+                },
+                {
+                    "happening": 0.0101
+                },
+                {
+                    "stanford": 0.0152
+                },
+                {
+                    "pretty": 0.0152
+                },
+                {
+                    "company": 0.0556
+                }
+            ]
+        },
+        {
+            "label": "Topic 15",
+            "totaltokens": 168,
+            "uniquetokens": 7,
+            "words": [
+                {
+                    "search": 0.0357
+                },
+                {
+                    "years": 0.0238
+                },
+                {
+                    "chicago": 0.0119
+                },
+                {
+                    "clear": 0.0119
+                },
+                {
+                    "science": 0.25
+                },
+                {
+                    "practice": 0.0179
+                },
+                {
+                    "coding": 0.0655
+                },
+                {
+                    "technical": 0.0238
+                },
+                {
+                    "ly": 0.0119
+                },
+                {
+                    "dataviz": 0.0655
+                },
+                {
+                    "informatics": 0.0238
+                },
+                {
+                    "service": 0.0238
+                },
+                {
+                    "computer": 0.0893
+                },
+                {
+                    "turned": 0.0357
+                },
+                {
+                    "driven": 0.0417
+                },
+                {
+                    "lots": 0.0357
+                },
+                {
+                    "fusion": 0.0119
+                },
+                {
+                    "glob": 0.0179
+                },
+                {
+                    "org": 0.0298
+                },
+                {
+                    "obsessed": 0.0119
+                },
+                {
+                    "feel": 0.0298
+                },
+                {
+                    "trades": 0.0119
+                },
+                {
+                    "recently": 0.0774
+                },
+                {
+                    "web": 0.0179
+                },
+                {
+                    "toolkit": 0.0179
+                },
+                {
+                    "scientist": 0.3155
+                },
+                {
+                    "world": 0.1369
+                },
+                {
+                    "previously": 0.0119
+                }
+            ]
+        },
+        {
+            "label": "Topic 16",
+            "totaltokens": 132,
+            "uniquetokens": 8,
+            "words": [
+                {
+                    "hungry": 0.0152
+                },
+                {
+                    "sorts": 0.0152
+                },
+                {
+                    "team": 0.0227
+                },
+                {
+                    "palantir": 0.0152
+                },
+                {
+                    "develop": 0.0606
+                },
+                {
+                    "systems": 0.1515
+                },
+                {
+                    "urban": 0.0152
+                },
+                {
+                    "find": 0.0303
+                },
+                {
+                    "meet": 0.1515
+                },
+                {
+                    "learn": 0.053
+                },
+                {
+                    "hacker": 0.1136
+                },
+                {
+                    "energy": 0.0379
+                },
+                {
+                    "variety": 0.0152
+                },
+                {
+                    "company": 0.0758
+                },
+                {
+                    "organizer": 0.0152
+                },
+                {
+                    "mills": 0.0152
+                },
+                {
+                    "summer": 0.0303
+                },
+                {
+                    "months": 0.0227
+                },
+                {
+                    "modeling": 0.053
+                },
+                {
+                    "backend": 0.0152
+                },
+                {
+                    "write": 0.0455
+                },
+                {
+                    "junior": 0.0152
+                },
+                {
+                    "contract": 0.0152
+                },
+                {
+                    "cto": 0.0606
+                },
+                {
+                    "www": 0.0227
+                },
+                {
+                    "diy": 0.0152
+                },
+                {
+                    "stanford": 0.0455
+                },
+                {
+                    "ll": 0.0152
+                },
+                {
+                    "sounds": 0.0303
+                },
+                {
+                    "education": 0.053
+                },
+                {
+                    "programming": 0.0909
+                },
+                {
+                    "teams": 0.0152
+                },
+                {
+                    "thomas": 0.0152
+                },
+                {
+                    "manager": 0.1818
+                },
+                {
+                    "studying": 0.0227
+                },
+                {
+                    "level": 0.0152
+                },
+                {
+                    "oakland": 0.0152
+                },
+                {
+                    "folks": 0.053
+                },
+                {
+                    "interesting": 0.0227
+                },
+                {
+                    "dive": 0.0152
+                },
+                {
+                    "health": 0.0758
+                },
+                {
+                    "craft": 0.0227
+                },
+                {
+                    "oracle": 0.0152
+                },
+                {
+                    "visualization": 0.1591
+                },
+                {
+                    "spend": 0.0303
+                },
+                {
+                    "ups": 0.0227
+                },
+                {
+                    "spatial": 0.0152
+                }
+            ]
+        },
+        {
+            "label": "Topic 17",
+            "totaltokens": 153,
+            "uniquetokens": 6,
+            "words": [
+                {
+                    "check": 0.0196
+                },
+                {
+                    "random": 0.0131
+                },
+                {
+                    "behavior": 0.0392
+                },
+                {
+                    "intern": 0.0458
+                },
+                {
+                    "gephi": 0.0131
+                },
+                {
+                    "solid": 0.0131
+                },
+                {
+                    "deal": 0.0131
+                },
+                {
+                    "interest": 0.1111
+                },
+                {
+                    "sf": 0.2941
+                },
+                {
+                    "agency": 0.0196
+                },
+                {
+                    "internship": 0.0261
+                },
+                {
+                    "design": 0.0131
+                },
+                {
+                    "consumer": 0.0196
+                },
+                {
+                    "ve": 0.0719
+                },
+                {
+                    "graphs": 0.0196
+                },
+                {
+                    "charting": 0.0327
+                },
+                {
+                    "strong": 0.0196
+                },
+                {
+                    "processes": 0.0131
+                },
+                {
+                    "ror": 0.0261
+                },
+                {
+                    "called": 0.0392
+                },
+                {
+                    "germany": 0.0196
+                },
+                {
+                    "festival": 0.0131
+                },
+                {
+                    "net": 0.0196
+                },
+                {
+                    "bluenose": 0.0131
+                },
+                {
+                    "main": 0.0131
+                },
+                {
+                    "visualisation": 0.0261
+                },
+                {
+                    "css": 0.0458
+                },
+                {
+                    "mechanic": 0.0131
+                },
+                {
+                    "university": 0.0131
+                },
+                {
+                    "requires": 0.0131
+                },
+                {
+                    "user": 0.2092
+                },
+                {
+                    "hearing": 0.0131
+                },
+                {
+                    "finance": 0.0131
+                },
+                {
+                    "developing": 0.1176
+                },
+                {
+                    "store": 0.0196
+                },
+                {
+                    "generally": 0.0261
+                },
+                {
+                    "geo": 0.0196
+                },
+                {
+                    "focus": 0.0392
+                },
+                {
+                    "current": 0.0196
+                },
+                {
+                    "cal": 0.0131
+                },
+                {
+                    "experience": 0.1961
+                },
+                {
+                    "policy": 0.0327
+                },
+                {
+                    "scientific": 0.0196
+                },
+                {
+                    "large": 0.0327
+                },
+                {
+                    "rich": 0.0131
+                },
+                {
+                    "nlp": 0.0196
+                }
+            ]
+        },
+        {
+            "label": "Topic 18",
+            "totaltokens": 173,
+            "uniquetokens": 6,
+            "words": [
+                {
+                    "cities": 0.0116
+                },
+                {
+                    "argentina": 0.0116
+                },
+                {
+                    "platform": 0.0231
+                },
+                {
+                    "curator": 0.0116
+                },
+                {
+                    "lookout": 0.0116
+                },
+                {
+                    "meaning": 0.0116
+                },
+                {
+                    "visuals": 0.0231
+                },
+                {
+                    "huge": 0.0173
+                },
+                {
+                    "field": 0.0173
+                },
+                {
+                    "solutions": 0.0173
+                },
+                {
+                    "server": 0.0173
+                },
+                {
+                    "end": 0.3006
+                },
+                {
+                    "number": 0.0116
+                },
+                {
+                    "google": 0.0405
+                },
+                {
+                    "entrepreneur": 0.1214
+                },
+                {
+                    "changing": 0.0116
+                },
+                {
+                    "trulia": 0.0347
+                },
+                {
+                    "presentations": 0.0173
+                },
+                {
+                    "professional": 0.0578
+                },
+                {
+                    "developer": 0.2023
+                },
+                {
+                    "understand": 0.0289
+                },
+                {
+                    "hack": 0.0405
+                },
+                {
+                    "visual": 0.1214
+                },
+                {
+                    "saas": 0.0116
+                },
+                {
+                    "charts": 0.0289
+                },
+                {
+                    "results": 0.0116
+                },
+                {
+                    "offer": 0.0116
+                },
+                {
+                    "healthcare": 0.0116
+                },
+                {
+                    "front": 0.1965
+                },
+                {
+                    "payments": 0.0116
+                },
+                {
+                    "photography": 0.0116
+                }
+            ]
+        },
+        {
+            "label": "Topic 19",
+            "totaltokens": 179,
+            "uniquetokens": 3,
+            "words": [
+                {
+                    "products": 0.0503
+                },
+                {
+                    "sean": 0.0168
+                },
+                {
+                    "events": 0.0279
+                },
+                {
+                    "github": 0.0391
+                },
+                {
+                    "ebay": 0.0168
+                },
+                {
+                    "create": 0.0503
+                },
+                {
+                    "infrastructure": 0.0279
+                },
+                {
+                    "east": 0.0112
+                },
+                {
+                    "arduino": 0.0112
+                },
+                {
+                    "training": 0.0112
+                },
+                {
+                    "api": 0.0168
+                },
+                {
+                    "software": 0.2793
+                },
+                {
+                    "coffee": 0.0112
+                },
+                {
+                    "lead": 0.0503
+                },
+                {
+                    "engineer": 0.6648
+                },
+                {
+                    "success": 0.0112
+                },
+                {
+                    "building": 0.0559
+                },
+                {
+                    "developers": 0.0168
+                },
+                {
+                    "founded": 0.0168
+                },
+                {
+                    "problems": 0.0335
+                },
+                {
+                    "video": 0.0223
+                },
+                {
+                    "ago": 0.0112
+                },
+                {
+                    "plan": 0.0112
+                },
+                {
+                    "widgets": 0.0112
+                },
+                {
+                    "eng": 0.0112
+                },
+                {
+                    "project": 0.0279
+                },
+                {
+                    "engineers": 0.0112
+                },
+                {
+                    "visualized": 0.0112
+                },
+                {
+                    "enjoying": 0.0223
+                }
+            ]
+        },
+        {
+            "label": "Topic 20",
+            "totaltokens": 98,
+            "uniquetokens": 4,
+            "words": [
+                {
+                    "tx": 0.0102
+                },
+                {
+                    "montreal": 0.0102
+                },
+                {
+                    "freelance": 0.0204
+                },
+                {
+                    "short": 0.0102
+                },
+                {
+                    "early": 0.0102
+                },
+                {
+                    "smartrecruiters": 0.0102
+                },
+                {
+                    "lisp": 0.0102
+                },
+                {
+                    "survived": 0.0102
+                },
+                {
+                    "sapiens": 0.0204
+                },
+                {
+                    "faulkner": 0.0102
+                },
+                {
+                    "wendy": 0.0102
+                },
+                {
+                    "surfer": 0.0102
+                },
+                {
+                    "rauber": 0.0102
+                },
+                {
+                    "vis": 0.1531
+                },
+                {
+                    "mapping": 0.0306
+                },
+                {
+                    "exciter": 0.0102
+                },
+                {
+                    "skos": 0.0102
+                },
+                {
+                    "hoping": 0.0204
+                },
+                {
+                    "exciting": 0.0306
+                },
+                {
+                    "tachyus": 0.0102
+                },
+                {
+                    "front": 0.0102
+                },
+                {
+                    "dabble": 0.0102
+                },
+                {
+                    "pearson": 0.0204
+                },
+                {
+                    "sold": 0.0102
+                },
+                {
+                    "puppets": 0.0102
+                },
+                {
+                    "california": 0.0102
+                },
+                {
+                    "specialist": 0.051
+                },
+                {
+                    "bayesian": 0.0102
+                },
+                {
+                    "patters": 0.0102
+                },
+                {
+                    "enthusiastic": 0.0102
+                },
+                {
+                    "eff": 0.0102
+                },
+                {
+                    "processing": 0.0612
+                },
+                {
+                    "loggly": 0.0102
+                },
+                {
+                    "multimillion": 0.0102
+                },
+                {
+                    "thoughtbot": 0.0306
+                },
+                {
+                    "futurist": 0.0102
+                },
+                {
+                    "applying": 0.0306
+                },
+                {
+                    "netflix": 0.0408
+                },
+                {
+                    "object": 0.0102
+                },
+                {
+                    "bio": 0.0102
+                },
+                {
+                    "vrml": 0.0102
+                },
+                {
+                    "intel": 0.0102
+                },
+                {
+                    "love": 0.5714
+                },
+                {
+                    "ucop": 0.0102
+                },
+                {
+                    "quit": 0.0102
+                },
+                {
+                    "networking": 0.0306
+                },
+                {
+                    "demandbase": 0.0102
+                },
+                {
+                    "immersion": 0.0102
+                },
+                {
+                    "versed": 0.0102
+                },
+                {
+                    "joss": 0.0102
+                },
+                {
+                    "controls": 0.0102
+                },
+                {
+                    "moved": 0.01
+                }
+            ]
+        },
+        {
+            "label": "Topic 21",
+            "totaltokens": 160,
+            "uniquetokens": 5,
+            "words": [
+                {
+                    "usf": 0.0125
+                },
+                {
+                    "motion": 0.0125
+                },
+                {
+                    "analytic": 0.0188
+                },
+                {
+                    "transportation": 0.0438
+                },
+                {
+                    "personal": 0.0563
+                },
+                {
+                    "moving": 0.0188
+                },
+                {
+                    "map": 0.0313
+                },
+                {
+                    "great": 0.0875
+                },
+                {
+                    "integration": 0.0188
+                },
+                {
+                    "sydney": 0.0125
+                },
+                {
+                    "stuff": 0.1188
+                },
+                {
+                    "mathematician": 0.0125
+                },
+                {
+                    "join": 0.0563
+                },
+                {
+                    "rider": 0.0125
+                },
+                {
+                    "excited": 0.1063
+                },
+                {
+                    "clojure": 0.0188
+                },
+                {
+                    "gis": 0.0563
+                },
+                {
+                    "specializing": 0.0125
+                },
+                {
+                    "guru": 0.0188
+                },
+                {
+                    "economic": 0.0125
+                },
+                {
+                    "senior": 0.025
+                },
+                {
+                    "metamarkets": 0.0125
+                },
+                {
+                    "recent": 0.0625
+                },
+                {
+                    "creating": 0.0563
+                },
+                {
+                    "effective": 0.0125
+                },
+                {
+                    "learn": 0.625
+                },
+                {
+                    "transit": 0.0375
+                },
+                {
+                    "sports": 0.0125
+                }
+            ]
+        },
+        {
+            "label": "Topic 22",
+            "totaltokens": 183,
+            "uniquetokens": 5,
+            "words": [
+                {
+                    "part": 0.0164
+                },
+                {
+                    "wet": 0.0109
+                },
+                {
+                    "writing": 0.0109
+                },
+                {
+                    "forms": 0.0164
+                },
+                {
+                    "ms": 0.0109
+                },
+                {
+                    "profit": 0.0109
+                },
+                {
+                    "reactor": 0.0109
+                },
+                {
+                    "ui": 0.1475
+                },
+                {
+                    "related": 0.0273
+                },
+                {
+                    "stealth": 0.0109
+                },
+                {
+                    "lives": 0.0109
+                },
+                {
+                    "visualizer": 0.0273
+                },
+                {
+                    "finance": 0.0219
+                },
+                {
+                    "manage": 0.0328
+                },
+                {
+                    "photographer": 0.0109
+                },
+                {
+                    "qs": 0.0109
+                },
+                {
+                    "making": 0.0929
+                },
+                {
+                    "connect": 0.0273
+                },
+                {
+                    "master": 0.0109
+                },
+                {
+                    "leverage": 0.0109
+                },
+                {
+                    "shop": 0.0109
+                },
+                {
+                    "visualizations": 0.2623
+                },
+                {
+                    "editing": 0.0109
+                },
+                {
+                    "water": 0.0109
+                },
+                {
+                    "place": 0.0164
+                },
+                {
+                    "application": 0.0328
+                },
+                {
+                    "beautiful": 0.0328
+                },
+                {
+                    "working": 0.4426
+                },
+                {
+                    "diving": 0.0109
+                },
+                {
+                    "frontend": 0.0164
+                },
+                {
+                    "library": 0.0546
+                },
+                {
+                    "visually": 0.0109
+                },
+                {
+                    "sql": 0.0109
+                },
+                {
+                    "monkey": 0.0109
+                },
+                {
+                    "approaches": 0.0109
+                },
+                {
+                    "specializes": 0.0109
+                }
+            ]
+        },
+        {
+            "label": "Topic 23",
+            "totaltokens": 98,
+            "uniquetokens": 5,
+            "words": [
+                {
+                    "express": 0.0102
+                },
+                {
+                    "painter": 0.0102
+                },
+                {
+                    "enamorado": 0.0102
+                },
+                {
+                    "gnomes": 0.0102
+                },
+                {
+                    "things": 0.0816
+                },
+                {
+                    "work": 0.2755
+                },
+                {
+                    "begin": 0.0102
+                },
+                {
+                    "delivering": 0.0102
+                },
+                {
+                    "benjamin": 0.0102
+                },
+                {
+                    "johann": 0.0102
+                },
+                {
+                    "engineering": 0.0816
+                },
+                {
+                    "lifelong": 0.0102
+                },
+                {
+                    "codame": 0.0102
+                },
+                {
+                    "librato": 0.0204
+                },
+                {
+                    "yahoo": 0.0204
+                },
+                {
+                    "pragmatic": 0.0102
+                },
+                {
+                    "dclure": 0.0102
+                },
+                {
+                    "arrived": 0.0102
+                },
+                {
+                    "high": 0.0102
+                },
+                {
+                    "gt": 0.0102
+                },
+                {
+                    "space": 0.0102
+                },
+                {
+                    "nodeprime": 0.0102
+                },
+                {
+                    "social": 0.1735
+                },
+                {
+                    "straight": 0.0102
+                },
+                {
+                    "powerd": 0.0102
+                },
+                {
+                    "javascripter": 0.0102
+                },
+                {
+                    "architect": 0.2245
+                },
+                {
+                    "professionally": 0.0102
+                },
+                {
+                    "chen": 0.0102
+                },
+                {
+                    "http": 0.1531
+                },
+                {
+                    "companies": 0.0204
+                },
+                {
+                    "chance": 0.0204
+                },
+                {
+                    "breakfast": 0.0102
+                },
+                {
+                    "joya": 0.0102
+                },
+                {
+                    "unity": 0.0102
+                },
+                {
+                    "highly": 0.0408
+                },
+                {
+                    "diego": 0.0102
+                },
+                {
+                    "performance": 0.051
+                },
+                {
+                    "extend": 0.0102
+                },
+                {
+                    "enterprise": 0.0612
+                },
+                {
+                    "lab": 0.0408
+                },
+                {
+                    "jquery": 0.0408
+                },
+                {
+                    "state": 0.0102
+                },
+                {
+                    "applications": 0.1735
+                },
+                {
+                    "college": 0.0102
+                },
+                {
+                    "relations": 0.0102
+                },
+                {
+                    "addepar": 0.0102
+                },
+                {
+                    "group": 0.051
+                },
+                {
+                    "iphone": 0.0102
+                },
+                {
+                    "ebay": 0.0102
+                },
+                {
+                    "implementation": 0.0204
+                }
+            ]
+        },
+        {
+            "label": "Topic 24",
+            "totaltokens": 154,
+            "uniquetokens": 6,
+            "words": [
+                {
+                    "meeting": 0.0714
+                },
+                {
+                    "atlassian": 0.0195
+                },
+                {
+                    "solar": 0.013
+                },
+                {
+                    "perspective": 0.013
+                },
+                {
+                    "introduction": 0.013
+                },
+                {
+                    "collaboration": 0.026
+                },
+                {
+                    "animation": 0.013
+                },
+                {
+                    "unique": 0.0195
+                },
+                {
+                    "language": 0.013
+                },
+                {
+                    "journalist": 0.0519
+                },
+                {
+                    "learner": 0.026
+                },
+                {
+                    "involved": 0.013
+                },
+                {
+                    "career": 0.0195
+                },
+                {
+                    "interested": 0.2532
+                },
+                {
+                    "data": 0.2597
+                },
+                {
+                    "lover": 0.026
+                },
+                {
+                    "change": 0.0455
+                },
+                {
+                    "eager": 0.0195
+                },
+                {
+                    "idea": 0.013
+                },
+                {
+                    "searching": 0.013
+                },
+                {
+                    "management": 0.0909
+                },
+                {
+                    "communication": 0.013
+                },
+                {
+                    "javascript": 0.0195
+                },
+                {
+                    "person": 0.0195
+                },
+                {
+                    "latest": 0.0325
+                },
+                {
+                    "couple": 0.013
+                },
+                {
+                    "firm": 0.013
+                },
+                {
+                    "make": 0.1494
+                },
+                {
+                    "founder": 0.026
+                },
+                {
+                    "familiar": 0.0195
+                },
+                {
+                    "matter": 0.013
+                },
+                {
+                    "day": 0.0584
+                },
+                {
+                    "human": 0.039
+                },
+                {
+                    "book": 0.0195
+                },
+                {
+                    "downtown": 0.013
+                },
+                {
+                    "tools": 0.1753
+                }
+            ]
+        },
+        {
+            "label": "Topic 25",
+            "totaltokens": 138,
+            "uniquetokens": 4,
+            "words": [
+                {
+                    "vision": 0.0145
+                },
+                {
+                    "information": 0.0362
+                },
+                {
+                    "present": 0.0145
+                },
+                {
+                    "games": 0.0435
+                },
+                {
+                    "graduate": 0.0507
+                },
+                {
+                    "apis": 0.0145
+                },
+                {
+                    "webgl": 0.0145
+                },
+                {
+                    "problem": 0.0145
+                },
+                {
+                    "architecture": 0.0217
+                },
+                {
+                    "solve": 0.0217
+                },
+                {
+                    "professionals": 0.0145
+                },
+                {
+                    "follow": 0.0145
+                },
+                {
+                    "presentation": 0.029
+                },
+                {
+                    "ai": 0.0217
+                },
+                {
+                    "dev": 0.4275
+                },
+                {
+                    "js": 0.0507
+                },
+                {
+                    "exploratory": 0.0217
+                },
+                {
+                    "enable": 0.0145
+                },
+                {
+                    "story": 0.0145
+                },
+                {
+                    "starting": 0.058
+                },
+                {
+                    "hope": 0.0435
+                },
+                {
+                    "guy": 0.0435
+                },
+                {
+                    "entrepreneurship": 0.0145
+                },
+                {
+                    "producer": 0.0217
+                },
+                {
+                    "music": 0.029
+                },
+                {
+                    "informed": 0.0217
+                },
+                {
+                    "twitter": 0.0145
+                },
+                {
+                    "head": 0.0145
+                },
+                {
+                    "feet": 0.0145
+                },
+                {
+                    "complex": 0.0725
+                },
+                {
+                    "interested": 0.3986
+                },
+                {
+                    "eric": 0.0145
+                },
+                {
+                    "team": 0.029
+                },
+                {
+                    "engineering": 0.1014
+                },
+                {
+                    "statuswolf": 0.0145
+                },
+                {
+                    "works": 0.0217
+                },
+                {
+                    "mining": 0.029
+                },
+                {
+                    "space": 0.0507
+                },
+                {
+                    "night": 0.0145
+                },
+                {
+                    "bootcamp": 0.0507
+                },
+                {
+                    "prototyping": 0.0217
+                }
+            ]
+        },
+        {
+            "label": "Topic 26",
+            "totaltokens": 212,
+            "uniquetokens": 4,
+            "words": [
+                {
+                    "solving": 0.0142
+                },
+                {
+                    "physicist": 0.0189
+                },
+                {
+                    "loves": 0.0377
+                },
+                {
+                    "data": 0.6132
+                },
+                {
+                    "gpu": 0.0142
+                },
+                {
+                    "lot": 0.0472
+                },
+                {
+                    "http": 0.0189
+                },
+                {
+                    "cool": 0.1415
+                },
+                {
+                    "work": 0.0425
+                },
+                {
+                    "big": 0.1981
+                },
+                {
+                    "pretty": 0.0377
+                },
+                {
+                    "love": 0.0236
+                },
+                {
+                    "applied": 0.0142
+                },
+                {
+                    "program": 0.0283
+                }
+            ]
+        },
+        {
+            "label": "Topic 27",
+            "totaltokens": 163,
+            "uniquetokens": 6,
+            "words": [
+                {
+                    "interactive": 0.0982
+                },
+                {
+                    "guys": 0.0123
+                },
+                {
+                    "warehouse": 0.0123
+                },
+                {
+                    "life": 0.0675
+                },
+                {
+                    "needed": 0.0123
+                },
+                {
+                    "based": 0.1288
+                },
+                {
+                    "san": 0.1656
+                },
+                {
+                    "harvard": 0.0123
+                },
+                {
+                    "began": 0.0123
+                },
+                {
+                    "environments": 0.0184
+                },
+                {
+                    "tests": 0.0123
+                },
+                {
+                    "hacking": 0.0245
+                },
+                {
+                    "living": 0.0491
+                },
+                {
+                    "studio": 0.0245
+                },
+                {
+                    "ometrics": 0.0123
+                },
+                {
+                    "editor": 0.0245
+                },
+                {
+                    "francisco": 0.1166
+                },
+                {
+                    "academy": 0.0184
+                },
+                {
+                    "users": 0.0123
+                },
+                {
+                    "purposes": 0.0123
+                },
+                {
+                    "casual": 0.0123
+                },
+                {
+                    "terms": 0.0123
+                },
+                {
+                    "quantified": 0.0123
+                },
+                {
+                    "everyday": 0.0123
+                },
+                {
+                    "edge": 0.0245
+                },
+                {
+                    "back": 0.0491
+                },
+                {
+                    "developer": 0.4233
+                },
+                {
+                    "exploratorium": 0.0123
+                },
+                {
+                    "tech": 0.0184
+                },
+                {
+                    "neuroscience": 0.0123
+                },
+                {
+                    "techniques": 0.0552
+                },
+                {
+                    "high": 0.0368
+                },
+                {
+                    "visualizing": 0.0429
+                },
+                {
+                    "intelligence": 0.0245
+                },
+                {
+                    "variety": 0.0123
+                },
+                {
+                    "dimensional": 0.0123
+                }
+            ]
+        },
+        {
+            "label": "Topic 28",
+            "totaltokens": 194,
+            "uniquetokens": 6,
+            "words": [
+                {
+                    "nice": 0.0361
+                },
+                {
+                    "past": 0.0206
+                },
+                {
+                    "enjoy": 0.0464
+                },
+                {
+                    "stamen": 0.0103
+                },
+                {
+                    "geek": 0.0928
+                },
+                {
+                    "knowledge": 0.0258
+                },
+                {
+                    "ceo": 0.0258
+                },
+                {
+                    "interaction": 0.067
+                },
+                {
+                    "focused": 0.0361
+                },
+                {
+                    "riverbed": 0.0258
+                },
+                {
+                    "set": 0.0103
+                },
+                {
+                    "analytics": 0.067
+                },
+                {
+                    "dashboards": 0.0206
+                },
+                {
+                    "firm": 0.0103
+                },
+                {
+                    "super": 0.0103
+                },
+                {
+                    "john": 0.0103
+                },
+                {
+                    "io": 0.0515
+                },
+                {
+                    "geospatial": 0.0155
+                },
+                {
+                    "recovering": 0.0103
+                },
+                {
+                    "ux": 0.1546
+                },
+                {
+                    "cc": 0.0103
+                },
+                {
+                    "designer": 0.567
+                },
+                {
+                    "experienced": 0.0206
+                },
+                {
+                    "oakland": 0.0103
+                },
+                {
+                    "box": 0.0103
+                },
+                {
+                    "mit": 0.0103
+                },
+                {
+                    "silicon": 0.0103
+                },
+                {
+                    "hci": 0.0155
+                },
+                {
+                    "ton": 0.0103
+                },
+                {
+                    "business": 0.0155
+                },
+                {
+                    "improve": 0.0412
+                },
+                {
+                    "visualisation": 0.0103
+                },
+                {
+                    "https": 0.0206
+                },
+                {
+                    "android": 0.0155
+                },
+                {
+                    "valley": 0.0103
+                },
+                {
+                    "wrote": 0.0206
+                },
+                {
+                    "interested": 0.0103
+                },
+                {
+                    "datasets": 0.0103
+                }
+            ]
+        },
+        {
+            "label": "Topic 29",
+            "totaltokens": 190,
+            "uniquetokens": 9,
+            "words": [
+                {
+                    "analytics": 0.2684
+                },
+                {
+                    "austin": 0.0105
+                },
+                {
+                    "manager": 0.0105
+                },
+                {
+                    "custom": 0.0158
+                },
+                {
+                    "network": 0.0684
+                },
+                {
+                    "subject": 0.0105
+                },
+                {
+                    "visualize": 0.1105
+                },
+                {
+                    "community": 0.0368
+                },
+                {
+                    "ggplot": 0.0105
+                },
+                {
+                    "author": 0.0211
+                },
+                {
+                    "scientist": 0.0895
+                },
+                {
+                    "dabbler": 0.0105
+                },
+                {
+                    "analyst": 0.1
+                },
+                {
+                    "kaggle": 0.0158
+                },
+                {
+                    "relationships": 0.0105
+                },
+                {
+                    "users": 0.0105
+                },
+                {
+                    "skills": 0.0632
+                },
+                {
+                    "work": 0.1316
+                },
+                {
+                    "don": 0.0158
+                },
+                {
+                    "builder": 0.0105
+                },
+                {
+                    "passionate": 0.0158
+                },
+                {
+                    "storage": 0.0211
+                },
+                {
+                    "facebook": 0.0421
+                },
+                {
+                    "hacker": 0.0158
+                },
+                {
+                    "java": 0.0105
+                },
+                {
+                    "models": 0.0105
+                },
+                {
+                    "exploring": 0.0211
+                },
+                {
+                    "mining": 0.0368
+                },
+                {
+                    "ve": 0.0263
+                },
+                {
+                    "sets": 0.0105
+                },
+                {
+                    "internal": 0.0211
+                },
+                {
+                    "python": 0.0158
+                },
+                {
+                    "french": 0.0105
+                },
+                {
+                    "metrics": 0.0211
+                },
+                {
+                    "forward": 0.0947
+                },
+                {
+                    "good": 0.0737
+                },
+                {
+                    "ucsf": 0.0105
+                },
+                {
+                    "youtube": 0.0105
+                }
+            ]
+        }
+    ]
+}
