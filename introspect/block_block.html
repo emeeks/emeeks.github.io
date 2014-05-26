@@ -333,9 +333,10 @@
         }
         newContent += "</ul></p><p>Connections:</p><ul>";
         var neighbors = findNeighbors(d,i);
+        console.log(neighbors)
         for (x in neighbors.nodes) {
           if (neighbors.nodes[x] != d) {
-            newContent += "<li>" + neighbors.nodes[x].label + "</li>";
+            newContent += "<li>" + neighbors.nodes[x].label + " - " + neighbors.links[x-1].properties.weight+ "</li>";
           }
         }
         newContent += "</ul></p>";

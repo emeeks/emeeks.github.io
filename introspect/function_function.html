@@ -343,7 +343,7 @@
         var neighbors = findNeighbors(d,i);
         for (x in neighbors.nodes) {
           if (neighbors.nodes[x] != d) {
-            newContent += "<li>" + neighbors.nodes[x].label + "</li>";
+            newContent += "<li>" + neighbors.nodes[x].label + " - " + neighbors.links[x-1].properties.weight+ "</li>";
           }
         }
         newContent += "</ul></p>";
