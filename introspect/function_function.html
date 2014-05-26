@@ -237,7 +237,8 @@
       filteredLinks = gD3.links().filter(function (d) {return d.properties[dAtt] == 0 || (d.properties[dAtt] >= currentBrush[0] && d.properties[dAtt] <= currentBrush[1])});
       sourceNodes = filteredLinks.map(function (el) {return el.source});
       targetNodes = filteredLinks.map(function (el) {return el.target});
-      filteredNodes = gD3.nodes().filter(function (d) {return sourceNodes.indexOf(d) > -1 || targetNodes.indexOf(d) > -1});
+//      filteredNodes = gD3.nodes().filter(function (d) {return sourceNodes.indexOf(d) > -1 || targetNodes.indexOf(d) > -1});
+      filteredNodes = gD3.nodes();
       }
       else {
         filteredLinks = gD3.links();
@@ -294,7 +295,7 @@
       var maxWeight = d3.max(filteredNodes, function(d) {return d.weight || 0});
       
       if (maxWeight > 0) {
-        var nodeScale = d3.scale.linear().domain([1,maxWeight]).range([4,12]).clamp(true);
+        var nodeScale = d3.scale.linear().domain([0,1,maxWeight]).range([4,6,12]).clamp(true);
         d3.selectAll("g.node").select("circle").attr("r", function(d) {return nodeScale(d.weight) || 0});
       }
 
