@@ -51,7 +51,7 @@
     d3.select("#brushG").call(gD3.dynamicBrush);
     gD3.dynamicBrush().on("brush", brushMove);
 
-    gD3.nodeScale().range([1,10])
+    gD3.nodeScale().range([5,10])
     
     zoom = d3.behavior.zoom()
     .scaleExtent([.1, 10])
@@ -287,7 +287,7 @@
       var maxWeight = d3.max(filteredNodes, function(d) {return d.weight || 0});
       
       if (maxWeight > 0) {
-        var nodeScale = d3.scale.linear().domain([1,maxWeight]).range([2,5]).clamp(true);
+        var nodeScale = d3.scale.linear().domain([1,maxWeight]).range([3,8]).clamp(true);
         d3.selectAll("g.node").select("circle").attr("r", function(d) {return nodeScale(d.weight) || 0});
       }
 
