@@ -58,6 +58,9 @@
     .on("zoom", zoomed);
 
     allLinks = gD3.links();
+    for (x in allLinks) {
+      allLinks[x]["highlighted"] = false;
+    }
     brushMove();
     d3.select("svg").call(zoom);
     createControls();
@@ -74,6 +77,10 @@
           .style("stroke-width", isNeighbor > -1 ? 3 : 1)
           .style("stroke", isNeighbor > -1 ? "blue" : "white")
         })
+        nodeNeighbors.links.forEach(function (link){
+          link.highlighted = true;
+        })
+        redrawGraph();
       }
       
       function findNeighbors(d,i) {
@@ -169,6 +176,17 @@
   context.lineTo(xScale(link.target.x),yScale(link.target.y))
   context.stroke();
       })
+
+  context.lineWidth = 2;
+  context.strokeStyle = "rgba(0, 255, 122, 0.75)";
+
+  filteredLinks.filter(function (d) {return d.highlighted}).forEach(function (link) {
+  context.beginPath();
+  context.moveTo(xScale(link.source.x),yScale(link.source.y))
+  context.lineTo(xScale(link.target.x),yScale(link.target.y))
+  context.stroke();
+      })
+      
       d3.selectAll("g.node")
       .attr("transform", function(d) {return "translate(" + xScale(d.x) + "," + yScale(d.y) + ")"});
     }
@@ -333,7 +351,6 @@
         }
         newContent += "</ul></p><p>Connections:</p><ul>";
         var neighbors = findNeighbors(d,i);
-        console.log(neighbors)
         for (x in neighbors.nodes) {
           if (neighbors.nodes[x] != d) {
             newContent += "<li>" + neighbors.nodes[x].label + " - " + neighbors.links[x-1].properties.weight+ "</li>";
@@ -365,7 +382,8 @@
 
         d3.selectAll(".hoverLabel").remove();
         d3.selectAll("circle").style("opacity", 1).style("stroke", "black").style("stroke-width", "1px");
-        d3.selectAll("line").style("opacity", .25);
+        filteredLinks.forEach(function (link) {link.highlighted = false});
+        redrawGraph();
       }
     
 
