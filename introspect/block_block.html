@@ -14,12 +14,54 @@
   body {
     overflow:hidden;
   }
+  #infodiv {
+    width:50%;
+    position: fixed;
+    top:5%;
+    bottom:10%;
+    overflow: auto;
+    background: rgba(255,255,255,.95);
+    border: 2px double rgba(200,150,50,.75);
+    padding: 10px;
+    right:10%;
+    z-index: 9;
+  }
+  .question {
+    font-size: 18px;
+    font-weight: 800;
+  }
+  #close {
+    background: white;
+    cursor:pointer;
+    border: 1px solid black;
+    padding: 5px;
+    font-weight: 900;
+    width: 100px;
+    position: absolute;
+    right: 20px;
+    text-align: center;
+  }
+  .
 </style>
 <body onload="loadGraph('4more_blocks.gexf')">
 <div id="header" style="position:fixed;"><p><a href="index.html">Topic Model Viewer for D3 Meetup Data</a> | Block Network Viz | <a href="function_function.html">Function Network Viz</a></p></div>
+<div id="infodiv">
+  <div id="close" onclick="d3.select('#infodiv').remove()">Close This</div>
+  <p><span class="question">What is this?</span></p>
+  <p>This is a network of small <a href="http://d3js.org">D3.js</a>-related projects. Each circle represents a small self-contained piece of code like this <a href="http://bl.ocks.org/mbostock/7782500">Rotating Icosahedron</a>. There are nearly 800 such projects and each project is connected to another project based on shared use of the same functions from the D3 library. So, if you have a block that uses d3.svg.axis and d3.transform and another project that uses those same two functions, then they will be connected by a strength 2 link. To keep the network manageable, I've only included connections greater than four (8000+ connections).</p>
+  <p>The data comes from the awesome <a href="http://bl.ocksplorer.org/">bl.ocksplorer.org</a>, which provides another way of exploring these projects.</p>
+  <p><span class="question">How do I use it?</span></p>
+  <p>Moving your mouse over a block will show you the blocks it is connected to. Clicking on a block will give you some details about the block. By adjusting the brush at the bottom of the page, you can constrain the network to only showing edges with a strength within the range of the brush. You can also zoom in or out on the network using your mousewheel.</p>
+  <p><span class="question">Why is that important?</span></p>
+  <p>D3 provides an incredible amount of functionality under the broad category of "information visualization". This includes network visualization, all kinds of maps, more traditional charts, and even graphical representation of complex mathematical principles. By exploring the way that these projects relate to each other, we can better understand how D3 is being used and whether or not there are opportunities for creating information visualization that integrates less commonly co-occurring behaviors, components, layouts and functions.</p>
+  <p><span class="question">Where are my blocks?</span></p>
+  <p>The yellow blocks are all created by Mike Bostock, creator of D3. The rest of the colors are randomly assigned to other users. If you don't see your blocks that's because you either haven't registered your username on bl.ocksplorer or because your individual blocks do not have thumbnails. Only those blocks that include a thumbnail.png in their gist are represented here.</p>
+  <p><span class="question">More Questions?</span></p>
+  <p><a href="https://twitter.com/Elijah_Meeks" target="_blank">@elijah_meeks</a></p>
+</div>
 <div id="vizcontainer" style="width:100%;height:100%;overflow:hidden;">
 <canvas style="background: white;1000px;width:1000px;position:absolute;z-index:-1;" height=1000 width=1000></canvas>
-<svg id="graphSVG" style="height:1000px;width:1000px;border:1px lightgray solid;" height=1000 width=1000>
+<svg id="graphSVG" onmousedown="d3.select('#infodiv').remove()" style="height:1000px;width:1000px;border:1px lightgray solid;" height=1000 width=1000>
   <g id="graphG" />
 <div id="modal"><div id="content"></div><button id="modalClose" onclick="nodeFocus=false;nodeOut();d3.select('#modal').style('display','none');">X</button></div>
 </div>
@@ -45,7 +87,7 @@
       .linkDistance(150)
       .linkStrength(.5)
       .size([1000, 1000])
-      .gravity(.1)
+      .gravity(1)
       .on("tick", redrawGraph)
 
     d3.select("#brushG").call(gD3.dynamicBrush);
