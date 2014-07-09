@@ -1,0 +1,51 @@
+.invisible {
+    fill: rgba(0,0,0,0);
+    stroke-width: 0;
+    stroke: black;
+    cursor: pointer;
+}
+
+.countries {
+    fill: none;
+    stroke-width: 1px;
+    stroke: black;
+    opacity: 1;
+}
+
+.francelike {
+    fill: pink;
+    stroke-width: 2px;
+    stroke: lightgray;
+}
+
+.roads {
+    stroke: brown;
+    stroke-width: 1px;
+    fill: none;
+}
+
+.rivers {
+    stroke: blue;
+    stroke-width: 2px;
+    fill: none;
+    opacity: 1;
+}
+
+circle {
+    fill: black;
+    stroke: red;
+}
+
+circle.pinkcircle {
+    fill: pink;
+    stroke: black;
+    stroke-width: 1;
+    opacity: 1
+}
+
+circle.greencircle {
+    fill: green;
+    stroke: red;
+    opacity: 1;
+    stroke-width: 3;
+}

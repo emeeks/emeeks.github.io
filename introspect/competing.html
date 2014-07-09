@@ -1,0 +1,179 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>SUL DH Project Proposals</title>
+  <meta charset="utf-8" />
+</head>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/colorbrewer.v1.min.js"></script>
+
+<body onload="main()">
+<div id="header" style="position:fixed;">DH Project Proposal Chart</div>
+<div id="vizcontainer" style="width:100%;height:100%">
+<svg id="graphSVG" style="border:1px lightgray solid;"></svg>
+</div>
+
+  <footer>
+<script>
+  function main() {
+  poles = [["Frogs","Cats"],["Dialectic","Medieval"],["Post-Modern","Industrial"]];
+  
+  survey = [{label: "KINDRED BRITAIN 2.0", eval: [3,-4,-5]},
+            {label: "AN ATLAS OF THE GRAND TOUR", eval: [-3,-4,-5]},
+            {label: "AUTHORIAL LONDON MODERNIZATION", eval: [-3,-4,-5]},
+            {label: "INTERVISOR (NOH THEATRE)", eval: [4,-4,-5]},
+            {label: "CHINA'S OTHER POPULATION CRISIS", eval: [3,-4,2]},
+            {label: "THE LINGUISTIC ATLAS OF FRANCE", eval: [-5,4,5]},
+            {label: "GOOGLE SCHOLASTICUS", eval: [-4,2,-5]},
+            {label: "VISUALIZING RENAISSANCE MUSIC", eval: [5,-3,-5]}
+            
+            ];
+
+  r = 250;
+  flattened = [];
+  
+  surveyColors = d3.scale.category20().domain(survey.map(function(d) {return d.label}));
+  
+  poles.forEach(function(d) {flattened.push(d[0])});
+  poles.forEach(function(d) {flattened.push(d[1])});
+  
+  pieLayout = d3.layout.pie();
+  pieLayout.value(function(d) {return 1}).sort(null);
+  
+  piedData = pieLayout(flattened);
+
+  arc = d3.svg.arc().innerRadius(r / 1.75).outerRadius(r);
+  
+  var scales = [];
+  
+  for (x in poles) {
+    var poleSideA = arc.centroid(piedData[x]);
+    var poleSideB = arc.centroid(piedData[parseInt(x) + poles.length]);
+    
+    var poleScaleX = d3.scale.linear().domain([-5,5]).range([poleSideA[0],poleSideB[0]]);
+    var poleScaleY = d3.scale.linear().domain([-5,5]).range([poleSideA[1],poleSideB[1]]);
+    
+    scales.push({x: poleScaleX, y:poleScaleY});
+
+  }
+  
+  d3.select("svg").append("g").attr("class", "chart").attr("transform", "translate(300,300)");
+  
+  d3.select("g.chart").selectAll("line.guide")
+  .data(poles)
+  .enter()
+  .append("line")
+  .attr("x1", function(d,i) {return scales[i].x(-6.3)})
+  .attr("y1", function(d,i) {return scales[i].y(-6.3)})
+  .attr("x2", function(d,i) {return scales[i].x(6.3)})
+  .attr("y2", function(d,i) {return scales[i].y(6.3)})
+  .style("stroke", "gray")
+  .style("storke-width", "1px")
+  .style("stroke-dasharray", "5 5");
+  
+    d3.select("g.chart").append("circle")
+  .attr("r", 250).style("fill", "none").style("stroke", "black").style("stroke-width","2px");
+
+  
+    d3.select("g.chart").selectAll("text.sideA_back")
+  .data(poles)
+  .enter()
+  .append("text")
+  .attr("class", "sideA_back")
+  .attr("x", function(d,i) {return scales[i].x(-6.3)})
+  .attr("y", function(d,i) {return scales[i].y(-6.3)})
+  .style("text-anchor", "middle")
+  .text(function (d) {return d[0]})
+  .style("opacity", .8)
+  .style("stroke", "white")
+  .style("stroke-width", "5px")
+  .style("fill", "white")
+  
+  d3.select("g.chart").selectAll("text.sideA")
+  .data(poles)
+  .enter()
+  .append("text")
+  .attr("class", "sideA")
+  .attr("x", function(d,i) {return scales[i].x(-6.3)})
+  .attr("y", function(d,i) {return scales[i].y(-6.3)})
+  .style("text-anchor", "middle")
+  .text(function (d) {return d[0]})
+
+    d3.select("g.chart").selectAll("text.sideB_back")
+  .data(poles)
+  .enter()
+  .append("text")
+  .attr("class", "sideB_back")
+  .attr("x", function(d,i) {return scales[i].x(6.3)})
+  .attr("y", function(d,i) {return scales[i].y(6.3)})
+  .style("text-anchor", "middle")
+  .text(function (d) {return d[1]})
+  .style("opacity", .8)
+  .style("stroke", "white")
+  .style("stroke-width", "5px")
+  .style("fill", "white")
+  
+  d3.select("g.chart").selectAll("text.sideB")
+  .data(poles)
+  .enter()
+  .append("text")
+  .attr("class", "sideB")
+  .attr("x", function(d,i) {return scales[i].x(6.3)})
+  .attr("y", function(d,i) {return scales[i].y(6.3)})
+  .style("text-anchor", "middle")
+  .text(function (d) {return d[1]}) 
+
+  d3.select("g.chart").append("g").attr("class","allCharts").selectAll("g.project").data(survey)
+  .enter()
+  .insert("g", "text")
+  .attr("class", "project")
+  .style("opacity", .8)
+  .on("mouseover", projectOver)
+  .on("mouseout", projectOut)
+  .each(function(d,i) {
+    d3.select(this).selectAll("circle").data(d.eval)
+    .enter()
+    .append("circle")
+    .attr("r", 5)
+    .style("fill", surveyColors(d.label))
+    .style("stroke", "black")
+    .style("stroke-width", "2px")
+    .attr("cx", function (p,q) {return scales[q].x(p)})
+    .attr("cy", function (p,q) {return scales[q].y(p)});
+    d3.select(this).append("text")
+    .attr("x", 300)
+    .attr("y", (i * 20) - 200)
+    .style("fill", surveyColors(d.label))
+    .style("font-weight", 700)
+    .text(d.label)
+  })
+  
+  function projectOver(d,i) {
+    projectOut();
+    this.parentNode.appendChild(this);
+    d3.select(this).style("opacity", 1).selectAll("circle").attr("r", 10);
+    d3.select(this).selectAll("text").style("text-decoration", "underline").style("font-weight", 900);
+    
+  groupPath = function(p) {
+    return "M" + d3.geom.hull(p.map(function(pp,qq) {
+	return [scales[qq].x(pp),scales[qq].y(pp)];
+    })).join("L") + "Z";  
+  };
+
+  var circleData = d3.select(this).selectAll("circle").data();
+  d3.select(this).insert("path","circle").attr("class", "hull").attr("d", groupPath(circleData)).style("stroke-width", "2px").style("fill", "none").style("stroke", surveyColors(d.label)).style("opacity", .5)
+
+
+  }
+  function projectOut() {
+    d3.selectAll("path.hull").remove();
+    d3.selectAll("g.project").style("opacity", .8).selectAll("circle").attr("r", 5);
+    d3.selectAll("g.project").selectAll("text").style("text-decoration", "none").style("font-weight", 700)
+  }
+  }
+  
+  
+  
+</script>
+  </footer>
+</body>
+</html>

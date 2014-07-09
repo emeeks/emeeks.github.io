@@ -150,6 +150,7 @@
         redrawGraph();
     }
     
+    
     function createControls() {
       d3.select("#controls").append("button").attr("class", "origButton").html("Force On").on("click", function() {
       force.start();})
@@ -192,11 +193,6 @@
       var nodeAttExtent = d3.extent(filteredNodes, function(p) {return parseFloat(p.properties[d])});
       var colorScale = d3.scale.quantize().domain(nodeAttExtent).range(colorbrewer.Reds[6]);
       d3.selectAll("circle").style("fill", function(p) {return colorScale(p.properties[d])}).style("opacity", 1)
-    }
-    function linkButtonClick(d,i) {
-      var linkAttExtent = d3.extent(filteredLinks, function(p) {return parseFloat(p.properties[d])});
-      var colorScale = d3.scale.quantize().domain(linkAttExtent).range(colorbrewer.Reds[6]);
-      d3.selectAll("line").style("stroke", function(p) {return colorScale(p.properties[d])}).style("opacity", 1)      
     }
     
     function redrawGraph() {
