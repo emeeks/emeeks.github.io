@@ -1,0 +1,123 @@
+id,label,name,long,lat,rank,expense
+50206,Iol Caesarea,Iol Caesarea,2.2,36.61,90,0.81
+50756,Palma,Palma,2.65,39.57,80,0.63
+50448,Ebusus,Ebusus,1.42,38.91,80,0.71
+50368,Sufasar,Sufasar,2.51,36.19,80,3.38
+50060,Auzia,Auzia,3.68,36.15,80,7.47
+50145,Dertosa,Dertosa,0.52,40.81,80,0.55
+50065,Barcino,Barcino,2.16,41.36,90,0.57
+50476,Colubraria,Colubraria,0.69,39.9,60,0.79
+50379,Tarraco,Tarraco,1.23,41.12,100,0.52
+50483,Metagonium Pr.,Metagonium Pr.,6.47,37.09,60,0.58
+50394,Tubusuctu,Tubusuctu,4.83,36.67,80,1.59
+50221,Lamasba,Lamasba,5.91,35.6,80,8.69
+50148,Diana Veteranorum,Diana Veteranorum,5.89,35.79,80,9.48
+50135,Cuicul,Cuicul,5.73,36.32,80,5.89
+50362,Sitifis,Sitifis,5.39,36.19,90,4.7
+50482,Igilgili,Igilgili,5.77,36.82,80,0.64
+50334,Saldae,Saldae,5.07,36.76,80,0.68
+50222,Lambaesis,Lambaesis,6.26,35.49,90,7.34
+50120,Cirta,Cirta,6.59,36.36,90,2.98
+50299,Perdices,Perdices,5.37,35.84,70,6.21
+50427,Zarai,Zarai,5.68,35.8,80,7.25
+50385,Thamugadi,Thamugadi,6.47,35.5,80,6.65
+50329,Rusicade,Rusicade,6.91,36.88,80,0.56
+50203,Ilerda,Ilerda,0.62,41.61,80,3.52
+50167,Emporiae,Emporiae,3.1,42.15,80,0.54
+50390,Theveste,Theveste,8.14,35.41,80,9.69
+50198,Hippo Regius,Hippo Regius,7.75,36.89,90,0.5
+50384,Thagaste,Thagaste,7.98,36.29,80,3.09
+50486,Caralis,Caralis,9.11,39.21,80,0.3
+50451,Olbia,Olbia,9.5,40.93,80,0.21
+50716,Aleria,Aleria,9.53,42.12,80,0.28
+50487,Gallicum Fretum,Gallicum Fretum,9.16,41.39,60,0.23
+50369,Sufetula,Sufetula,9.13,35.26,80,6.12
+50449,Thabraca,Thabraca,8.75,36.95,80,0.44
+50260,Musti,Musti,9.14,36.34,80,4.69
+50021,Ammaedara,Ammaedara,8.46,35.57,80,8.48
+50087,Bulla Regia,Bulla Regia,8.74,36.56,80,4.29
+50391,Thuburnica,Thuburnica,8.46,36.53,80,3.28
+50485,Galata,Galata,8.93,37.53,60,0.41
+50387,Thelepte,Thelepte,8.6,34.99,80,8.0
+50107,Carthago,Carthago,10.31,36.85,100,0.37
+50352,Sicca Veneria,Sicca Veneria,8.71,36.18,80,5.41
+50317,Portus,Portus,12.26,41.78,90,0.09
+50505,Lilybaeum,Lilybaeum,12.44,37.8,80,0.34
+50501,Maritima,Maritima,12.06,37.97,60,0.31
+50279,Ocriculum,Ocriculum,12.47,42.41,80,0.71
+50265,Narnia,Narnia,12.52,42.52,80,1.18
+50327,Roma,Roma,12.49,41.89,100,0.0
+50425,Volsinii,Volsinii,11.99,42.64,80,3.53
+50134,Cosa,Cosa,11.29,42.41,80,0.16
+50286,Ostia/Portus,Ostia/Portus,12.29,41.75,90,0.1
+50489,Ilva,Ilva,10.24,42.74,70,0.24
+50499,Cossyra,Cossyra,11.94,36.83,70,0.4
+50498,Caput Vada,Caput Vada,11.16,35.23,60,0.57
+50188,Hadrumetum,Hadrumetum,10.64,35.84,90,0.5
+50493,Mercurii Pr.,Mercurii Pr.,11.01,37.06,60,0.41
+50495,Clipea,Clipea,11.11,36.84,70,0.44
+50264,Narbo,Narbo,3.0,43.2,90,0.48
+50239,Lugdunum Convenarum,Lugdunum Convenarum,0.56,43.04,80,7.57
+50015,Alba Fucens,Alba Fucens,13.41,42.08,80,3.23
+50255,Minturnae,Minturnae,13.77,41.24,90,0.21
+50175,Formiae,Formiae,13.61,41.26,80,0.2
+50177,Fregellanum,Fregellanum,13.51,41.55,60,3.44
+50047,Asculum,Asculum,13.57,42.85,90,1.96
+50378,Tarracina,Tarracina,13.25,41.29,90,0.17
+50714,Panormus,Panormus,13.32,38.12,90,0.41
+50173,Ferentinum,Ferentinum,13.25,41.69,80,2.47
+50122,Clusium,Clusium,11.95,43.02,90,4.75
+50761,Populonium,Populonium,10.5,43.0,80,0.21
+50393,Tibur,Tibur,12.8,41.96,80,0.99
+50324,Reate,Reate,12.86,42.4,80,2.51
+50366,Spoletium,Spoletium,12.74,42.74,90,2.47
+50507,Selinus,Selinus,12.83,37.58,90,0.39
+50715,Agrigentum,Agrigentum,13.58,37.31,80,0.43
+50398,Tolosa,Tolosa,1.43,43.62,80,3.95
+50040,Arelate,Arelate,4.63,43.69,90,0.53
+50022,Ancona,Ancona,13.52,43.62,90,0.96
+50081,Bovianum,Bovianum,14.47,41.49,80,5.6
+50104,Capua,Capua,14.24,41.09,90,1.59
+50132,Corfinium,Corfinium,13.84,42.12,80,2.91
+50357,Sinuessa,Sinuessa,13.83,41.16,80,0.22
+50010,Aesernia,Aesernia,14.23,41.59,80,4.74
+50110,Castrum Truentinum,Castrum Truentinum,13.9,42.9,80,0.98
+50205,Interpromium,Interpromium,13.93,42.24,70,2.28
+50136,Cumae,Cumae,14.04,40.85,80,0.23
+50256,Misenum,Misenum,14.08,40.78,80,0.23
+50322,Puteoli,Puteoli,14.11,40.83,90,0.22
+50268,Neapolis,Neapolis,14.23,40.84,90,0.24
+50312,Pompeii,Pompeii,14.48,40.75,80,0.25
+50109,Casinum,Casinum,13.83,41.49,90,2.43
+50049,Aternum,Aternum,14.21,42.46,80,0.95
+50381,Teanum,Teanum,14.06,41.25,80,1.1
+50176,Forum Iulii,Forum Iulii,6.73,43.44,80,0.43
+50031,Aquae Sextiae,Aquae Sextiae,5.44,43.53,80,1.45
+50250,Massilia,Massilia,5.36,43.31,80,0.49
+50043,Arretium,Arretium,11.86,43.47,90,2.91
+50513,Camarina,Camarina,14.45,36.85,80,0.52
+50512,Melita,Melita,14.4,35.88,80,0.54
+50269,Nemausus,Nemausus,4.36,43.84,80,1.57
+50171,Fanum Fortunae,Fanum Fortunae,13.02,43.84,80,0.99
+50237,Luca,Luca,10.5,43.85,90,2.14
+50174,Florentia,Florentia,11.26,43.77,80,0.54
+50278,Nuceria,Nuceria,14.67,40.74,80,0.71
+50113,Caudium,Caudium,14.64,41.06,80,2.83
+50335,Salernum,Salernum,14.77,40.68,80,0.28
+50762,Palinurus Pr.,Palinurus Pr.,14.93,40.26,60,0.27
+50307,Pisae,Pisae,10.4,43.72,90,0.25
+50456,Portus Pachyni,Portus Pachyni,15.14,36.68,70,0.54
+50455,Syracusae,Syracusae,15.29,37.07,90,0.52
+50516,Messana,Messana,15.56,38.19,90,0.44
+50326,Regium,Regium,15.64,38.11,80,0.43
+50518,Titius (river),Titius (river),15.86,43.72,60,0.99
+50521,Heracleum Pr.,Heracleum Pr.,16.06,37.93,60,0.48
+50417,Vibo Valentia,Vibo Valentia,16.1,38.67,80,0.49
+50523,Lokroi Epizephyrioi,Lokroi Epizephyrioi,16.26,38.24,80,0.5
+50336,Salona,Salona,16.5,43.53,90,0.94
+50308,Pistoriae,Pistoriae,10.89,43.93,80,1.75
+50089,Burnum,Burnum,16.0,44.01,80,3.3
+50201,Iader,Iader,15.23,44.11,80,1.02
+50042,Ariminum,Ariminum,12.56,44.06,80,1.02
+50241,Luna,Luna,10.03,44.07,90,0.27
+50037,Arausio,Arausio,4.81,44.14,80,1.04
