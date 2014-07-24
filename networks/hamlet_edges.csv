@@ -1,0 +1,129 @@
+source,target,type,id,label,cost,wight,num_speeches,num_words,windowType,windowTypeNum
+guildenstern,hamlet,Directed,2,,0.0043668122,229,24,229,3N2E,3
+guildenstern,queen gertrude,Directed,0,,0.0526315789,19,2,19,5N6E,5
+guildenstern,king claudius,Directed,1,,0.0128205128,78,3,78,5N4E,5
+laertes,laertes,Directed,5,,0.0042372881,236,8,236,4N5E,4
+laertes,danes,Directed,6,,0.0476190476,21,3,21,5N3E,5
+laertes,hamlet,Directed,7,,0.0048309179,207,12,207,5N5E,5
+laertes,first priest,Directed,10,,0.023255814,43,4,43,4N2E,4
+laertes,lord polonius,Directed,3,,0.0454545455,22,2,22,3N2E,3
+laertes,ophelia,Directed,4,,0.0026315789,380,7,380,4N5E,4
+laertes,queen gertrude,Directed,11,,0.0256410256,39,3,39,3N3E,3
+laertes,king claudius,Directed,8,,0.002,500,24,500,4N4E,4
+laertes,osric,Directed,9,,0.0384615385,26,2,26,6N5E,6
+first ambassador,horatio,Directed,12,,0.0243902439,41,1,41,5N5E,5
+rosencrantz,guildenstern,Directed,14,,0.0833333333,12,2,12,5N5E,5
+rosencrantz,hamlet,Directed,17,,0.0021786492,459,36,459,3N2E,3
+rosencrantz,lord polonius,Directed,16,,0.1666666667,6,1,6,3N4E,3
+rosencrantz,queen gertrude,Directed,13,,0.0147058824,68,3,68,5N5E,5
+rosencrantz,king claudius,Directed,15,,0.0057142857,175,7,175,5N4E,5
+danes,laertes,Directed,18,,0.1111111111,9,2,9,5N3E,5
+danes,danes,Directed,19,,0.25,4,1,4,4N3E,4
+first sailor,horatio,Directed,20,,0.0243902439,41,2,41,5N4E,5
+hamlet,guildenstern,Directed,23,,0.0035842294,279,15,279,3N2E,3
+hamlet,laertes,Directed,24,,0.0021551724,464,16,464,4N4E,4
+hamlet,rosencrantz,Directed,26,,0.0008598452,1163,47,1163,3N2E,3
+hamlet,hamlet,Directed,29,,0.0004816956,2076,26,2076,4N4E,4
+hamlet,lucianus,Directed,35,,0.0588235294,17,1,17,4N3E,4
+hamlet,captain,Directed,36,,0.012987013,77,6,77,2N1E,2
+hamlet,first clown,Directed,38,,0.0085470085,117,19,117,2N1E,2
+hamlet,lord polonius,Directed,25,,0.0021052632,475,34,475,2N2E,2
+hamlet,horatio,Directed,28,,0.0003109453,3216,98,3216,5N4E,5
+hamlet,lord,Directed,33,,0.0277777778,36,3,36,4N3E,4
+hamlet,attendants,Directed,37,,0.1666666667,6,1,6,3N3E,3
+hamlet,marcellus,Directed,22,,0.037037037,27,6,27,3N2E,3
+hamlet,ophelia,Directed,27,,0.0015974441,626,29,626,3N3E,3
+hamlet,queen gertrude,Directed,34,,0.0007027407,1423,35,1423,4N4E,4
+hamlet,ghost,Directed,21,,0.0032154341,311,17,311,3N3E,3
+hamlet,players,Directed,30,,0.0011198208,893,12,893,6N4E,6
+hamlet,king claudius,Directed,31,,0.0028735632,348,17,348,6N6E,6
+hamlet,osric,Directed,32,,0.0028328612,353,20,353,4N5E,4
+lucianus,lucianus,Directed,39,,0.0243902439,41,1,41,4N4E,4
+first priest,laertes,Directed,40,,0.0107526882,93,2,93,4N2E,4
+captain,hamlet,Directed,42,,0.0125,80,6,80,2N1E,2
+captain,prince fortinbras,Directed,41,,0.1666666667,6,1,6,5N4E,5
+first clown,hamlet,Directed,45,,0.0032786885,305,18,305,2N1E,2
+first clown,first clown,Directed,44,,0.0101010101,99,4,99,3N3E,3
+first clown,second clown,Directed,43,,0.0028169014,355,13,355,2N1E,2
+cornelius,king claudius,Directed,46,,0.1,10,1,10,5N3E,5
+lord polonius,laertes,Directed,50,,0.0043478261,230,2,230,3N2E,3
+lord polonius,rosencrantz,Directed,48,,0.1,10,1,10,3N4E,3
+lord polonius,hamlet,Directed,52,,0.0034965035,286,31,286,2N2E,2
+lord polonius,lord polonius,Directed,47,,0.0081967213,122,8,122,2N2E,2
+lord polonius,ophelia,Directed,49,,0.001814882,551,15,551,4N4E,4
+lord polonius,queen gertrude,Directed,55,,0.0032894737,304,6,304,6N6E,6
+lord polonius,reynaldo,Directed,51,,0.0020080321,498,14,498,2N1E,2
+lord polonius,players,Directed,53,,0.0769230769,13,3,13,4N5E,4
+lord polonius,king claudius,Directed,54,,0.0014084507,710,18,710,5N5E,5
+horatio,first ambassador,Directed,67,,0.0090909091,110,1,110,5N5E,5
+horatio,first sailor,Directed,58,,0.03125,32,2,32,5N4E,5
+horatio,hamlet,Directed,63,,0.0011614402,861,82,861,4N4E,4
+horatio,horatio,Directed,62,,0.0046082949,217,3,217,4N4E,4
+horatio,marcellus,Directed,57,,0.0020366599,491,13,491,4N4E,4
+horatio,francisco,Directed,59,,0.25,4,1,4,3N2E,3
+horatio,bernardo,Directed,60,,0.0065359477,153,4,153,3N2E,3
+horatio,queen gertrude,Directed,65,,0.0625,16,1,16,6N5E,6
+horatio,prince fortinbras,Directed,66,,0.0175438596,57,2,57,5N5E,5
+horatio,ghost,Directed,56,,0.0081300813,123,3,123,4N3E,4
+horatio,servant,Directed,61,,0.0833333333,12,2,12,5N4E,5
+horatio,osric,Directed,64,,0.0666666667,15,1,15,3N2E,3
+gentleman,queen gertrude,Directed,68,,0.01,100,2,100,5N4E,5
+gentleman,king claudius,Directed,69,,0.0128205128,78,1,78,5N5E,5
+messenger,king claudius,Directed,70,,0.0277777778,36,2,36,5N3E,5
+lord,hamlet,Directed,71,,0.0149253731,67,3,67,4N3E,4
+marcellus,hamlet,Directed,75,,0.012345679,81,14,81,3N2E,3
+marcellus,horatio,Directed,72,,0.0037174721,269,14,269,4N4E,4
+marcellus,francisco,Directed,73,,0.0769230769,13,2,13,4N3E,4
+marcellus,bernardo,Directed,74,,0.0136986301,73,4,73,3N3E,3
+francisco,horatio,Directed,77,,0.1111111111,9,2,9,4N3E,4
+francisco,marcellus,Directed,76,,0.125,8,1,8,4N3E,4
+francisco,bernardo,Directed,78,,0.0263157895,38,6,38,2N1E,2
+bernardo,horatio,Directed,81,,0.0070921986,141,9,141,4N3E,4
+bernardo,marcellus,Directed,79,,0.0357142857,28,4,28,4N4E,4
+bernardo,francisco,Directed,80,,0.0243902439,41,6,41,2N1E,2
+ophelia,laertes,Directed,84,,0.0037878788,264,8,264,2N3E,2
+ophelia,hamlet,Directed,85,,0.0046511628,215,27,215,3N3E,3
+ophelia,lord polonius,Directed,82,,0.00330033,303,11,303,2N1E,2
+ophelia,ophelia,Directed,83,,0.0046296296,216,5,216,4N4E,4
+ophelia,queen gertrude,Directed,87,,0.0166666667,60,4,60,3N4E,3
+ophelia,king claudius,Directed,86,,0.0060240964,166,3,166,3N3E,3
+voltimand,king claudius,Directed,88,,0.0065789474,152,1,152,4N3E,4
+queen gertrude,guildenstern,Directed,90,,0.5,2,1,2,7N6E,7
+queen gertrude,laertes,Directed,91,,0.0048309179,207,7,207,5N5E,5
+queen gertrude,rosencrantz,Directed,93,,0.0097087379,103,5,103,4N3E,4
+queen gertrude,hamlet,Directed,97,,0.0023529412,425,33,425,7N6E,7
+queen gertrude,lord polonius,Directed,92,,0.0434782609,23,3,23,5N6E,5
+queen gertrude,horatio,Directed,95,,0.25,4,1,4,6N5E,6
+queen gertrude,gentleman,Directed,96,,0.1,10,2,10,5N4E,5
+queen gertrude,attendants,Directed,89,,0.0909090909,11,1,11,7N5E,7
+queen gertrude,ophelia,Directed,94,,0.0196078431,51,4,51,4N5E,4
+queen gertrude,queen gertrude,Directed,99,,0.0136986301,73,4,73,5N3E,5
+queen gertrude,king claudius,Directed,98,,0.0058139535,172,14,172,5N5E,5
+prince fortinbras,soldiers,Directed,100,,0.3333333333,3,1,3,6N5E,6
+prince fortinbras,captain,Directed,102,,0.02,50,1,50,5N4E,5
+prince fortinbras,horatio,Directed,103,,0.014084507,71,3,71,5N5E,5
+prince fortinbras,prince fortinbras,Directed,101,,0.0158730159,63,1,63,4N4E,4
+ghost,hamlet,Directed,105,,0.0014619883,684,10,684,3N3E,3
+ghost,horatio,Directed,104,,0.25,4,4,4,3N3E,3
+second clown,first clown,Directed,106,,0.0101010101,99,12,99,2N1E,2
+servant,horatio,Directed,107,,0.1111111111,9,1,9,5N4E,5
+reynaldo,lord polonius,Directed,108,,0.0153846154,65,13,65,2N1E,2
+players,hamlet,Directed,110,,0.0416666667,24,5,24,6N5E,6
+players,players,Directed,109,,0.0010559662,947,13,947,3N2E,3
+king claudius,laertes,Directed,116,,0.0007047216,1419,34,1419,4N4E,4
+king claudius,rosencrantz,Directed,114,,0.0027173913,368,11,368,4N3E,4
+king claudius,hamlet,Directed,118,,0.0022271715,449,22,449,6N6E,6
+king claudius,cornelius,Directed,124,,0.0188679245,53,2,53,5N3E,5
+king claudius,lord polonius,Directed,113,,0.0050251256,199,12,199,5N5E,5
+king claudius,horatio,Directed,112,,0.0555555556,18,2,18,5N6E,5
+king claudius,gentleman,Directed,117,,0.25,4,1,4,5N5E,5
+king claudius,messenger,Directed,123,,0.0909090909,11,3,11,3N2E,3
+king claudius,attendants,Directed,111,,0.0096153846,104,5,104,6N6E,6
+king claudius,ophelia,Directed,115,,0.0909090909,11,3,11,3N3E,3
+king claudius,voltimand,Directed,119,,0.0192307692,52,2,52,4N3E,4
+king claudius,queen gertrude,Directed,122,,0.00155521,643,22,643,5N5E,5
+king claudius,king claudius,Directed,120,,0.0011806375,847,9,847,6N6E,6
+king claudius,osric,Directed,121,,0.1666666667,6,1,6,5N4E,5
+osric,laertes,Directed,125,,0.1,10,2,10,6N6E,6
+osric,hamlet,Directed,127,,0.0028985507,345,22,345,5N4E,5
+osric,osric,Directed,126,,0.1666666667,6,1,6,5N5E,5

@@ -7,6 +7,7 @@
 
 <body onload="start()">
 <div id="viz">
+  <div id="controls" style="padding:20px;">
   <form>
     Gravity <input id="gravitySlider" type="range" onchange="updateForce(); changeGravity()" min ="0" max="1" step =".01"  value=".1" />
     <input type="text" id="gravityInput" value=".1" />
@@ -32,6 +33,7 @@
   <div id="definitionbox" height="1px">
   </div>
 </div>
+</div>
 <div id="lesson">
   <div id="lessontitle">
   <h1>Introduction to Network Analysis and Representation</h1>
@@ -52,6 +54,7 @@
     <li><input type="button" value="Pathfinding" onclick='selectPath(); updateText("pathfinding")'><input type="button" value="Ego Network" onclick='showEgoNetwork(); updateText("egonetwork")'><input type="button" value="Spatial Problem" onclick='spatialProblem(); updateText("spatialproblem")' ></li>
   </ol>
     </div>
+  <div id="lessonContent">
     <div id="lessontext">
   </div>
   <div id="citations">
@@ -59,5 +62,5 @@
   <div id="codetext">
   </div>
 </div>
-<div id="footer"></div>
+  </div>
 </body>

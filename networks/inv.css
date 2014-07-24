@@ -3,8 +3,7 @@ html, body {
   width: 100%;
   color: #444;
   font: 1em/1 "Hoefler Text", "Georgia", Georgia, serif, sans-serif;
-  padding: 10px;
-
+  margin: 0;
 }
 
 ol {
@@ -55,6 +54,7 @@ rect {
   height: 100%;
   width: 50%;
   float: left;
+  overflow: hidden;
 }
 
 #lesson {
@@ -85,4 +85,9 @@ rect {
   margin: 20px;
   height: 20px;
   width: 1000px;
+}
+
+#lessonContent {
+  height: 300px;
+  overflow: auto;
 }
