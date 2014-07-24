@@ -136,15 +136,15 @@ var svg = d3.select("#viz").append("svg")
     .attr("width", width)
     .attr("height", height)
     .attr("id", "networkViz");
-    
-    svg.append("g").attr("class", "linkLayer")
-    svg.append("g").attr("class", "nodeLayer")
 
 svg.append("rect")
     .attr("width", width)
     .attr("height", height)
     .attr("id","backgroundRect")
     .on("mousemove", mousemove);
+
+    svg.append("g").attr("class", "linkLayer")
+    svg.append("g").attr("class", "nodeLayer")
 
 nodes = force.nodes();
 links = force.links();
