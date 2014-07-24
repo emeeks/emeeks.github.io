@@ -4,6 +4,18 @@ function start() {
   currentEdge = "fixed";
   pathSource = "";
 
+  speedVal = 200;
+  dampingFactor = .85;
+  maxPageRank = 0;
+  nodeAmount = 10;
+  currentPagingNodeID = 0;
+  model = {};
+  model.autoCount = 0;
+  pageRankColoration = d3.scale.linear().domain([0,1]).range(["black","#F5A9A9"])
+  pageRankSize = d3.scale.linear().domain([0,1]).range([2,12])
+  f = d3.format(",.2f");
+  model.nextStep = randomStart;
+  
 width = 500;
 height = 600;
 
@@ -16,19 +28,19 @@ updateText("introduction");
 
 function updateText(lessonType) {
   switch(lessonType)
-  {        
+  {
   case "introduction":
-  d3.select("#codetext").html("<h3>Code</h3><p><a href='https://gist.github.com/emeeks/4588962'>You can see the code on Github here</a></p><p>This section is used to display relevant code for the actions that you've clicked on. All implementations of network functionality on this site are built in D3 using JavaScript, so they're not particularly high performance. Plus, they were coded by a humanist, and you know how that goes.</p>");
-  d3.select("#citations").html("<h3>Citations</h3><ol><li>1. BRUGHMANS, T. 2012. Thinking through networks: a review of formal network methods in archaeology. Journal of Archaeological Method and Theory.</li></ol>");
+  d3.select("#codetext").html("<h3></h3><p></p>");
+  d3.select("#citations").html("<h3>Citations</h3><ol><li><a href='http://www.themacroscope.org'>The Historians Macroscope</a></li><li>2. BRUGHMANS, T. 2012. Thinking through networks: a review of formal network methods in archaeology. Journal of Archaeological Method and Theory.</li></ol>");
   d3.select("#lessontext").html("<h2>Introduction</h2><p>Networks and network analysis has grown more prominent in both humanities scholarship and public discourse. In this context, networks--also known as graphs or node-link diagrams--are \"a set of vertices (also called points or nodes) which represent the entities of research interest, and a set of lines (or ties) between these vertices which represent their relationships.\" [1]</p><p>This interactive application is designed to provide an overview of various network analysis principles used for analysis and representation. It also provides a few examples of untraditional networks used in digital humanities scholarship. Finally, along with the various methods described interactively here are links to related scholarship.</p><p>Each network type is listed in the Models section, and can be paired with an analysis or representation method by simply clicking on a network type to load a new network, and then clicking on an analysis or visualization method.</p><p>Networks are represented using traditional force-directed techniques or by plotting along the xy axis based on numerical attributes of the nodes (longitude and latitude in the case of nodes that represent geographic entities). For the force directed layout, you can adjust the various force principles to see how this affects the representation of the network you're working with.</p><p>This implementation will likely remain a work-in-progress for some time, and if you notice any flaws or discrepencies, or have a suggestion, please contact <a href='mailto:emeeks@stanford.edu'>Elijah Meeks</a>.</p>");
   break;
   case "transport":
-  d3.select("#codetext").html("<h3>Code</h3><p>Loading a Transportation Network uses the same code to load all preset networks, so maybe this should focus on the CSV being loaded</p>");
+  d3.select("#codetext").html("<h3></h3><p></p>");
   d3.select("#citations").html("<h3>Citations</h3><ol><li><a href='http://journalofdigitalhumanities.org/1-3/modeling-networks-and-scholarship-with-orbis-by-elijah-meeks-and-karl-grossner/'>Meeks, E. & Grossner, G. \"Modeling Networks and Scholarship with ORBIS\" Journal of Digital Humanities 1.3 Summer 2012.</a></li><li>...</li></ol>");
   d3.select("#lessontext").html("<h2>Transportation Networks</h2><p>This is a piece of the transportation network of the Roman World from <a href='http://orbis.stanford.edu'>ORBIS</a>. A transportation network typically uses edges to describe an annotated connection between two sites, though sometimes nodes do not represent sites in the traditional sense but rather any place where a switch can be made from one route to another, such as an intersection, on-ramp, or crossroads.</p><p>If plotted, the nodes are laid out by their geographic location</p><p><a href='http://thenounproject.com/noun/city/#icon-No1566'>City icon by Thibault Geffroy, from The Noun Project</a></p>");
   break;
   case "randomgraph":
-  d3.select("#codetext").html("<h3>Code</h3><p>Some code that produces a random graph, with random links and random spatial characteristics.</p>");
+  d3.select("#codetext").html("<h3></h3><p></p>");
   d3.select("#citations").html("<h3>Citations</h3><ol><li>Albert, R., and Barabasi, A-L. (2002). Statistical mechanics of complex networks. Reviews of modern physics 74 (January): 47-97.</li><li>...</li></ol>");
   d3.select("#lessontext").html("<h2>Random Graph</h2><p>Random graphs are used as control sets to compare variation with the studied network. Random isn't the best word for these networks, as they can be generated by very specific and complicated rules, so as better to model the phenomena being studied.</p><p>If plotted, each node will be placed according to random xy values generated when the network is first created.</p><p>This graph is created with 50 nodes and a 2.5% for each node to be connected to each node (in both directions, so a 5% chance total if treated as an undirected graph). You can create a new random graph with different settings:</p><form>Nodes: <input type=\"text\" name=\"nrgNodeValue\" value=\"50\" /> Link Chance <input type=\"text\" name=\"nrgLinksValue\" value=\".025\" /><input type=\"button\" value=\"New Graph\" onclick='randomGraph(this.form.nrgNodeValue.value,this.form.nrgLinksValue.value);'></form>");
   break;
@@ -56,6 +68,11 @@ function updateText(lessonType) {
   d3.select("#codetext").html("<h3>Code</h3><p>Part of this code is from Pathfinding.</p>");
   d3.select("#citations").html("<h3>Citations</h3><ol><li>1. <a href='http://faculty.ucr.edu/~hanneman/nettext/C10_Centrality.html'>Hanneman, R. & Riddle, M. Introduction to Social Network Methods - Chapter 10. Centrality</a></li><li>...</li></ol>");
   d3.select("#lessontext").html("<h2>Centrality</h2><p>Centrality is a general term indicating a measure of a node's location in a network relative to other nodes in the network.</p><p>One measure, shown first, is the average Least Cost Path to all the nodes in the network. This <input type='button' onclick='sizeByStats(\"Average Path Length\")' value='Average Path Length' /> is similar to (these should be buttons) Closeness or Farness centrality.</p><p>Another measure is <input type='button' onclick='sizeByStats(\"Betweenness\")' value='Betweenness Centrality' /> which tallies the number of times a node is crossed for every least cost path in the network.</p><p>There are many more centrality measures some of which are described in [1].</p>");
+  break;
+  case "pagerank":
+  d3.select("#codetext").html("<h3>Code</h3><p><a href='http://bl.ocks.org/emeeks/f448eef177b5fe94b1c0'></p>");
+  d3.select("#citations").html("<h3>Citations</h3><ol><li></li></ol>");
+  d3.select("#lessontext").html("<h2>PageRank</h2><p><button onclick='runOnce();'>One Step</button><button onclick='runHundred();'>100 Steps</button><button onclick='runThousand();'>1000 Steps</button></p>");
   break;
   case "clustering":
   d3.select("#codetext").html("<h3>Code</h3><p>This code only does undirected</p>");
@@ -93,6 +110,7 @@ newLinks = [];
 nodeHash = {};
 
 for ( x = 0; x < newGraph.nodes.length; x++ ) {
+  newGraph.nodes[x].pageRank = 0;
   newNodes.push(newGraph.nodes[x]);
   nodeHash[String(newGraph.nodes[x].id)] = x;
 }
@@ -240,6 +258,7 @@ function restart() {
 
   nodeg = node.enter().insert("g", ".cursor")
       .attr("class", "node")
+      .attr("id", function(d) {return "node" + d.id})
       .call(force.drag);
 
       nodeg.append("circle")
@@ -259,7 +278,7 @@ function restart() {
       
   nodeg.append("image")
       .attr("class", "node")
-      .attr("xlink:href", function(d) { return ("dot.svg")});
+//      .attr("xlink:href", function(d) { return ("dot.svg")});
       
   node.exit().transition().duration(300).attr("r",1).remove();
 
@@ -446,7 +465,7 @@ function deleteRandomNodes() {
     sampledIDValues.push(randomNodeArray[x].id)
   }
   
-  deleteNodes(sampledIDValues);  
+  deleteNodes(sampledIDValues);
 }
 
 function getRandomSubarray(arr, size) {
@@ -948,3 +967,96 @@ orbitArray = {};
 	}
 
 }
+
+function randomStart() {
+//        d3.select("#annotation").style("color", "green").html("start");
+    d3.selectAll("g.node").select("circle")
+      .style("stroke-width", "0")
+      .style("fill", "#F5A9A9");
+      d3.selectAll("line.link").style("stroke-width", "1px").style("stroke", "gray");
+      
+        currentPagingNodeID = Math.floor(Math.random() * nodeAmount);
+        d3.select("#node" + currentPagingNodeID).select("circle").style("fill", "green")
+        model.nextStep = stepTo;
+        increasePageRank();
+      }
+      
+      function stepTo() {
+        if (Math.random() > dampingFactor) {
+        d3.select("#annotation").style("color", "black").html("end");
+          model.nextStep = randomStart;
+          return;
+        }
+        d3.select("#annotation").style("color", "#F5A9A9").html("step");
+
+        //undirected network
+/*        var connectingEdges = edges.filter(function(d) {
+          return d.source.id == currentPagingNodeID || d.target.id == currentPagingNodeID
+        })
+*/
+        //directed network
+        var connectingEdges = links.filter(function(d) {
+          return d.source.id == currentPagingNodeID;
+        })
+        
+        if (connectingEdges.length == 0) {
+          d3.select("#annotation").style("color", "black").html("end");
+          model.nextStep = randomStart;
+          return;
+        }
+
+        var randomEdge = Math.floor(Math.random() * connectingEdges.length);
+      d3.selectAll("line.link").filter(function(d) {return d == connectingEdges[randomEdge]}).transition().duration(speedVal).style("stroke-width", "4px").style("stroke", "red").each(function() {this.parentNode.appendChild(this)});
+        
+        currentPagingNodeID = connectingEdges[randomEdge].target.id == currentPagingNodeID ? connectingEdges[randomEdge].source.id : connectingEdges[randomEdge].target.id;
+        increasePageRank();
+
+      }
+      
+      function increasePageRank() {
+      d3.select("#node" + currentPagingNodeID).select("circle").style("stroke-width", "2px").each(function (d) {d.pageRank += 1});
+      maxPageRank = d3.max(nodes, function(d) {return d.pageRank});
+      totalPageRank = d3.sum(nodes, function(d) {return d.pageRank});
+      pageRankColoration.domain([0,maxPageRank]);
+      pageRankSize.domain([0,maxPageRank])
+      d3.selectAll("g.node").select("circle")
+      .transition().duration(speedVal)
+      .attr("r", function(d) {return pageRankSize(d.pageRank)})  
+      d3.selectAll("g.node").select("text")
+      //.style("fill", function(d) {return pageRankColoration(d.pageRank)})  
+      .text(function(d) {return d.pageRank / totalPageRank > 0.03 ? f(d.pageRank / totalPageRank) : ""})  
+      }
+      
+      function runOnce() {
+        speedVal = 1;
+        model.autoCount = 1;
+        startAuto();
+      }
+
+      function runHundred() {
+        speedVal = 200;
+        model.autoCount = 100;
+        startAuto();
+      }
+      
+        function runThousand() {
+        speedVal = 20;
+        model.autoCount = 1000;
+        startAuto();
+      }
+
+      function startAuto() {
+        if (model.autoCount > 0) {
+          setTimeout(autoRun,speedVal);
+          model.autoCount--;
+        }
+        else {
+          return;
+        }
+      }
+      
+      function autoRun() {
+        model.nextStep();
+        startAuto();
+      }
+

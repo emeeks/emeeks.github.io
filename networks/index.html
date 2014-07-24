@@ -47,6 +47,7 @@
       <li>Metrics</li>
     <li><input type="button" value="Centrality" onclick='calculateCentrality(); updateText("centrality")' /><input type="button" value="Clustering Coefficient" onclick='clusteringCoefficient(); updateText("clustering")' /></li>
     <li><input type="button" value="Community Detection" disabled=true></li>
+    <li><input type="button" value="PageRank" onclick='runOnce(); updateText("pagerank")'"></li>
   <li>Exploration</li>
     <li><input type="button" value="Pathfinding" onclick='selectPath(); updateText("pathfinding")'><input type="button" value="Ego Network" onclick='showEgoNetwork(); updateText("egonetwork")'><input type="button" value="Spatial Problem" onclick='spatialProblem(); updateText("spatialproblem")' ></li>
   </ol>
