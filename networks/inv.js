@@ -12,8 +12,8 @@ function start() {
   model = {};
   model.autoCount = 0;
   pageRankColoration = d3.scale.linear().domain([0,1]).range(["black","#F5A9A9"])
-  pageRankSize = d3.scale.linear().domain([0,1]).range([2,12])
-  f = d3.format(",.2f");
+  pageRankSize = d3.scale.linear().domain([0,1]).range([4,14])
+  f = d3.format(".2f");
   model.nextStep = randomStart;
   networkDirected = false;
 
@@ -74,7 +74,7 @@ function updateText(lessonType) {
   case "pagerank":
   d3.select("#codetext").html("<h3>Code</h3><p><a href='http://bl.ocks.org/emeeks/f448eef177b5fe94b1c0'></p>");
   d3.select("#citations").html("<h3>Citations</h3><ol><li></li></ol>");
-  d3.select("#lessontext").html("<h2>PageRank</h2><p><button onclick='runOnce();'>One Step</button><button onclick='runHundred();'>25 Steps</button><button onclick='runThousand();'>250 Steps</button></p>");
+  d3.select("#lessontext").html("<h2>PageRank</h2><p><button onclick='runOnce();'>One Step</button><button onclick='runHundred();'>25 Steps</button><button onclick='runThousand();'>250 Steps</button></p><p>This is a simple attempt to visualize the model that the PageRank algorithm is based on. PageRank is a method for discovering central nodes in a network by treating nodes as web pages and edges as links between them, upon which a simulated web surfer starts on a random page and clicks a random link, navigating to a new page, with a 15% chance that the surfer ends that session.</p><p>In this example, you can step through the process by clicking 'run once'. The first random node is colored green and 'start' appears at the top. If the random walk goes to a new node, the link is colored red and the new node is stroked in black and 'step' appears as the top. If the random walk is ended, 'end' will appear at the top. After each tick, new PageRank values are calculated for each node by totaling the number of visits to that node and dividing it by summing the number of total visits to any node in the network.</p><p>You'll notice that early on the PageRank values can change dramatically, but as you run more passes they eventually stabilize. You can see that by running a multiple random walks.</p><p>This is not a visualization of the PageRank algorithm, but rather the model that it's based on.</p>");
   break;
   case "clustering":
   d3.select("#codetext").html("<h3></h3><p></p>");
@@ -275,6 +275,14 @@ function restart() {
       .attr("class", "node")
       .style("stroke-width", 0)
       .style("stroke", "#808080")
+      ;
+
+        nodeg.append("text")
+      .attr("x", 0)
+      .attr("y", 0)
+      .style("text-anchor", "middle")
+      .attr("class", "pagerank")
+      .text("")
       ;
 
   nodeg.append("text")
@@ -764,13 +772,13 @@ function sizeByStats(statname) {
     
         d3.select("#definitionbox").html("Nodes are now sized by " + statname);
 
-  var sizeRamp = d3.scale.linear().domain([minStat,maxStat]).range([2,10]).clamp(true);
-  d3.selectAll("circle.node").transition().duration(300).attr("r", function(d,i) {return graphStats[nodes[i].id][statname] > 0 ? sizeRamp(graphStats[nodes[i].id][statname]) : 1});
+  var sizeRamp = d3.scale.linear().domain([minStat,maxStat]).range([4,14]).clamp(true);
+  d3.selectAll("circle.node").transition().duration(300).attr("r", function(d,i) {return graphStats[nodes[i].id][statname] > 0 ? sizeRamp(graphStats[nodes[i].id][statname]) : 2});
   d3.selectAll("image.node").transition().duration(300)
-  .attr("height", function(d,i) {return graphStats[nodes[i].id]["Total Connectivity"] > 0 ? sizeRamp(graphStats[nodes[i].id][statname]) : 1})
-  .attr("width", function(d,i) {return graphStats[nodes[i].id]["Total Connectivity"] > 0 ? sizeRamp(graphStats[nodes[i].id][statname]) : 1})
-  .attr("x", function(d,i) {return graphStats[nodes[i].id]["Total Connectivity"] > 0 ? -(sizeRamp(graphStats[nodes[i].id][statname]) / 2) : -.5})
-  .attr("y", function(d,i) {return graphStats[nodes[i].id]["Total Connectivity"] > 0 ? -(sizeRamp(graphStats[nodes[i].id][statname]) / 2) : -.5});
+  .attr("height", function(d,i) {return graphStats[nodes[i].id]["Total Connectivity"] > 0 ? sizeRamp(graphStats[nodes[i].id][statname]) : 2})
+  .attr("width", function(d,i) {return graphStats[nodes[i].id]["Total Connectivity"] > 0 ? sizeRamp(graphStats[nodes[i].id][statname]) : 2})
+  .attr("x", function(d,i) {return graphStats[nodes[i].id]["Total Connectivity"] > 0 ? -(sizeRamp(graphStats[nodes[i].id][statname]) / 2) : -1})
+  .attr("y", function(d,i) {return graphStats[nodes[i].id]["Total Connectivity"] > 0 ? -(sizeRamp(graphStats[nodes[i].id][statname]) / 2) : -1});
 
 }
 
@@ -978,7 +986,7 @@ orbitArray = {};
 }
 
 function randomStart() {
-//        d3.select("#annotation").style("color", "green").html("start");
+        d3.select("#definitionbox").style("color", "green").html("start");
     d3.selectAll("g.node").select("circle")
       .style("stroke-width", "0")
       .style("stroke", "black")
@@ -993,13 +1001,13 @@ function randomStart() {
       
       function stepTo() {
         if (Math.random() > dampingFactor) {
-        d3.select("#annotation").style("color", "black").html("end");
+        d3.select("#definitionbox").style("color", "black").html("end");
         d3.selectAll("g.node").select("circle").transition().duration(speedVal / 3).style("stroke", "red").transition().duration(speedVal / 3).style("stroke", "white")
           model.nextStep = randomStart;
           model.autoCount--;
           return;
         }
-        d3.select("#annotation").style("color", "#F5A9A9").html("step");
+        d3.select("#definitionbox").style("color", "#F5A9A9").html("step");
 
         if (networkDirected) {
             var connectingEdges = links.filter(function(d) {
@@ -1013,7 +1021,7 @@ function randomStart() {
         }
         
         if (connectingEdges.length == 0) {
-          d3.select("#annotation").style("color", "black").html("end");
+          d3.select("#definitionbox").style("color", "black").html("end");
           model.nextStep = randomStart;
           model.autoCount--;
           return;
@@ -1036,7 +1044,7 @@ function randomStart() {
       d3.selectAll("g.node").select("circle")
       .transition().duration(speedVal)
       .attr("r", function(d) {return pageRankSize(d.pageRank)})  
-      d3.selectAll("g.node").select("text")
+      d3.selectAll("g.node").select("text.pagerank")
       //.style("fill", function(d) {return pageRankColoration(d.pageRank)})  
       .text(function(d) {return d.pageRank / totalPageRank > 0.03 ? f(d.pageRank / totalPageRank) : ""})  
       }
