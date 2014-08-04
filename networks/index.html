@@ -6,8 +6,17 @@
 <script src="inv.js"></script>
 
 <body onload="start()">
+<div id="title" onclick='updateText("introduction")'><h1>Introduction to Network Analysis and Representation</h1>
+<h2>by Elijah Meeks and <a href="http://scottbot.net">Scott B. Weingart</a></h2></div>
 <div id="viz">
-  <div id="controls" style="padding:20px;">
+  <div id="vizInfo">
+  <ol><li><span class="infoType">Directed</span><span class="infoValue" id="directedInfo">No</span></li>
+  <li><span class="infoType">Weighted</span><span class="infoValue" id="weightedInfo">No</span></li>
+  <li></li>
+  <li><span class="infoType">Nodes</span><span class="infoValue" id="nodesInfo">50</span></li>
+  <li><span class="infoType">Edges</span><span class="infoValue" id="edgesInfo">100</span></li>
+  </ol></div>
+  <div id="controls">
   <form>
     Gravity <input id="gravitySlider" type="range" onchange="updateForce(); changeGravity()" min ="0" max="1" step =".01"  value=".1" />
     <input type="text" id="gravityInput" value=".1" />
@@ -30,30 +39,32 @@
     <form><input type="checkbox" id="directedCheck" onclick="changeDirectedness()"> Directed</form>
 <form><input type="button" value="Delete some edges" disabled=true> <input type="button" value="Delete some nodes" onclick="deleteRandomNodes()">
 <input type="button" id="addNodesButton" value="Add nodes" onclick="addNodes()"></form>
-  <div id="definitionbox" height="1px">
-  </div>
 </div>
 </div>
 <div id="lesson">
-  <div id="lessontitle">
-  <h1>Introduction to Network Analysis and Representation</h1>
-  </div>
   <div>
     <ol>
-      <li><input type="button" value="Introduction" onclick='updateText("introduction")'></li>
-      <li>Models</li>
-    <li><input type="button" value="Random" onclick='randomGraph(50,.025); updateText("randomgraph")'><input type="button" value="Dramatic" onclick='loadGraph("hamlet_nodes.csv","hamlet_edges.csv","person"); updateText("drama")'><input type="button" value="Transportation" onclick='loadGraph("rome_nodes.csv","rome_edges.csv","city"); updateText("transport")'></li>
-    <li><input type="button" value="Correspondence" disabled=true><input type="button" value="Genealogy" onclick='loadGraph("darwin_nodes.csv","darwin_edges.csv","person"); updateText("darwin")'><input type="button" value="Administration" onclick='loadGraph("dgsd_nodes.csv","dgsd_edges.csv","city"); updateText("dgsd")'></li>
-      <li>Layouts</li>
-    <li><input type="button" value="Force-Directed" onclick='updateForce(); updateText("forcealgo")'><input type="button" value="Plot" onclick='plotLayout(); updateText("plotlayout")'><input type="button" value="Hierarchical" disabled=true></li>
-      <li>Metrics</li>
-    <li><input type="button" value="Centrality" onclick='calculateCentrality(); updateText("centrality")' /><input type="button" value="Clustering Coefficient" onclick='clusteringCoefficient(); updateText("clustering")' /></li>
-    <li><input type="button" value="Community Detection" disabled=true></li>
-    <li><input type="button" value="PageRank" onclick='runOnce(); updateText("pagerank")'"></li>
-  <li>Exploration</li>
+      <li>Dataset <select id="datasetSelect" onchange="newDataset();"><option>random</option>
+      <option value="random">Random Network</option>
+      <option value="dramatic">Dramatic</option>
+      <option value="transport">Transportation</option>
+      <option value="genealogy">Genealogy</option>
+      <option value="administration">Administration</option>
+      </select> <span style="margin-left: 20px;">Layout</span>
+      <select id="layoutSelect" onchange="newLayout()";>
+        <option value="force">Force-directed</option>
+        <option value="plot">Plot</option>
+        <option value="arc">Arc Diagram</option>
+        <option value="matrix">Adjacency Matrix</option>
+      </select></li>
+      <li><input type="button" value="Introduction" ></li>
+    <li><input type="button" value="Centrality" onclick='calculateCentrality(); updateText("centrality")' /><input type="button" value="Clustering Coefficient" onclick='clusteringCoefficient(); updateText("clustering")' /><input type="button" value="PageRank" onclick='runOnce(); updateText("pagerank")'"></li>
     <li><input type="button" value="Pathfinding" onclick='selectPath(); updateText("pathfinding")'><input type="button" value="Ego Network" onclick='showEgoNetwork(); updateText("egonetwork")'><input type="button" value="Spatial Problem" onclick='spatialProblem(); updateText("spatialproblem")' ></li>
   </ol>
     </div>
+    <div id="definitionbox" height="30px">
+  </div>
+
   <div id="lessonContent">
     <div id="lessontext">
   </div>

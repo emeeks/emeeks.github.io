@@ -123,6 +123,10 @@ for ( x = 0; x < newGraph.links.length; x++ ) {
   newLinks.push({id: x, source: newGraph.nodes[nodeHash[newGraph.links[x].source]], target: newGraph.nodes[nodeHash[newGraph.links[x].target]], "cost": newGraph.links[x].cost, "weight": newGraph.links[x].invcost });
 }
 
+d3.select("#directedInfo").html("No");
+d3.select("#weightedInfo").html("No");
+d3.select("#nodesInfo").html(newNodes.length);
+d3.select("#edgesInfo").html(newLinks.length);
 
 force = d3.layout.force()
     .size([width, height])
@@ -132,10 +136,12 @@ force = d3.layout.force()
     .charge(-60)
     .on("tick", tick);
 
-var svg = d3.select("#viz").append("svg")
+var svg = d3.select("#viz").insert("svg", "#controls")
+    .attr("id", "networkViz")
     .attr("width", width)
     .attr("height", height)
-    .attr("id", "networkViz");
+    .style("width", width)
+    .style("height", height);
 
 svg.append("rect")
     .attr("width", width)
@@ -156,7 +162,8 @@ cursor = svg.select("g.nodeLayer").append("circle")
     .attr("transform", "translate(-100,-100)")
     .attr("class", "cursor")
     .attr("r", 1)
-    .style("opacity", 0);
+    .style("opacity", 0)
+    .style("fill", "pink");
 
 
 restart();
@@ -275,6 +282,7 @@ function restart() {
       .attr("class", "node")
       .style("stroke-width", 0)
       .style("stroke", "#808080")
+      .style("fill", "pink")
       ;
 
         nodeg.append("text")
@@ -292,10 +300,6 @@ function restart() {
       .text(function(d) {return d.label})
       .style("display", "none")
       ;
-      
-  nodeg.append("image")
-      .attr("class", "node")
-//      .attr("xlink:href", function(d) { return ("dot.svg")});
       
   node.exit().transition().duration(300).attr("r",1).remove();
 
@@ -510,20 +514,10 @@ function resize(byValue) {
   {
     case "nothing":
       d3.selectAll("circle.node").attr("r", 5)
-      
-      d3.selectAll("image.node").attr("x", -2.5)
-      .attr("y", -2.5)
-      .attr("width", 5)
-      .attr("height", 5);
 
     break;
     case "degree":
       d3.selectAll("circle.node").attr("r", function(d) {return sizingRamp(d["weight"])})
-      
-      d3.selectAll("image.node").attr("x", function(d) { return -((sizingRamp(d["weight"]))/2)})
-      .attr("y", function(d) { return -((sizingRamp(d["weight"]))/2)})
-      .attr("width", function(d) { return (sizingRamp(d["weight"]))})
-      .attr("height", function(d) { return (sizingRamp(d["weight"]))});
 
     break;
     }
@@ -725,6 +719,7 @@ else {
 }
 
 function selectPath() {
+  d3.selectAll("circle").style("fill", "pink");
   d3.selectAll("g.node").on("click",setSource).style("cursor", "pointer")
   d3.select("#definitionbox").html("Select a node to compute a path from");
 }
@@ -774,15 +769,11 @@ function sizeByStats(statname) {
 
   var sizeRamp = d3.scale.linear().domain([minStat,maxStat]).range([4,14]).clamp(true);
   d3.selectAll("circle.node").transition().duration(300).attr("r", function(d,i) {return graphStats[nodes[i].id][statname] > 0 ? sizeRamp(graphStats[nodes[i].id][statname]) : 2});
-  d3.selectAll("image.node").transition().duration(300)
-  .attr("height", function(d,i) {return graphStats[nodes[i].id]["Total Connectivity"] > 0 ? sizeRamp(graphStats[nodes[i].id][statname]) : 2})
-  .attr("width", function(d,i) {return graphStats[nodes[i].id]["Total Connectivity"] > 0 ? sizeRamp(graphStats[nodes[i].id][statname]) : 2})
-  .attr("x", function(d,i) {return graphStats[nodes[i].id]["Total Connectivity"] > 0 ? -(sizeRamp(graphStats[nodes[i].id][statname]) / 2) : -1})
-  .attr("y", function(d,i) {return graphStats[nodes[i].id]["Total Connectivity"] > 0 ? -(sizeRamp(graphStats[nodes[i].id][statname]) / 2) : -1});
 
 }
 
 function calculateCentrality() {
+  d3.selectAll("circle").style("fill", "pink")
   var directedValue = document.getElementById('directedCheck').checked;
     d3.select("#definitionbox").html("Calculating paths...");
   //Here's closeness, at least
@@ -827,6 +818,7 @@ function findEgoNetwork(searchNode, egoNetworkDegree, isDirected, searchType) {
 }
 
 function showEgoNetwork() {
+  d3.selectAll("circle").style("fill", "pink");
   d3.selectAll("g.node").on("click",findEgo).style("cursor", "pointer");
   d3.select("#definitionbox").html("Select a node to see its 2-Degree Ego Network");
 }
@@ -888,11 +880,10 @@ function labelChange() {
 }
 
 function changeImage(newImageName) {
-      d3.selectAll("image.node").attr("xlink:href", function(d) { return ("" + newImageName + ".svg")});  
 }
 
 function clusteringCoefficient() {
-  
+  d3.selectAll("circle").style("fill", "pink");
   //this implementation is currently only undirected
   
   //we'll store the value we compute in an object to use it to size the results
@@ -1081,3 +1072,40 @@ function randomStart() {
         startAuto();
       }
 
+function newDataset() {
+  var ds = document.getElementById("datasetSelect").value;
+  switch(ds) {
+    case "random":
+      randomGraph(50,.025); updateText("randomgraph");
+      break;
+    case "dramatic":
+      loadGraph("hamlet_nodes.csv","hamlet_edges.csv","person"); updateText("drama");
+      break;
+    case "transport":
+      loadGraph("rome_nodes.csv","rome_edges.csv","city"); updateText("transport")
+      break;
+    case "genealogy":
+      loadGraph("darwin_nodes.csv","darwin_edges.csv","person"); updateText("darwin");
+      break;
+    case "administration":
+      loadGraph("dgsd_nodes.csv","dgsd_edges.csv","city"); updateText("dgsd");
+      break;
+    
+  }
+}
+
+function newLayout() {
+  var ls = document.getElementById("layoutSelect").value;
+  switch(ls) {
+    case "force":
+      updateForce(); updateText("forcealgo");
+      break;
+    case "plot":
+      plotLayout(); updateText("plotlayout")
+      break;
+    case "arc":
+      break;
+    case "matrix":
+      break;
+  }
+}
