@@ -1,0 +1,380 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>HILT Tweets Burshable by Centrality</title>
+  <meta charset="utf-8" />
+  <link type="text/css" rel="stylesheet" href="gexfd3.css" />
+</head>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/colorbrewer.v1.min.js"></script>
+<script src="parser.js" type="text/javascript">
+</script>
+<script src="gexfd3.js" type="text/javascript">
+</script>
+<body onload="loadGraph('cosit.gexf')">
+
+<div id="vizcontainer" style="width:100%;height:100%">
+<canvas style="background: white;1000px;width:1000px;position:absolute;z-index:-1;" height=1000 width=1000></canvas>
+<svg id="graphSVG" style="border:1px lightgray solid;">
+  <g id="graphG" />
+<div id="modal"><div id="content"></div><button id="modalClose" onclick="nodeFocus=false;nodeOut();d3.select('#modal').style('display','none');">X</button></div>
+</div>
+<div id="controls">
+</div>
+<div id="brushDiv"><svg style="width:100%;height:50px;"><g id="brushG" class="brush"></g></svg></div>
+  <footer>
+<script>
+  nodeFocus = false;
+  currentBrush =[0,0];
+  docHash = {};
+  allLinks = [];
+  currentScale = 0;
+
+  
+  function loadGraph(sourceGEXF) {
+    newGEXF = GexfParser.fetch(sourceGEXF);
+
+    gD3 = gexfD3().graph(newGEXF).size([1000,1000]).dynamicAttribute("centrality");
+
+    force = d3.layout.force()
+      .charge(-200)
+      .linkDistance(50)
+      .size([1000, 1000])
+      .gravity(.1)
+      .on("tick", redrawGraph)
+
+    d3.select("#brushG").call(gD3.dynamicBrush);
+    gD3.dynamicBrush().on("brush", brushMove);
+
+    zoom = d3.behavior.zoom()
+    .scaleExtent([.1, 10])
+    .on("zoom", zoomed);
+
+    allLinks = gD3.links();
+    for (x in allLinks) {
+      allLinks[x]["highlighted"] = false;
+    }
+
+    brushMove();
+    d3.select("svg").call(zoom);
+    createControls();
+    zoomed();
+
+  }
+      
+      function highlightNeighbors(d,i) {
+        var nodeNeighbors = findNeighbors(d,i);
+        d3.selectAll("g.node").each(function(p) {
+          var isNeighbor = nodeNeighbors.nodes.indexOf(p);
+          d3.select(this).select("circle")
+          .style("opacity", isNeighbor > -1 ? 1 : .25)
+          .style("stroke-width", isNeighbor > -1 ? 3 : 1)
+          .style("stroke", isNeighbor > -1 ? "blue" : "white")
+        })
+        nodeNeighbors.links.forEach(function (link){
+          link.highlighted = true;
+        })
+        redrawGraph();
+      }
+      
+      function findNeighbors(d,i) {
+        neighborArray = [d];
+        var linkArray = [];
+        filteredLinks.filter(function(p) {return p.source == d || p.target == d}).forEach(function(p) {
+          neighborArray.indexOf(p.source) == -1 ? neighborArray.push(p.source) : null;
+          neighborArray.indexOf(p.target) == -1 ? neighborArray.push(p.target) : null;
+          linkArray.push(p);
+        })
+        return {nodes: neighborArray, links: linkArray};
+      }
+
+    function zoomed() {
+    force.stop();
+    var canvWidth = parseInt(d3.select("#vizcontainer").style("width"));
+    var canvHeight = parseInt(d3.select("#vizcontainer").style("height"));
+      var canvasTranslate = zoom.translate();
+        currentScale = zoom.scale();
+        var halfCanvas = canvHeight / 2;
+        var zoomLevel = halfCanvas * currentScale;
+        gD3.xScale().range([(halfCanvas - zoomLevel) + canvasTranslate[0], (halfCanvas + zoomLevel) + canvasTranslate[0]]);
+        gD3.yScale().range([(halfCanvas + zoomLevel) + canvasTranslate[1], (halfCanvas - zoomLevel) + canvasTranslate[1]]);
+        redrawGraph();
+    }
+    
+    function createControls() {
+      d3.select("#controls").append("button").attr("class", "origButton topology").html("Force On").on("click", function() {
+      force.start();})
+      d3.select("#controls").append("button").attr("class", "origButton topology").html("Force Off").on("click", function() {
+      force.stop();})
+      d3.select("#controls").append("button").attr("class", "origButton topology").html("Reset Layout").on("click", function() {
+      force.stop();
+      gD3.nodes().forEach(function (el) {el.x = el.originalX;el.px = el.originalX;el.y = el.originalY;el.py = el.originalY;});
+      currentBrush = [0,0];
+      brushMove();
+      redrawGraph();
+      })
+
+      d3.select("#controls").append("button").attr("class", "origButton node-appearance").html("Reset Colors").on("click", function() {
+      var sizeScale = gD3.nodeScale();
+      d3.selectAll("circle")
+      .attr("r", function (d) {return sizeScale(d.size)})
+      .style("fill", function(d) {return d.rgbColor})
+      .style("opacity", 1);
+      })
+            
+      d3.select("#controls").selectAll("button.nodeButtons").data(gD3.nodeAttributes())
+      .enter()
+      .append("button")
+      .attr("class", "nodeButtons node-appearance")
+      .on("click", nodeButtonClick)
+      .html(function(d) {return d});
+
+      d3.select("#controls").selectAll("button.linkButtons").data(gD3.linkAttributes())
+      .enter()
+      .append("button")
+      .attr("class", "linkButtons node-appearance")
+      .on("click", linkButtonClick)
+      .html(function(d) {return d});
+
+    }
+    
+    function nodeButtonClick(d,i) {
+      var nodeAttExtent = d3.extent(filteredNodes, function(p) {return parseFloat(p.properties[d])});
+      var colorScale = d3.scale.quantize().domain(nodeAttExtent).range(colorbrewer.YlGnBu[6]);
+      d3.selectAll("circle").style("fill", function(p) {return colorScale(p.properties[d])}).style("opacity", 1)
+    }
+    function linkButtonClick(d,i) {
+      var linkAttExtent = d3.extent(filteredLinks, function(p) {return parseFloat(p.properties[d])});
+      var colorScale = d3.scale.quantize().domain(linkAttExtent).range(colorbrewer.YlGnBu[6]);
+      d3.selectAll("line").style("stroke", function(p) {return colorScale(p.properties[d])}).style("opacity", 1)      
+    }
+    
+    function redrawGraph() {
+      var xScale = gD3.xScale();
+      var yScale = gD3.yScale();
+
+     var context = d3.select("canvas").node
+
+      var canvas = d3.select("canvas").node();
+      var context = canvas.getContext("2d");
+      context.clearRect (0,0,canvas.width,canvas.height);
+
+  context.lineWidth = 1;
+  context.strokeStyle = "rgba(0, 0, 0, 0.5)";
+
+  filteredLinks.forEach(function (link) {
+  context.beginPath();
+  context.moveTo(xScale(link.source.x),yScale(link.source.y))
+  context.lineTo(xScale(link.target.x),yScale(link.target.y))
+  context.stroke();
+      })
+
+  context.lineWidth = 2;
+  context.strokeStyle = "rgba(0, 255, 122, 0.75)";
+
+  filteredLinks.filter(function (d) {return d.highlighted}).forEach(function (link) {
+  context.beginPath();
+  context.moveTo(xScale(link.source.x),yScale(link.source.y))
+  context.lineTo(xScale(link.target.x),yScale(link.target.y))
+  context.stroke();
+      })
+  
+      d3.selectAll("g.node")
+      .attr("transform", function(d) {return "translate(" + xScale(d.x) + "," + yScale(d.y) + ")"});
+    }
+    
+    function collapseNetwork(collapseVector) {
+    currentBrush = [0,0];
+    dAtt = gD3.dynamicAttribute();
+    if (collapseVector == "base") {
+      gD3.links(allLinks);
+      brushMove();
+      return;
+    }
+    newLinks = [];
+     for (x in allLinks) {
+      if (allLinks[x].source.properties.type == collapseVector) {
+        for (y in allLinks) {
+          if (allLinks[y].source.properties.type == collapseVector) {
+          if (allLinks[y].target == allLinks[x].target && (allLinks[y].properties[dAtt] || allLinks[y].source.properties[dAtt])  == (allLinks[x].properties[dAtt] || allLinks[x].source.properties[dAtt])) {
+            var newLink = {id: collapseVector + newLinks.length, source: allLinks[x].source, target: allLinks[y].source, properties: {}};
+            if (gD3.linkAttributes().indexOf(dAtt) > -1) {
+              newLink.properties[dAtt] = allLinks[x].properties[dAtt];
+            }
+            else if (gD3.nodeAttributes().indexOf(dAtt) > -1) {
+              newLink.properties[dAtt] = allLinks[y].target.properties[dAtt];              
+            }
+            newLinks.push(newLink);
+            }
+          }
+        }        
+      }
+      else if (allLinks[x].target.properties.type == collapseVector) {
+        for (y in allLinks) {
+          if (allLinks[y].target.properties.type == collapseVector) {
+          if (allLinks[y].source == allLinks[x].source && (allLinks[y].properties[dAtt] || allLinks[y].target.properties[dAtt])  == (allLinks[x].properties[dAtt] || allLinks[x].target.properties[dAtt])) {
+            var newLink = {id: collapseVector + newLinks.length, source: allLinks[x].target, target: allLinks[y].target, properties: {}};
+            if (gD3.linkAttributes().indexOf(dAtt) > -1) {
+              newLink.properties[dAtt] = allLinks[x].properties[dAtt];
+            }
+            else if (gD3.nodeAttributes().indexOf(dAtt) > -1) {
+              newLink.properties[dAtt] = allLinks[y].source.properties[dAtt];              
+            }
+            newLinks.push(newLink);
+            }
+          }
+        }
+      }
+     }
+     console.log(newLinks)
+     gD3.links(newLinks);
+     brushMove();
+     redrawGraph();
+    }
+
+    function brushMove() {
+      var s = gD3.dynamicBrush().extent();
+      var dAtt = gD3.dynamicAttribute();
+      var xScale = gD3.xScale();
+      var yScale = gD3.yScale();
+      var sizeScale = gD3.nodeScale();
+      
+      if (Math.ceil(s[0]) == currentBrush[0] && Math.floor(s[1]) == currentBrush[1]) {
+        return;
+      }
+      else {
+        currentBrush[0] = Math.floor(s[0]);
+        currentBrush[1] = Math.ceil(s[1]);
+      }
+
+      var forceRunning = false;
+      if (force.alpha() > 0) {
+        force.stop();
+        forceRunning = true;
+      }
+      
+
+      if (typeof gD3.links()[0].properties["startyr"] != "undefined") {
+      filteredLinks = gD3.links().filter(function (d) {return d.properties[dAtt] == 0 || (d.properties[dAtt] >= currentBrush[0] && d.properties[dAtt] <= currentBrush[1])});
+      sourceNodes = filteredLinks.map(function (el) {return el.source});
+      targetNodes = filteredLinks.map(function (el) {return el.target});
+      filteredNodes = gD3.nodes().filter(function (d) {return sourceNodes.indexOf(d) > -1 || targetNodes.indexOf(d) > -1});
+      }
+      else {
+        filteredLinks = gD3.links();
+        filteredNodes = gD3.nodes();
+      }
+      if (gD3.nodeAttributes().indexOf(dAtt) > -1) {
+        filteredNodes = filteredNodes.filter(function (d) {return d.properties[dAtt] == 0 || (d.properties[dAtt] >= currentBrush[0] && d.properties[dAtt] <= currentBrush[1])});
+        nodeIDs = filteredNodes.map(function (el) {return el.id})
+        filteredLinks = filteredLinks.filter(function (d) {return nodeIDs.indexOf(d.source.id) > -1 && nodeIDs.indexOf(d.target.id) > -1})
+      }
+
+      d3.select("#graphG").selectAll("g.node").data(filteredNodes, function (d) {return d.id})
+      .enter()
+      .append("g")
+      .attr("class", "node")
+      .attr("transform", function(d) {return "translate(" + xScale(d.x) + "," + yScale(d.y) + ")"})
+      .on("mouseover", nodeOver)
+      .on("mouseout", nodeOut)
+      .on("click", nodeClick)
+      .append("circle")
+      .attr("r", 5)
+      .style("fill", function(d) {return d.rgbColor})
+      .style("stroke", "black")
+      .style("stroke-width", "1px")
+      .style("stroke-opacity", 1);
+
+      d3.selectAll("g.node").data(filteredNodes, function (d) {return d.id})
+      .exit()
+      .remove();
+
+      force
+      .nodes(filteredNodes)
+      .links(filteredLinks);
+
+      force.start();
+      
+      var maxWeight = d3.max(filteredNodes, function(d) {return d.weight || 0});
+      
+      if (maxWeight > 0) {
+        var nodeScale = d3.scale.linear().domain([1,maxWeight]).range([2,10]).clamp(true);
+        d3.selectAll("g.node").select("circle").attr("r", function(d) {return nodeScale(d.weight) || 0});
+      }
+
+      if (!forceRunning) {
+        force.stop();
+      }
+      
+        function nodeOver(d,i,e) {
+        var el = this;
+        if (!d3.event.fromElement) {
+          el = e;
+        }
+        if (nodeFocus) {
+          return;
+        }
+        //Only do the element stuff if this came from mouseover
+        el.parentNode.appendChild(el);
+        d3.select(el).append("text").attr("class", "hoverLabel").attr("stroke", "white").attr("stroke-width", "5px")
+        .style("opacity", .9)
+        .style("pointer-events", "none")
+        .text(d.label);
+        
+        d3.select(el).append("text").attr("class", "hoverLabel")
+        .style("pointer-events", "none")
+        .text(d.label);
+        highlightNeighbors(d,i);
+      }
+
+      function nodeClick(d,i) {
+        nodeFocus = false;
+        nodeOut();
+        nodeOver(d,i,this);
+        nodeFocus = true;
+        var newContent = "<p>" + d.label + "</p>";
+        newContent += "<p>Attributes: </p><p><ul>";
+        for (x in gD3.nodeAttributes()) {
+          newContent += "<li>" + gD3.nodeAttributes()[x] + ": " + d.properties[gD3.nodeAttributes()[x]]+ "</li>";          
+        }
+        newContent += "</ul></p><p>Connections:</p><ul>";
+        var neighbors = findNeighbors(d,i);
+        for (x in neighbors.nodes) {
+          if (neighbors.nodes[x] != d) {
+            newContent += "<li>" + neighbors.nodes[x].label + "</li>";
+          }
+        }
+        newContent += "</ul></p>";
+        
+        d3.select("#modal").style("display", "block").select("#content").html(newContent);
+      }
+      redrawGraph();
+    }
+
+  
+      function createAnonymousEdgeTable() {
+      var htmlTable = "source,target,year<br>";
+      for (x in gD3.links()) {
+        htmlTable+=gD3.links()[x].source.properties.type + "-" + gD3.nodes().indexOf(gD3.links()[x].source) + "," + gD3.links()[x].target.properties.type + "-" + gD3.nodes().indexOf(gD3.links()[x].target) + "," + gD3.links()[x].properties.year;
+        htmlTable+="<br>";
+      }
+      d3.select("#content").html(htmlTable)
+      
+    
+    }
+    
+          function nodeOut() {
+        if (nodeFocus) {
+          return;
+        }
+
+        d3.selectAll(".hoverLabel").remove();
+        d3.selectAll("circle").style("opacity", 1).style("stroke", "black").style("stroke-width", "1px");
+        filteredLinks.forEach(function (link) {link.highlighted = false});
+        redrawGraph();
+      }
+    
+
+</script>
+  </footer>
+</body>
+</html>
