@@ -1,0 +1,96 @@
+#modal {
+    position:fixed;
+    left:150px;
+    top:20px;
+    z-index:1;
+    background: white;
+    border: 1px black solid;
+    box-shadow: 10px 10px 5px #888888;
+    display: none;
+}
+  
+#content {
+    max-height: 400px;
+    overflow: auto;
+}
+  
+#modalClose {
+    position: absolute;
+    top: -0px;
+    right: -0px;
+    z-index: 1;
+}
+tr {
+  border: 1px gray solid;
+}
+
+td {
+  font-size: 10px;
+}
+td.data {
+    font-weight: 900;
+}
+  
+.tick line {
+  shape-rendering: crispEdges;
+  stroke: #000;
+}
+
+line.minor  {
+  stroke: #777;
+  stroke-dasharray: 2,2;
+}
+
+path.domain {
+  fill: none;
+  stroke: black;
+}
+
+.inactive, .tentative {
+  stroke: darkgray;
+  stroke-width: 4px;
+  stroke-dasharray: 5 5;
+}
+
+.tentative {
+  opacity: .5;
+}
+
+.active {
+  stroke: black;
+  stroke-width: 4px;
+  stroke-dasharray: 0;
+}
+
+circle {
+  fill: red;
+}
+
+rect {
+  fill: darkgray;
+}
+
+#controls {
+  position: fixed;
+  bottom: 50px;
+  left: 20px;
+}
+#brushDiv {
+  position: fixed;
+  bottom: 100px;
+  left: 20px;
+  right: 20px;
+  height:50px;
+  background: white;
+  opacity: .75;
+}
+
+.brush .extent {
+  fill-opacity: .90;
+  shape-rendering: crispEdges;
+}
+
+svg {
+    width: 100%;
+    height:100%;
+}
