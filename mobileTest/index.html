@@ -55,15 +55,14 @@
     d3.select("svg").on("mousemove", mouseStatus)
     
     function touchStatus() {
-      this.preventDefault();
+//      this.preventDefault();
       d = d3.touches(this);
       d3.select("#touchStatus")
       .select("ol")
       .selectAll("li")
       .data(d)
       .enter()
-      .append("li")
-      .html(function(d) {return d});
+      .append("li");
       
       d3.select("#touchStatus")
       .select("ol")
@@ -75,8 +74,8 @@
       d3.select("#touchStatus")
       .select("ol")
       .selectAll("li")
-      .data(d)
       .html(function(d) {return d});
+      
     }
 
     function mouseStatus() {
