@@ -47,9 +47,16 @@
     .style("pointer-events", "none")
     .append("div").attr("id", "touchStatus").html("Current Touch Status");
     
+    d3.select("svg").on("touchstart", touchStatus)
     d3.select("svg").on("touchmove", touchStatus)
+    d3.select("svg").on("mousemove", mouseStatus)
     
     function touchStatus() {
+      d = d3.touches(this);
+      d3.select("#touchStatus").html(JSON.stringify(d));
+    }
+
+    function mouseStatus() {
       d = d3.touches(this);
       d3.select("#touchStatus").html(JSON.stringify(d));
     }
