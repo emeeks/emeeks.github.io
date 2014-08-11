@@ -43,7 +43,17 @@
   <footer>
 <script>
   function touchDemo1() {
-    d3.select("#buttons").remove();
+    d3.select("#buttons").html("")
+    .style("pointer-events", "none")
+    .append("div").attr("id", "touchStatus").html("Current Touch Status");
+    
+    d3.select("svg").on("touchmove", touchStatus)
+    
+    function touchStatus() {
+      d = d3.touches(this);
+      console.log (JSON.stringify(d));
+    }
+
   }
 </script>
   </footer>
