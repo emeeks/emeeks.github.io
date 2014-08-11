@@ -55,7 +55,7 @@
     d3.select("svg").on("mousemove", mouseStatus)
     
     function touchStatus() {
-//      this.preventDefault();
+      d3.event.preventDefault();
       d = d3.touches(this);
       d3.select("#touchStatus")
       .select("ol")
