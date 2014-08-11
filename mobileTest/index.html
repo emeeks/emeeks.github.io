@@ -51,7 +51,7 @@
     
     function touchStatus() {
       d = d3.touches(this);
-      console.log (JSON.stringify(d));
+      d3.select("#touchStatus").html(JSON.stringify(d));
     }
 
   }
