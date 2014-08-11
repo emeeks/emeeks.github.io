@@ -46,20 +46,19 @@
     d3.select("#buttons").html("")
     .style("pointer-events", "none")
     .append("div").attr("id", "touchStatus")
-    .append("ol").html("Current Touch Status");
+      .append("p")
+      .html("Touch Status:")
+      .append("ol");
     
     d3.select("svg").on("touchstart", touchStatus)
     d3.select("svg").on("touchmove", touchStatus)
     d3.select("svg").on("mousemove", mouseStatus)
     
     function touchStatus() {
-      this.preventDefault();
+//      this.preventDefault();
       d = d3.touches(this);
       d3.select("#touchStatus")
-      .html()
-      .append("p")
-      .html("Touch Status:")
-      .append("ol")
+      .select("ol")
       .selectAll("li")
       .data(d)
       .enter()
@@ -67,6 +66,7 @@
       .html(function(d) {return d});
       
       d3.select("#touchStatus")
+      .select("ol")
       .selectAll("li")
       .data(d)
       .exit()
