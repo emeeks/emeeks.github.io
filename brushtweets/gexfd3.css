@@ -1,5 +1,6 @@
 body {
     overflow: hidden;
+    font-family: 'Indie Flower', cursive;
 }
 
 #modal {
@@ -81,7 +82,7 @@ rect {
 }
 #brushDiv {
   position: fixed;
-  bottom: 100px;
+  bottom: 130px;
   left: 20px;
   right: 20px;
   height:50px;
@@ -97,6 +98,12 @@ rect {
 svg {
     width: 100%;
     height:100%;
+}
+
+button {
+    font-family: 'Indie Flower', cursive;
+    border-radius: 5px;
+    font-size: 14px;
 }
 
 button.topology {
