@@ -71,7 +71,12 @@
       .data(d)
       .exit()
       .remove();
-      
+
+      d3.select("#touchStatus")
+      .select("ol")
+      .selectAll("li")
+      .data(d)
+      .html(function(d) {return d});
     }
 
     function mouseStatus() {
