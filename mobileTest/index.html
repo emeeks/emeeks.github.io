@@ -186,7 +186,7 @@
 
      var touchColor = d3.scale.linear().domain([0, 10]).range(["pink", "darkred"])
      
-     var graphicsG = d3.select("svg").append("g").attr("id", "graphics");
+     var graphicsG = d3.select("svg").append("g").attr("id", "graphics").attr("transform", "scale(1)");
      
      graphicsG.append("rect").attr("width", 250).attr("height", 50).attr("x", 50).attr("y", 50)
      .style("fill", "red").style("stroke", "gray").style("stroke-width", "1px");
@@ -201,7 +201,7 @@
        d = d3.touches(this);
       if (d.length == 2) {
         initialLength = Math.sqrt((d[0][0] + d[0][1]) + (d[1][0] + d[1][1]));
-        initialScale = d3.transform(d3.select("#graphics").attr("transform")).scale();
+        initialScale = d3.transform(d3.select("#graphics").attr("transform")).scale[0];
       }
 
           }
