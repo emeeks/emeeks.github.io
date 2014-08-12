@@ -38,6 +38,7 @@
   <button onclick="touchDemo1();">Basic Touch</button>
   <button onclick="touchDemo2();">Touch Circles</button>
   <button onclick="touchDemo3();">Touch Lines</button>
+  <button onclick="touchDemo4();">Zooming</button>
 </div>
 </div>
   <footer>
@@ -170,6 +171,63 @@
 
        }
        d3.select("svg").selectAll("line").data(l).exit().remove();
+
+     }
+
+   }
+   
+  function touchDemo4() {
+    var initialLength = 0;
+    var initialScale = 1;
+     d3.select("#buttons").html("").style("pointer-events", "none").append("div").attr("id", "touchStatus").append("p").html("Touch Status:").append("ol");
+
+     d3.select("svg").on("touchstart", touchBegin);
+     d3.select("svg").on("touchmove", touchStatus);
+
+     var touchColor = d3.scale.linear().domain([0, 10]).range(["pink", "darkred"])
+     
+     var graphicsG = d3.select("svg").append("g").attr("id", "graphics");
+     
+     graphicsG.append("circle").attr("r", 100).attr("cx", 150).attr("cy", 200)
+     .style("fill", "red").style("stroke", "gray").style("stroke-width", "1px");
+
+     graphicsG.append("rect").attr("width", 100).attr("height", 400).attr("x", 350).attr("cy", 400)
+     .style("fill", "pink").style("stroke", "black").style("stroke-width", "1px");
+
+      function touchBegin() {
+       d3.event.preventDefault();
+       d3.event.stopPropagation();
+       
+       d = d3.touches(this);
+      if (d.length == 2) {
+        initialLength = Math.sqrt((d[0][0] + d[0][1]) + (d[1][0] + d[1][1]));
+        initialScale = d3.transform(d3.select("#graphics").attr("transform")).scale();
+      }
+
+          }
+     function touchStatus() {
+       d3.event.preventDefault();
+       d3.event.stopPropagation();
+       d = d3.touches(this);
+       d3.select("svg").selectAll("circle").data(d).enter().append("circle").attr("r", 75).style("fill", function(d, i) {
+         return touchColor(i)
+       });
+
+       d3.select("svg").selectAll("circle").data(d).exit().remove();
+
+       d3.select("svg").selectAll("circle").attr("cx", function(d) {
+         return d[0]
+       }).attr("cy", function(d) {
+         return d[1]
+       });
+
+      if (d.length == 2) {
+        var currentLength = Math.sqrt((d[0][0] + d[0][1]) + (d[1][0] + d[1][1]));
+        var zoom = currentLength / initialLength;
+        var newScale = zoom * initialScale;
+        d3.select("#graphics").attr("transform", "scale(" +newScale +")")
+
+      }
 
      }
 
