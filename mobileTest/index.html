@@ -159,7 +159,7 @@
 
   }
   
-      function touchDemo3() {
+  function touchDemo3() {
     d3.select("#buttons").html("")
     .style("pointer-events", "none")
     .append("div").attr("id", "touchStatus")
@@ -194,7 +194,6 @@
       .selectAll("circle")
       .attr("cx", function(d) {return d[0]})
       .attr("cy", function(d) {return d[1]});
-    }
     
     if (d.length > 1) {
       var l = [];
@@ -228,7 +227,8 @@
       .attr("y2", function(d) {return d.target[1]})
       
     }
-
+   }
+ 
 
   }
 </script>
