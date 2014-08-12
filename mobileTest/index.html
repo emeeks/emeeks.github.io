@@ -36,7 +36,7 @@
 <svg></svg>
 <div id="buttons">
   <button onclick="touchDemo1();">Basic Touch</button>
-  <button>Touch Lines</button>
+  <button onclick="touchDemo2();">Touch Lines</button>
   <button>Touch Rotate</button>
 </div>
 </div>
@@ -50,9 +50,8 @@
       .html("Touch Status:")
       .append("ol");
     
-    d3.select("svg").on("touchstart", touchStatus)
-    d3.select("svg").on("touchmove", touchStatus)
-    d3.select("svg").on("mousemove", mouseStatus)
+    d3.select("svg").on("touchstart", touchStatus);
+    d3.select("svg").on("touchmove", touchStatus);
     
     function touchStatus() {
       d3.event.preventDefault();
@@ -79,7 +78,44 @@
       
     }
 
-    function mouseStatus() {
+  }
+  
+    function touchDemo2() {
+    d3.select("#buttons").html("")
+    .style("pointer-events", "none")
+    .append("div").attr("id", "touchStatus")
+      .append("p")
+      .html("Touch Status:")
+      .append("ol");
+    
+    d3.select("svg").on("touchstart", touchStatus);
+    d3.select("svg").on("touchmove", touchStatus);
+    
+    var touchColor = d3.scale.linear().domain([0,10]).range(["pink","darkred"])
+    
+    function touchStatus() {
+      d3.event.preventDefault();
+      d3.event.stopPropagation();
+      d = d3.touches(this);
+      d3.select("svg")
+      .selectAll("circle")
+      .data(d)
+      .enter()
+      .append("circle")
+      .attr("r", 20)
+      .style("fill", function(d,i) {return touchColor(i)});
+      
+      d3.select("svg")
+      .selectAll("circle")
+      .data(d)
+      .exit()
+      .remove();
+
+      d3.select("svg")
+      .selectAll("circle")
+      .attr("cx", function(d) {return d[0]})
+      .attr("cy", function(d) {return d[1]});
+      
     }
 
   }
