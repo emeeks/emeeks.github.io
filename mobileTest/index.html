@@ -188,7 +188,7 @@
      
      var graphicsG = d3.select("svg").append("g").attr("id", "graphics");
      
-     graphicsG.append("circle").attr("r", 100).attr("cx", 150).attr("cy", 200)
+     graphicsG.append("rect").attr("width", 250).attr("height", 50).attr("x", 50).attr("y", 50)
      .style("fill", "red").style("stroke", "gray").style("stroke-width", "1px");
 
      graphicsG.append("rect").attr("width", 100).attr("height", 400).attr("x", 350).attr("cy", 400)
