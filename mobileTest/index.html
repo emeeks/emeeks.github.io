@@ -225,6 +225,9 @@
         var currentLength = Math.sqrt((d[0][0] + d[0][1]) + (d[1][0] + d[1][1]));
         var zoom = currentLength / initialLength;
         var newScale = zoom * initialScale;
+
+        d3.select("#touchStatus").html(newScale)
+
         d3.select("#graphics").attr("transform", "scale(" +newScale +")")
 
       }
