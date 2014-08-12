@@ -200,7 +200,7 @@
        
        d = d3.touches(this);
       if (d.length == 2) {
-        initialLength = Math.sqrt((d[0][0] + d[0][1]) + (d[1][0] + d[1][1]));
+        initialLength = Math.sqrt(Math.abs(d[0][0] - d[0][1]) + Math.abs(d[1][0] - d[1][1]));
         initialScale = d3.transform(d3.select("#graphics").attr("transform")).scale[0];
       }
 
@@ -222,7 +222,7 @@
        });
 
       if (d.length == 2) {
-        var currentLength = Math.sqrt((d[0][0] + d[0][1]) + (d[1][0] + d[1][1]));
+        var currentLength = Math.sqrt(Math.abs(d[0][0] - d[0][1]) + Math.abs(d[1][0] - d[1][1]));
         var zoom = currentLength / initialLength;
         var newScale = zoom * initialScale;
 
