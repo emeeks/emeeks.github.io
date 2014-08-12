@@ -36,8 +36,8 @@
 <svg></svg>
 <div id="buttons">
   <button onclick="touchDemo1();">Basic Touch</button>
-  <button onclick="touchDemo2();">Touch Lines</button>
-  <button>Touch Rotate</button>
+  <button onclick="touchDemo2();">Touch Circles</button>
+  <button onclick="touchDemo3();">Touch Lines</button>
 </div>
 </div>
   <footer>
@@ -102,7 +102,7 @@
       .data(d)
       .enter()
       .append("circle")
-      .attr("r", 50)
+      .attr("r", 75)
       .style("fill", function(d,i) {return touchColor(i)});
       
       d3.select("svg")
@@ -117,6 +117,118 @@
       .attr("cy", function(d) {return d[1]});
       
     }
+
+    function touchDemo2() {
+    d3.select("#buttons").html("")
+    .style("pointer-events", "none")
+    .append("div").attr("id", "touchStatus")
+      .append("p")
+      .html("Touch Status:")
+      .append("ol");
+    
+    d3.select("svg").on("touchstart", touchStatus);
+    d3.select("svg").on("touchmove", touchStatus);
+    
+    var touchColor = d3.scale.linear().domain([0,10]).range(["pink","darkred"])
+    
+    function touchStatus() {
+      d3.event.preventDefault();
+      d3.event.stopPropagation();
+      d = d3.touches(this);
+      d3.select("svg")
+      .selectAll("circle")
+      .data(d)
+      .enter()
+      .append("circle")
+      .attr("r", 75)
+      .style("fill", function(d,i) {return touchColor(i)});
+      
+      d3.select("svg")
+      .selectAll("circle")
+      .data(d)
+      .exit()
+      .remove();
+
+      d3.select("svg")
+      .selectAll("circle")
+      .attr("cx", function(d) {return d[0]})
+      .attr("cy", function(d) {return d[1]});
+      
+    }
+
+
+  }
+  
+      function touchDemo3() {
+    d3.select("#buttons").html("")
+    .style("pointer-events", "none")
+    .append("div").attr("id", "touchStatus")
+      .append("p")
+      .html("Touch Status:")
+      .append("ol");
+    
+    d3.select("svg").on("touchstart", touchStatus);
+    d3.select("svg").on("touchmove", touchStatus);
+    
+    var touchColor = d3.scale.linear().domain([0,10]).range(["pink","darkred"])
+    
+    function touchStatus() {
+      d3.event.preventDefault();
+      d3.event.stopPropagation();
+      d = d3.touches(this);
+      d3.select("svg")
+      .selectAll("circle")
+      .data(d)
+      .enter()
+      .append("circle")
+      .attr("r", 75)
+      .style("fill", function(d,i) {return touchColor(i)});
+      
+      d3.select("svg")
+      .selectAll("circle")
+      .data(d)
+      .exit()
+      .remove();
+
+      d3.select("svg")
+      .selectAll("circle")
+      .attr("cx", function(d) {return d[0]})
+      .attr("cy", function(d) {return d[1]});
+    }
+    
+    if (d.length > 1) {
+      var l = [];
+      for (x in d) {
+        for (y in d) {
+          if (y != x) {
+            var lineObj = {source:d[x], target:d[y]};
+            l.push(lineObj);
+          }
+        }
+      }
+      d3.select("svg")
+      .selectAll("line")
+      .data(l)
+      .enter()
+      .append("line")
+      .style("stroke", "black")
+      .style("stroke-width", "3px");
+
+      d3.select("svg")
+      .selectAll("line")
+      .data(l)
+      .exit()
+      .remove();
+      
+      d3.select("svg")
+      .selectAll("line")
+      .attr("x1", function(d) {return d.source[0]})
+      .attr("y1", function(d) {return d.source[1]})
+      .attr("x2", function(d) {return d.target[0]})
+      .attr("y2", function(d) {return d.target[1]})
+      
+    }
+
 
   }
 </script>
