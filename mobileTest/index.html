@@ -244,6 +244,7 @@
    
      function touchDemo5() {
     var initialD = [];
+    var initialRotate;
      d3.select("#buttons").html("").style("pointer-events", "none").append("div").attr("id", "touchStatus").append("p").html("Touch Status:").append("ol");
 
      d3.select("svg").on("touchstart", touchBegin);
@@ -262,6 +263,7 @@
       function touchBegin() {
        d3.event.preventDefault();
        d3.event.stopPropagation();
+        initialRotate = d3.transform(d3.select("#graphics").attr("transform")).rotate[0];
        
        d = d3.touches(this);
       if (d.length == 3) {
@@ -300,6 +302,10 @@
         d3.select("#touchStatus").append("p").html("Line 2 XY2: " + d[1]);
 
         d3.select("#touchStatus").append("p").html("Angle: " + angle);
+        
+        var newRotate = initialRotate + angle;
+        
+        d3.select("#graphics").attr("transform", "rotate(" +newRotate +")")
 
       }
 
