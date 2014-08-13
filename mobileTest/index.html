@@ -38,9 +38,9 @@
   <button onclick="touchDemo1();">Basic Touch</button>
   <button onclick="touchDemo2();">Touch Circles</button>
   <button onclick="touchDemo3();">Touch Lines</button>
-  <button onclick="touchDemo4();">Zooming</button>
-  <button onclick="touchDemo5();">Rotating</button>
-  <button onclick="touchDemo6();">Labels</button>
+  <button onclick="touchDemo4();">Panning</button>
+  <button onclick="touchDemo5();">Zooming</button>
+  <button onclick="touchDemo6();">Rotating</button>
 </div>
 </div>
   <footer>
@@ -177,8 +177,66 @@
      }
 
    }
-   
+
   function touchDemo4() {
+    var initialD;
+    var initialPosition;
+
+    d3.select("#buttons").html("").style("pointer-events", "none").append("div").attr("id", "touchStatus").append("p").html("Touch Status:").append("ol");
+
+    d3.select("svg").on("touchstart", touchBegin);
+    d3.select("svg").on("touchmove", touchStatus);
+
+    var touchColor = d3.scale.linear().domain([0, 10]).range(["pink", "darkred"])
+
+    var graphicsG = d3.select("svg").append("g").attr("id", "graphics").attr("transform", "scale(1)");
+
+    graphicsG.append("rect").attr("width", 250).attr("height", 50).attr("x", 50).attr("y", 50)
+    .style("fill", "red").style("stroke", "gray").style("stroke-width", "1px");
+
+    graphicsG.append("rect").attr("width", 100).attr("height", 400).attr("x", 350).attr("cy", 400)
+    .style("fill", "gray").style("stroke", "black").style("stroke-width", "1px");
+
+    function touchBegin() {
+      d3.event.preventDefault();
+      d3.event.stopPropagation();
+
+      d = d3.touches(this);
+      if (d.length == 1) {
+        initialD = d;
+        initialPosition = d3.transform(d3.select("#graphics").attr("transform")).translate;
+      }
+
+    }
+     function touchStatus() {
+       d3.event.preventDefault();
+       d3.event.stopPropagation();
+       d = d3.touches(this);
+       d3.select("svg").selectAll("circle").data(d).enter().append("circle").attr("r", 75).style("fill", function(d, i) {
+         return touchColor(i)
+       });
+
+       d3.select("svg").selectAll("circle").data(d).exit().remove();
+
+       d3.select("svg").selectAll("circle").attr("cx", function(d) {
+         return d[0]
+       }).attr("cy", function(d) {
+         return d[1]
+       });
+
+      if (d.length == 1) {
+        var newX = initialPosition[0] + initialD[0][0] - d[0][0];
+        var newY = initialPosition[1] + initialD[0][1] - d[0][1];
+
+        d3.select("#graphics").attr("transform", "translate(" +newX +"," + newY + ")")
+
+      }
+
+     }
+
+   }
+
+  function touchDemo5() {
     var initialLength = 0;
     var initialScale = 1;
      d3.select("#buttons").html("").style("pointer-events", "none").append("div").attr("id", "touchStatus").append("p").html("Touch Status:").append("ol");
@@ -243,7 +301,7 @@
 
    }
    
-     function touchDemo5() {
+     function touchDemo6() {
     var initialD = [];
     var initialRotate;
      d3.select("#buttons").html("").style("pointer-events", "none").append("div").attr("id", "touchStatus").append("p").html("Touch Status:").append("ol");
@@ -303,89 +361,6 @@
         var newRotate = initialRotate - angle;
         
         d3.select("#graphics").attr("transform", "rotate(" +newRotate +")")
-
-      }
-
-     }
-
-   }
-   
-  function touchDemo6() {
-    var initialD = [];
-    var initialRotate;
-     d3.select("#buttons").html("").style("pointer-events", "none").append("div").attr("id", "touchStatus").append("p").html("Touch Status:").append("ol");
-
-     d3.select("svg").on("touchstart", touchBegin);
-     d3.select("svg").on("touchmove", touchStatus);
-
-     var touchColor = d3.scale.linear().domain([0, 10]).range(["pink", "darkred"])
-     
-     var graphicsG = d3.select("svg").append("g").attr("id", "graphics").attr("transform", "rotate(0)");
-     
-  sampleData = d3.range(10).map(function(d) {
-    var datapoint = {};
-    datapoint.id = "Sample " + d;
-    datapoint.x = Math.random() * 500;
-    datapoint.y = Math.random() * 500;
-    return datapoint;
-  })
-     
-     console.log(sampleData)
-     var samples = graphicsG.selectAll("g")
-     .data(sampleData)
-     .enter()
-     .append("g")
-     .attr("transform", function(d) {return "translate("+d.x+","+d.y+")"});
-     
-     var sampleSubG = samples.append("g").attr("class", "sample");
-     sampleSubG.append("rect").attr("width", 100).attr("height", 100)
-     .style("fill", "red").style("stroke", "gray").style("stroke-width", "1px");
-
-     sampleSubG.append("text").text(function (d) {return d.id}).attr("y", 20);
-
-      function touchBegin() {
-      d3.event.preventDefault();
-      d3.event.stopPropagation();
-      initialRotate = d3.transform(d3.select("#graphics").attr("transform")).rotate;
-       
-       d = d3.touches(this);
-      if (d.length == 3) {
-        initialD = d;
-      }
-
-          }
-     function touchStatus() {
-       d3.event.preventDefault();
-       d3.event.stopPropagation();
-       d = d3.touches(this);
-       d3.select("svg").selectAll("circle").data(d).enter().append("circle").attr("r", 75).style("fill", function(d, i) {
-         return touchColor(i)
-       });
-
-       d3.select("svg").selectAll("circle").data(d).exit().remove();
-
-       d3.select("svg").selectAll("circle").attr("cx", function(d) {
-         return d[0]
-       }).attr("cy", function(d) {
-         return d[1]
-       });
-
-      if (d.length == 3) {
-        var slope1 = (initialD[0][1] - initialD[1][1]) / (initialD[0][0] - initialD[1][0]);
-        var slope2 = (d[0][1] - d[1][1]) / (d[0][0] - d[1][0]);
-        
-        var angle = Math.atan((slope1 - slope2)/(1 + slope1*slope2)) * 180/Math.PI;
-
-        d3.select("#touchStatus").html("")
-        d3.select("#touchStatus").append("p").html("Slope 1: " + slope1);
-        d3.select("#touchStatus").append("p").html("Slope 2: " + slope2);
-
-        d3.select("#touchStatus").append("p").html("Angle: " + angle);
-        
-        var newRotate = initialRotate - angle;
-        
-        d3.select("#graphics").attr("transform", "rotate(" +newRotate +")")
-        d3.selectAll("g.sample").attr("transform", "rotate(" +(-newRotate)+")")
 
       }
 
