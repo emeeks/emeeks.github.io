@@ -294,6 +294,11 @@
         d3.select("#touchStatus").html("")
         d3.select("#touchStatus").append("p").html("Slope 1: " + slope1);
         d3.select("#touchStatus").append("p").html("Slope 2: " + slope2);
+        d3.select("#touchStatus").append("p").html("Line 1 XY1: " + initialD[0]);
+        d3.select("#touchStatus").append("p").html("Line 1 XY2: " + initialD[1]);
+        d3.select("#touchStatus").append("p").html("Line 2 XY1: " + d[0]);
+        d3.select("#touchStatus").append("p").html("Line 2 XY2: " + d[1]);
+
         d3.select("#touchStatus").append("p").html("Angle: " + angle);
 
       }
