@@ -252,7 +252,7 @@
 
      var touchColor = d3.scale.linear().domain([0, 10]).range(["pink", "darkred"])
      
-     var graphicsG = d3.select("svg").append("g").attr("id", "graphics").attr("transform", "scale(1)");
+     var graphicsG = d3.select("svg").append("g").attr("id", "graphics").attr("transform", "rotate(0)");
      
      graphicsG.append("rect").attr("width", 250).attr("height", 50).attr("x", 50).attr("y", 50)
      .style("fill", "red").style("stroke", "gray").style("stroke-width", "1px");
@@ -303,9 +303,9 @@
 
         d3.select("#touchStatus").append("p").html("Angle: " + angle);
         
-        var newRotate = initialRotate + angle;
+        var newRotate = initialRotate - angle;
         
-        d3.select("#graphics").attr("transform", "rotate(" +angle +")")
+        d3.select("#graphics").attr("transform", "rotate(" +newRotate +")")
 
       }
 
