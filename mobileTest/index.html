@@ -303,7 +303,7 @@
 
         d3.select("#touchStatus").append("p").html("Angle: " + angle);
         
-        var newRotate = initialRotate - angle;
+        var newRotate = 0 - angle;
         
         d3.select("#graphics").attr("transform", "rotate(" +newRotate +")")
 
