@@ -335,13 +335,13 @@
      .data(sampleData)
      .enter()
      .append("g")
-     .attr("transform", function(d) {return "translate("+d.x+","+d.y+")"})
-     .attr("class", "sample");
+     .attr("transform", function(d) {return "translate("+d.x+","+d.y+")"});
      
-     samples.append("rect").attr("width", 100).attr("height", 100)
+     var sampleSubG = samples.append("g").attr("class", "sample");
+     sampleSubG.append("rect").attr("width", 100).attr("height", 100)
      .style("fill", "red").style("stroke", "gray").style("stroke-width", "1px");
 
-     samples.append("text").text(function (d) {return d.id}).attr("y", 20);
+     sampleSubG.append("text").text(function (d) {return d.id}).attr("y", 20);
 
       function touchBegin() {
       d3.event.preventDefault();
