@@ -333,6 +333,7 @@
      .data(sampleData)
      .enter()
      .append("g")
+     .attr("transform", function(d) {return "translate("+d.x+","+d.y+")"})
      .attr("class", "sample");
      
      samples.append("rect").attr("width", 100).attr("height", 100)
