@@ -327,8 +327,10 @@
     datapoint.id = "Sample " + d;
     datapoint.x = Math.random() * 500;
     datapoint.y = Math.random() * 500;
+    return datapoint;
   })
      
+     console.log(sampleData)
      var samples = graphicsG.selectAll("g")
      .data(sampleData)
      .enter()
@@ -339,7 +341,7 @@
      samples.append("rect").attr("width", 100).attr("height", 100)
      .style("fill", "red").style("stroke", "gray").style("stroke-width", "1px");
 
-     samples.append("text").text(function (d) {return d.id});
+     samples.append("text").text(function (d) {return d.id}).attr("y", 20);
 
       function touchBegin() {
       d3.event.preventDefault();
