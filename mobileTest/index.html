@@ -322,27 +322,22 @@
      
      var graphicsG = d3.select("svg").append("g").attr("id", "graphics").attr("transform", "rotate(0)");
      
-     var g1 = graphicsG.append("g")
-     .attr("transform", "translate(50,50)");
-
-     var g2 = graphicsG.append("g")
-     .attr("transform", "translate(250,250)");
-
-     var g3 = graphicsG.append("g")
-     .attr("transform", "translate(450,250)");
-
-     g1.append("rect").attr("width", 100).attr("height", 100)
+  sampleData = d3.range(10).map(function(d) {
+    var datapoint = {};
+    datapoint.id = "Sample " + d;
+    datapoint.x = Math.random() * 500;
+    datapoint.y = Math.random() * 500;
+     
+     var samples = graphicsG.selectAll("g")
+     .data(sampleData)
+     .enter()
+     .append("g")
+     .attr("class", "sample");
+     
+     samples.append("rect").attr("width", 100).attr("height", 100)
      .style("fill", "red").style("stroke", "gray").style("stroke-width", "1px");
-     g2.append("rect").attr("width", 100).attr("height", 100)
-     .style("fill", "red").style("stroke", "gray").style("stroke-width", "1px");
-     g3.append("rect").attr("width", 100).attr("height", 100)
-     .style("fill", "red").style("stroke", "gray").style("stroke-width", "1px");
 
-
-     g1.append("text").text("Rectangle 1");
-     g2.append("text").text("Rectangle 2");
-     g3.append("text").text("Rectangle 3");
-
+     samples.append("text").text(function (d) {return d.id});
 
       function touchBegin() {
       d3.event.preventDefault();
@@ -386,7 +381,7 @@
         var newRotate = initialRotate - angle;
         
         d3.select("#graphics").attr("transform", "rotate(" +newRotate +")")
-        d3.selectAll("text").attr("transform", "rotate(" +(-newRotate)+")")
+        d3.selectAll("g.sample").attr("transform", "rotate(" +(-newRotate)+")")
 
       }
 
