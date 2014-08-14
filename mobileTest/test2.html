@@ -207,15 +207,14 @@
          return d[1]
        });
        
-        d3.select("#touchStatus").append("p").html(initialTransform);
         var newX = panTransform.translate[0];
         var newY = panTransform.translate[1];
         var newRotate = rotateTransform.rotate;
         var newScale = zoomTransform.scale[0];
 
       if (d.length == 1) {
-        newX = initialD[0][0] - d[0][0] - panTransform.translate[0];
-        newY = initialD[0][1] - d[0][1] - panTransform.translate[1];
+        newX = -(initialD[0][0] - d[0][0] - panTransform.translate[0]);
+        newY = -(initialD[0][1] - d[0][1] - panTransform.translate[1]);
         d3.select("#touchStatus").append("p").html("One Finger");
       }
       else if (d.length == 2) {
@@ -245,7 +244,7 @@
         d3.select("#touchStatus").append("p").html("New Scale: " + newScale);
         d3.select("#touchStatus").append("p").html("New Rotate: " + newRotate);
       
-      d3.select("#pan").attr("transform", "translate(" +(-newX) +"," + (-newY) + ")")
+      d3.select("#pan").attr("transform", "translate(" +(newX) +"," + (newY) + ")")
       d3.select("#zoom").attr("transform", "scale("+newScale + ")")
       d3.select("#rotate").attr("transform", "rotate(" + newRotate + ")")
 
