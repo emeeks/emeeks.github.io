@@ -104,6 +104,8 @@
         var newRotate = initialTransform.rotate;
         var newScale = initialTransform.scale[0];
 
+                      d3.select("#touchStatus").html("")
+
       if (d.length == 1) {
         newX = initialD[0][0] - d[0][0] - initialTransform.translate[0];
         newY = initialD[0][1] - d[0][1] - initialTransform.translate[1];
@@ -112,7 +114,11 @@
         var initialLength = Math.sqrt(Math.abs(initialD[0][0] - initialD[1][0]) + Math.abs(initialD[0][1] - initialD[1][1]));
         var currentLength = Math.sqrt(Math.abs(d[0][0] - d[1][0]) + Math.abs(d[0][1] - d[1][1]));
         var zoom = currentLength / initialLength;
-        newScale = zoom * initialScale;
+        newScale = zoom * initialTransform.scale[0];
+        d3.select("#touchStatus").append("p").html("Initial Scale: " + initialScale);
+        d3.select("#touchStatus").append("p").html("Initial Length: " + initialLength);
+        d3.select("#touchStatus").append("p").html("Current Length: " + currentLength);
+
       }
       else if (d.length == 3) {
         var slope1 = (initialD[0][1] - initialD[1][1]) / (initialD[0][0] - initialD[1][0]);
@@ -121,10 +127,13 @@
         var angle = Math.atan((slope1 - slope2)/(1 + slope1*slope2)) * 180/Math.PI;
         var newRotate = initialTransform.rotate - angle;
 
-        d3.selectAll("g.sample").attr("transform", "rotate(" +(-newRotate)+")")
+        d3.selectAll("g.sample > text").attr("transform", "rotate(" +(-newRotate)+")")
 
       }
 
+        d3.select("#touchStatus").append("p").html("Zoom: " + zoom);
+        d3.select("#touchStatus").append("p").html("New Scale: " + newScale);
+      
       d3.select("#graphics").attr("transform", "translate(" +(-newX) +"," + (-newY) + ") scale("+newScale+") rotate(" + newRotate + ")")
 
      }
