@@ -105,8 +105,8 @@
         var newScale = initialTransform.scale[0];
 
       if (d.length == 1) {
-        newX = initialTransform.translate[0] + initialD[0][0] - d[0][0];
-        newY = initialTransform.translate[1] + initialD[0][1] - d[0][1];
+        newX = initialD[0][0] - d[0][0] - initialTransform.translate[0];
+        newY = initialD[0][1] - d[0][1] - initialTransform.translate[1];
       }
       else if (d.length == 2) {
         var initialLength = Math.sqrt(Math.abs(initialD[0][0] - initialD[1][0]) + Math.abs(initialD[0][1] - initialD[1][1]));
