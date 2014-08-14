@@ -47,6 +47,7 @@
     d3.select("#buttons").html("").style("pointer-events", "none").append("div").attr("id", "touchStatus").append("p").html("Touch Status:").append("ol");
 
     d3.select("svg").on("touchstart", touchBegin);
+    d3.select("svg").on("touchend", touchBegin);
     d3.select("svg").on("touchmove", touchUpdate);
 
     var touchColor = d3.scale.linear().domain([0, 10]).range(["pink", "darkred"])
