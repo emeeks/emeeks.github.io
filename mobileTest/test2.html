@@ -189,7 +189,7 @@
        d3.event.preventDefault();
        d3.event.stopPropagation();
        d = d3.touches(this);
-             d3.select("#touchStatus").selectAll("p").remove();
+        d3.select("#touchStatus").selectAll("p").remove();
         d3.select("#touchStatus").append("p").html(d);
 
        d3.select("svg").selectAll("circle.fingertips").data(d).enter().append("circle")
@@ -209,6 +209,7 @@
         var newY = initialTransform.translate[1];
         var newRotate = initialTransform.rotate;
         var newScale = initialTransform.scale[0];
+        d3.select("#touchStatus").append("p").html(initialTransform);
 
       if (d.length == 1) {
         newX = initialD[0][0] - d[0][0] - initialTransform.translate[0];
