@@ -224,7 +224,7 @@
         var zoom = currentLength / initialLength;
         newScale = zoom * zoomTransform.scale[0];
         d3.select("#touchStatus").append("p").html("Two Fingers");
-        d3.select("#touchStatus").append("p").html("Initial Scale: " + initialScale);
+        d3.select("#touchStatus").append("p").html("Initial Scale: " + zoomTransform.scale[0]);
         d3.select("#touchStatus").append("p").html("Initial Length: " + initialLength);
         d3.select("#touchStatus").append("p").html("Current Length: " + currentLength);
 
