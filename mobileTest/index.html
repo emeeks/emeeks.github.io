@@ -228,7 +228,7 @@
         var newX = initialPosition[0] + initialD[0][0] - d[0][0];
         var newY = initialPosition[1] + initialD[0][1] - d[0][1];
 
-        d3.select("#graphics").attr("transform", "translate(" +newX +"," + newY + ")")
+        d3.select("#graphics").attr("transform", "translate(" +(-newX) +"," + (-newY) + ")")
 
       }
 

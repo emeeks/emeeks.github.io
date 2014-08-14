@@ -119,13 +119,13 @@
         var slope2 = (d[0][1] - d[1][1]) / (d[0][0] - d[1][0]);
         
         var angle = Math.atan((slope1 - slope2)/(1 + slope1*slope2)) * 180/Math.PI;
-        var newRotate = initialRotate - angle;
+        var newRotate = initialTransform.rotate - angle;
 
         d3.selectAll("g.sample").attr("transform", "rotate(" +(-newRotate)+")")
 
       }
-      d3.select("#graphics").attr("transform", "translate(" +newX +"," + newY + ") scale("+newScale+") rotate(" + newRotate + ")")
 
+      d3.select("#graphics").attr("transform", "translate(" +(-newX) +"," + (-newY) + ") scale("+newScale+") rotate(" + newRotate + ")")
 
      }
 
