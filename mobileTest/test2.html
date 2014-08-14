@@ -152,7 +152,7 @@
     d3.select("svg").on("touchend", touchBegin);
     d3.select("svg").on("touchmove", touchUpdate);
 
-    var touchColor = d3.scale.linear().domain([0, 10]).range(["pink", "darkred"])
+    var touchColor = d3.scale.linear().domain([0, 10]).range(["blue", "darkred"])
 
     var graphicsG = d3.select("svg").append("g").attr("id", "pan").append("g").attr("id", "zoom").append("g").attr("id", "rotate").attr("transform", "rotate(0)");
 
@@ -207,7 +207,7 @@
         var newRotate = initialTransform.rotate;
         var newScale = initialTransform.scale[0];
 
-      d3.select("#touchStatus").html("")
+      d3.select("#touchStatus").selectAll("p").remove();
         d3.select("#touchStatus").append("p").html(d);
 
       if (d.length == 1) {
