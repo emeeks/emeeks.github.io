@@ -207,7 +207,8 @@
         var newRotate = initialTransform.rotate;
         var newScale = initialTransform.scale[0];
 
-                      d3.select("#touchStatus").html("")
+      d3.select("#touchStatus").html("")
+        d3.select("#touchStatus").append("p").html(d);
 
       if (d.length == 1) {
         newX = initialD[0][0] - d[0][0] - initialTransform.translate[0];
@@ -239,6 +240,7 @@
 
         d3.select("#touchStatus").append("p").html("Zoom: " + zoom);
         d3.select("#touchStatus").append("p").html("New Scale: " + newScale);
+        d3.select("#touchStatus").append("p").html("New Rotate: " + newRotate);
       
       d3.select("#pan").attr("transform", "translate(" +(-newX) +"," + (-newY) + ")")
       d3.select("#zoom").attr("transform", "scale("+newScale + ")")
