@@ -88,7 +88,7 @@
     .style("pointer-events", "none")
     .append("div").attr("id", "touchStatus")
       .append("p")
-      .html("Touch Status:")
+//      .html("Touch Status:")
       .append("ol");
     
     d3.select("svg").on("touchstart", touchStatus);
@@ -105,7 +105,7 @@
       .data(d)
       .enter()
       .append("circle")
-      .attr("r", 20)
+      .attr("r", 75)
       .style("fill", function(d,i) {return touchColor(i)});
       
       d3.select("svg")
