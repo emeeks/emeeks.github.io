@@ -277,6 +277,7 @@
        d = d3.touches(this);
       if (d.length == 3) {
         d3.select("svg").selectAll("line").remove();
+        d3.select("svg").selectAll("text").remove();
         d3.select("svg").append("line")
         .attr("x1", d[0][0])
         .attr("x2", d[1][0])
@@ -284,6 +285,13 @@
         .attr("y2", d[1][1])
         .style("stroke", "darkred")
         .style("stroke-width", "5px");
+        
+        d3.select("svg").append("text")
+        .attr("x", (d[0][0] + d[1][0]) / 2)
+        .attr("y", (d[0][1] + d[1][1]) / 2)
+        .style("color", "darkred")
+        .style("font-weight", 900)
+        .text("Initial Slope: ");
         
         initialD = d;
       }
@@ -322,7 +330,7 @@
          .style("stroke", function(d,i) {return i < 2 ? "red" : "black"})
          .style("stroke-width", function(d,i) {return i < 2 ? "5px" : "3px"});
 
-         d3.select("svg").selectAll("line").attr("x1", function(d) {
+         d3.select("svg").selectAll("line.status").attr("x1", function(d) {
            return d.source[0]
          }).attr("y1", function(d) {
            return d.source[1]
