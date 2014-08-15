@@ -283,8 +283,8 @@
         .attr("x2", d[1][0])
         .attr("y1", d[0][1])
         .attr("y2", d[1][1])
-        .style("stroke", "darkred")
-        .style("stroke-width", "5px");
+        .style("stroke", function(d,i) {return i == 0 ? "red" : "black"})
+        .style("stroke-width", function(d,i) {return i == 0 ? "5px" : "3px"})
         
         d3.select("svg").append("text")
         .attr("x", (d[0][0] + d[1][0]) / 2)
