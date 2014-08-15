@@ -276,6 +276,15 @@
        
        d = d3.touches(this);
       if (d.length == 3) {
+        d3.select("svg").selectAll("line").remove();
+        d3.select("svg").append("line")
+        .attr("x1", d[0][0])
+        .attr("x2", d[1][0])
+        .attr("y1", d[0][1])
+        .attr("y2", d[1][1])
+        .style("stroke", "darkred")
+        .style("stroke-width", "5px");
+        
         initialD = d;
       }
 
@@ -309,7 +318,9 @@
              }
            }
          }
-         d3.select("svg").selectAll("line").data(l).enter().append("line").style("stroke", "black").style("stroke-width", "3px");
+         d3.select("svg").selectAll("line.status").data(l).enter().append("line").attr("class", "status")
+         .style("stroke", function(d,i) {return i < 2 ? "red" : "black"})
+         .style("stroke-width", function(d,i) {return i < 2 ? "5px" : "3px"});
 
          d3.select("svg").selectAll("line").attr("x1", function(d) {
            return d.source[0]
@@ -322,7 +333,7 @@
          })
 
        }
-       d3.select("svg").selectAll("line").data(l).exit().remove();
+       d3.select("svg").selectAll("line.status").data(l).exit().remove();
 
       if (d.length == 3) {
         var slope1 = (initialD[0][1] - initialD[1][1]) / (initialD[0][0] - initialD[1][0]);
