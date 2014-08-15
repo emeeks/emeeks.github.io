@@ -65,7 +65,9 @@
       .selectAll("li")
       .data(d)
       .enter()
-      .append("li");
+      .append("li")
+      .style("font-size", "30px")
+      .style("font-weight", "900");
       
       d3.select("#touchStatus")
       .select("ol")
