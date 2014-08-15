@@ -289,9 +289,9 @@
         d3.select("svg").append("text")
         .attr("x", (d[0][0] + d[1][0]) / 2)
         .attr("y", (d[0][1] + d[1][1]) / 2)
+        .attr("class", "newslope")
         .style("color", "darkred")
-        .style("font-weight", 900)
-        .text("Initial Slope: ");
+        .style("font-weight", 900);
         
         initialD = d;
       }
@@ -347,6 +347,18 @@
         var slope1 = (initialD[0][1] - initialD[1][1]) / (initialD[0][0] - initialD[1][0]);
         var slope2 = (d[0][1] - d[1][1]) / (d[0][0] - d[1][0]);
         
+        d3.select("text.firstslope").text("Changed Slope: " + slope2);
+
+        d3.select("text.newslope").remove();
+
+        d3.select("svg").append("text")
+        .attr("x", (d[0][0] + d[1][0]) / 2)
+        .attr("y", (d[0][1] + d[1][1]) / 2)
+        .attr("class", "newslope")
+        .style("color", "darkred")
+        .style("font-weight", 900)
+        .text("Changed Slope: " + slope2);
+
         var angle = Math.atan((slope1 - slope2)/(1 + slope1*slope2)) * 180/Math.PI;
 
         d3.select("#touchStatus").html("")
