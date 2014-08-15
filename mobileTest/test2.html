@@ -113,6 +113,8 @@
         newY = -(initialD[0][1] - d[0][1] - initialTransform.translate[1]);
       }
       else if (d.length == 2) {
+        d3.select("#touchStatus").append("p").html("Two Fingers");
+
         var initialLength = Math.sqrt(Math.abs(initialD[0][0] - initialD[1][0]) + Math.abs(initialD[0][1] - initialD[1][1]));
         var currentLength = Math.sqrt(Math.abs(d[0][0] - d[1][0]) + Math.abs(d[0][1] - d[1][1]));
         var zoom = currentLength / initialLength;
@@ -133,7 +135,6 @@
 
       }
 
-        d3.select("#touchStatus").append("p").html("Zoom: " + zoom);
         d3.select("#touchStatus").append("p").html("New Scale: " + newScale);
       
       d3.select("#graphics").attr("transform", "translate(" +(newX) +"," + (newY) + ") scale("+newScale+") rotate(" + newRotate + ")")
