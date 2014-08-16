@@ -347,7 +347,7 @@
         .attr("class", "firstslope")
         .style("color", "darkred")
         .style("font-weight", 900)
-        .text("Initial Slope: " + d3.format(".2f")(slope1) + "&#176;");
+        .text("Initial Slope: " + d3.format(".2f")(slope1));
 
         
         d3.select("line.initial")
@@ -376,7 +376,7 @@
         d3.select("svg").selectAll("g.arc").remove();
         d3.select("svg").insert("g","g").attr("class","arc").attr("transform", "translate("+d[0][0]+","+d[0][1]+")").append("path").attr("class", "arc").attr("d", newArc).style("fill", "#B2B2CC")
         
-        d3.select("g.arc").append("text").text(d3.format(".2f")(altAngle)).attr("transform", "translate(" +newArc.centroid()[0] +","+ newArc.centroid()[1]+")").style("font-size", "24px").style("font-weight", 900)
+        d3.select("g.arc").append("text").text(d3.format(".2f")(altAngle) + "¡").attr("transform", "translate(" +newArc.centroid()[0] +","+ newArc.centroid()[1]+")").style("font-size", "24px").style("font-weight", 900)
         
         var newRotate = initialRotate - altAngle;
         
