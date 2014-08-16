@@ -270,19 +270,17 @@
      .style("fill", "lightgray").style("stroke", "gray").style("stroke-width", "1px");
 
       function touchBegin() {
-       d3.event.preventDefault();
-       d3.event.stopPropagation();
-        initialRotate = d3.transform(d3.select("#graphics").attr("transform")).rotate;
+      d3.event.preventDefault();
+      d3.event.stopPropagation();
+      initialD = d;
+      initialRotate = d3.transform(d3.select("#graphics").attr("transform")).rotate;
        
        d = d3.touches(this);
       if (d.length == 3) {
         d3.select("svg").selectAll("line").remove();
         d3.select("svg").selectAll("text").remove();
         d3.select("svg").append("line")
-        .attr("x1", d[0][0])
-        .attr("x2", d[1][0])
-        .attr("y1", d[0][1])
-        .attr("y2", d[1][1])
+        .attr("class", "initial")
         .style("stroke", function(d,i) {return i == 0 ? "red" : "black"})
         .style("stroke-width", function(d,i) {return i == 0 ? "5px" : "3px"})
         
@@ -293,7 +291,6 @@
         .style("color", "darkred")
         .style("font-weight", 900);
         
-        initialD = d;
       }
 
           }
@@ -327,8 +324,8 @@
            }
          }
          d3.select("svg").selectAll("line.status").data(l).enter().append("line").attr("class", "status")
-         .style("stroke", function(d,i) {return i < 2 ? "red" : "black"})
-         .style("stroke-width", function(d,i) {return i < 2 ? "5px" : "3px"});
+         .style("stroke", function(d,i) {return i == 0 ? "red" : "black"})
+         .style("stroke-width", function(d,i) {return i == 0 ? "6px" : "3px"});
 
          d3.select("svg").selectAll("line.status").attr("x1", function(d) {
            return d.source[0]
@@ -346,10 +343,17 @@
       if (d.length == 3) {
         var slope1 = (initialD[0][1] - initialD[1][1]) / (initialD[0][0] - initialD[1][0]);
         var slope2 = (d[0][1] - d[1][1]) / (d[0][0] - d[1][0]);
+        var lineAdjust = [d[0][0] + (initialD[0][0] - initialD[1][0]), d[0][1] + (initialD[0][1] - initialD[1][1])]
         
-        d3.select("text.firstslope").text("Changed Slope: " + slope1);
+        d3.select("text.firstslope").text("Initial Slope: " + slope1);
 
         d3.select("text.newslope").remove();
+        
+        d3.select("line.initial")
+        .attr("x1", d[0][0])
+        .attr("x2", lineAdjust[0])
+        .attr("y1", d[0][1])
+        .attr("y2", lineAdjust[1])
 
         d3.select("svg").append("text")
         .attr("x", (d[0][0] + d[1][0]) / 2)
@@ -367,7 +371,7 @@
         var newArc = d3.svg.arc().innerRadius(100).outerRadius(200).startAngle(arcAngle1).endAngle(arcAngle2);
         
         d3.select("svg").selectAll("path.arc").remove();
-        d3.select("svg").append("path").attr("class", "arc").attr("d", newArc)
+        d3.select("#graphics").append("path").attr("class", "arc").attr("d", newArc)
 
         d3.select("#touchStatus").html("")
         d3.select("#touchStatus").append("p").html("Slope 1: " + slope1);
