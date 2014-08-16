@@ -347,7 +347,7 @@
         .attr("class", "firstslope")
         .style("color", "darkred")
         .style("font-weight", 900)
-        .text("Initial Slope: " + slope1);
+        .text("Initial Slope: " + d3.format(".2f")(slope1));
 
         
         d3.select("line.initial")
@@ -362,7 +362,7 @@
         .attr("class", "newslope")
         .style("color", "darkred")
         .style("font-weight", 900)
-        .text("Changed Slope: " + slope2);
+        .text("Changed Slope: " + d3.format(".2f")(slope2));
 
         var angle = Math.atan((slope1 - slope2)/(1 + slope1*slope2)) * 180/Math.PI;
         
