@@ -368,8 +368,8 @@
         var arcAngle1 = Math.atan(slope1);
         var arcAngle2 = Math.atan(slope2);
         
-        var newArc = d3.svg.arc().innerRadius(100).outerRadius(200).startAngle(arcAngle1).endAngle(arcAngle2);
-        
+        var newArc = d3.svg.arc().innerRadius(100).outerRadius(200).startAngle(arcAngle2).endAngle(arcAngle1);
+
         d3.select("svg").selectAll("g.arc").remove();
         d3.select("svg").append("g").attr("class","arc").attr("transform", "translate("+d[0][0]+","+d[0][1]+")").append("path").attr("class", "arc").attr("d", newArc)
 
