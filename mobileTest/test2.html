@@ -369,7 +369,7 @@
         var arcAngle1 = Math.atan2(d[0][1] - lineAdjust[1],d[0][0] - lineAdjust[0]);
         var arcAngle2 = Math.atan2((d[0][1] - d[1][1]),(d[0][0] - d[1][0]));
         
-        var newArc = d3.svg.arc().innerRadius(100).outerRadius(200).startAngle(arcAngle1 + (Math.PI / 2)).endAngle(arcAngle2 + (Math.PI / 2));
+        var newArc = d3.svg.arc().innerRadius(100).outerRadius(200).startAngle(arcAngle1 - (Math.PI / 2)).endAngle(arcAngle2 - (Math.PI / 2));
         
         d3.select("svg").selectAll("g.arc").remove();
         d3.select("svg").append("g").attr("class","arc").attr("transform", "translate("+d[0][0]+","+d[0][1]+")").append("path").attr("class", "arc").attr("d", newArc)
