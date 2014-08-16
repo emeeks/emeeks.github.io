@@ -371,7 +371,7 @@
         
         var newArc = d3.svg.arc().innerRadius(100).outerRadius(200).startAngle(arcAngle1 - (Math.PI / 2)).endAngle(arcAngle2 - (Math.PI / 2));
         
-        var altAngle = (arcAngle2 - arcAngle1) * (180/pi)
+        var altAngle = (arcAngle2 - arcAngle1) * (180/Math.PI)
         
         d3.select("svg").selectAll("g.arc").remove();
         d3.select("svg").insert("g","g").attr("class","arc").attr("transform", "translate("+d[0][0]+","+d[0][1]+")").append("path").attr("class", "arc").attr("d", newArc).style("fill", "#B2B2CC")
