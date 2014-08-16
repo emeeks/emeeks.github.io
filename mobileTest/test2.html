@@ -366,8 +366,8 @@
 
         var angle = Math.atan((slope1 - slope2)/(1 + slope1*slope2)) * 180/Math.PI;
         
-        var arcAngle1 = Math.tan(slope1);
-        var arcAngle2 = Math.tan(slope2);
+        var arcAngle1 = Math.atan2(lineAdjust[1],lineAdjust[0]);
+        var arcAngle2 = Math.atan2((d[0][1] - d[1][1]),(d[0][0] - d[1][0]));
         
         var newArc = d3.svg.arc().innerRadius(100).outerRadius(200).startAngle(arcAngle1).endAngle(arcAngle2);
         
