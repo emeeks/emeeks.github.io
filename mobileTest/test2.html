@@ -371,7 +371,7 @@
         var newArc = d3.svg.arc().innerRadius(100).outerRadius(200).startAngle(arcAngle1).endAngle(arcAngle2);
         
         d3.select("svg").selectAll("g.arc").remove();
-        d3.select("#graphics").append("g").attr("class","arc").attr("transform", "translate("+d[0][0]+","+d[0][1]+")").append("path").attr("class", "arc").attr("d", newArc)
+        d3.select("svg").append("g").attr("class","arc").attr("transform", "translate("+d[0][0]+","+d[0][1]+")").append("path").attr("class", "arc").attr("d", newArc)
 
         d3.select("#touchStatus").html("")
         d3.select("#touchStatus").append("p").html("Slope 1: " + slope1);
