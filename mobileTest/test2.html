@@ -283,14 +283,7 @@
         .attr("class", "initial")
         .style("stroke", function(d,i) {return i == 0 ? "red" : "black"})
         .style("stroke-width", function(d,i) {return i == 0 ? "20px" : "5px"})
-        
-        d3.select("svg").append("text")
-        .attr("x", (d[0][0] + d[1][0]) / 2)
-        .attr("y", (d[0][1] + d[1][1]) / 2)
-        .attr("class", "firstslope")
-        .style("color", "darkred")
-        .style("font-weight", 900);
-        
+
       }
 
           }
@@ -345,9 +338,17 @@
         var slope2 = (d[0][1] - d[1][1]) / (d[0][0] - d[1][0]);
         var lineAdjust = [d[0][0] - (initialD[0][0] - initialD[1][0]), d[0][1] - (initialD[0][1] - initialD[1][1])]
         
-        d3.select("text.firstslope").text("Initial Slope: " + slope1);
-
         d3.select("text.newslope").remove();
+        d3.select("text.firstslope").remove();
+
+        d3.select("svg").append("text")
+        .attr("x", (d[0][0] + lineAdjust[0]) / 2)
+        .attr("y", (d[0][1] + lineAdjust[1]) / 2)
+        .attr("class", "firstslope")
+        .style("color", "darkred")
+        .style("font-weight", 900)
+        .text("Initial Slope: " + slope1);
+
         
         d3.select("line.initial")
         .attr("x1", d[0][0])
