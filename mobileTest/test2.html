@@ -434,7 +434,7 @@
       dataG = d3.selectAll("g.datapoint")
       .attr("transform", function(d) {return "translate(" + xScale(d.size) + "," + yScale(d.value) +")"})
       .each(function(d) {
-      houseSymbol = d3.svg.symbol().type(typeShape[d.type]).size(512);
+      houseSymbol = d3.svg.symbol().type(typeShape[d.type]).size(1024);
         d3.select(this).append("path")
         .attr("d", houseSymbol)
         .style("fill", locationScale(d.location))
