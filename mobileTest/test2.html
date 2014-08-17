@@ -29,6 +29,20 @@
     width: 100%;
     height: 15%;
   }
+  #modal {
+    position: absolute;
+    height: 130px;
+    width: 200px;
+    background: white;
+    box-shadow: 2px 2px 0px #888888;
+    border: 1px #888888 solid;
+    left: -300px;
+    top: -300px;
+  }
+  #modal > p {
+    margin: 2px;
+    padding: 2px;
+  }
 </style>
 <body>
 
@@ -38,6 +52,7 @@
   <button onclick="touchDemo7();">All Three</button>
   <button onclick="touchDemo8();">Nested G Elements</button>
   <button onclick="touchDemo9();">Visualizing Rotate</button>
+  <button onclick="touchDemo10();">Responsive Data Viz</button>
 </div>
 </div>
   <footer>
@@ -254,7 +269,6 @@
   function touchDemo9() {
     var initialD = [];
     var initialRotate;
-     d3.select("#buttons").html("").style("pointer-events", "none").append("div").attr("id", "touchStatus").append("p").html("Touch Status:").append("ol");
 
      d3.select("svg").on("touchstart", touchBegin);
      d3.select("svg").on("touchmove", touchStatus);
@@ -386,6 +400,69 @@
 
      }
 
+   }
+   
+   function touchDemo10() {
+    d3.select("#buttons").remove();
+    responsiveDataViz();
+   }
+   
+   function responsiveDataViz() {
+    d3.json("realestate.json", function(data) {realEstate(data)});
+    
+    function realEstate(data) {
+      d3.select("svg").style("width", "80%").style("float", "left");
+      d3.select("#vizcontainer").append("div").attr("id", "list").style("float", "left").style("height", "90%").style("width", "18%").style("overflow", "auto");
+      d3.select("#vizcontainer").append("div").attr("id", "modal");
+      
+      d3.select("#list").append("ol").selectAll("li").data(data).enter().append("li").attr("class", "datapoint").html(function(d) {return d.name})
+      .on("mouseover", highlightDatapoint)
+      screenHeight = parseFloat(d3.select("svg").node().clientHeight || d3.select("svg").node().parentNode.clientHeight);
+      screenWidth = parseFloat(d3.select("svg").node().clientWidth || d3.select("svg").node().parentNode.clientWidth);
+      
+      sizeExtent = d3.extent(data, function(d) {return d.size})
+      valueExtent = d3.extent(data, function(d) {return d.value})
+      xScale = d3.scale.linear().domain(sizeExtent).range([40,screenWidth-40])
+      yScale = d3.scale.linear().domain(valueExtent).range([screenHeight-40,40])
+      d3.select("svg").selectAll("g.datapoint").data(data).enter()
+      .append("g").attr("class", "datapoint");
+      
+      
+      locationScale = d3.scale.ordinal().domain(["Rural","Coastal","Suburb","City"]).range(colorbrewer.Reds[4]);
+      typeShape = {"Spanish": "circle","Craftsman":"cross","Ranch":"square","McMansion":"triangle-down"};
+
+      dataG = d3.selectAll("g.datapoint")
+      .attr("transform", function(d) {return "translate(" + xScale(d.size) + "," + yScale(d.value) +")"})
+      .each(function(d) {
+      houseSymbol = d3.svg.symbol().type(typeShape[d.type]).size(512);
+        d3.select(this).append("path")
+        .attr("d", houseSymbol)
+        .style("fill", locationScale(d.location))
+      .style("stroke", "black")
+      .style("stroke-width", "1px")
+      .on("mouseover", highlightDatapoint)
+      })
+      
+    xAxis = d3.svg.axis().scale(xScale).orient("top").tickSize(4);    
+    yAxis = d3.svg.axis().scale(yScale).orient("right").tickSize(4);    
+    d3.select("svg").append("g").attr("transform", "translate(0,"+(screenHeight - 20)+")").call(xAxis);
+    d3.select("svg").append("g").attr("transform", "translate(20,0)").call(yAxis);
+     
+    function highlightDatapoint(d) {
+      d3.selectAll("li.datapoint").style("font-weight", function(p) {return p == d ? 900 : 100})
+      d3.selectAll("g.datapoint").select("path").style("stroke-width", function(p) {return p == d ? "3px" : "1px"})
+      var modal = d3.select("#modal").style("top", yScale(d.value) - 135).style("left", xScale(d.size) - 100);
+      modal.selectAll("*").remove();
+      modal.append("p").html(d.name)
+      modal.append("p").html("Location: " + d.location)
+      modal.append("p").html("Style: " + d.type)
+      modal.append("p").html("Size: " + d.size + "Sq. Ft.")
+      modal.append("p").html("Value: $" + d.value)
+    }
+    }
+    function tabletView() {
+      d3.select("svg").style("width", "100%")
+    }
    }
 </script>
   </footer>
