@@ -589,41 +589,86 @@
       .children(function(d) {return d.values})
       .value(function(d) {return circleSize(d.size)})
 
+      d3.selectAll("g.datapoint").select("path")
+      .style("pointer-events", "none")
+      ;
+
       d3.select("#dataG")
       .attr("transform", "translate(0,100)")
       .selectAll("circle")
       .data(packChart(packableTweets))
       .enter()
-      .append("circle")
-      .attr("r", function(d) {return d.r})
-      .attr("cx", function(d) {return d.x})
-      .attr("cy", function(d) {return d.y})
-      .style("fill", "rgba(0,0,0,0)")
+      .insert("circle","g")
+      .attr("class", "pack")
+      .style("fill", "white")
       .style("stroke", "black")
-      .style("stroke-width", "2px");
-      
-      d3.selectAll("g.datapoint").transition().duration(1000)
-      .attr("transform", function(d) {return "translate(" + d.x + "," + d.y +")"})
+      .style("stroke-width", "2px")
+      .on("touchmove", changeView)
+      .on("click", changeView);
 
-      symbolSize = d3.scale.linear().domain(sizeExtent).range([100,180])
-
-      d3.selectAll("g.datapoint").select("path")
-      .on("mouseover", null)
-      .each(function(d) {
-      houseSymbol = d3.svg.symbol().type(typeShape[d.type]).size(symbolSize(d.size));
-        d3.select(this).transition().duration(1000).attr("d", houseSymbol);
-      })
-      
       d3.select("svg").append("g").attr("id", "header").attr("transform", "translate(" + (screenWidth / 2) + ",50)");
       d3.select("#header").append("text").attr("class", "viewTitle").text("Current View")
 
       d3.select("svg").append("g").attr("id", "footer").attr("transform", "translate(" + (screenWidth / 2) + "," + (screenHeight - 60) +")");
-      d3.select("#footer").append("text").attr("class", "viewStats").attr("id", "viewPrice").text("Average Value");
-      d3.select("#footer").append("text").attr("class", "viewStats").attr("id", "viewPrice").attr("y", 30).text("Average Size");
+      d3.select("#footer").append("text").attr("class", "viewStats").attr("id", "viewValue").text("Average Value");
+      d3.select("#footer").append("text").attr("class", "viewStats").attr("id", "viewSize").attr("y", 30).text("Average Size");
+      
+      changeView(packableTweets)
       
       function changeView(d) {
-        d3.select("#dataG").selectAll("circle").style("pointer-events", function(p) {return p.depth == d.depth + 1 ? "auto" : "none"}) 
-        d3.select("#dataG").attr("transform", "translate(" + d.x + "," + (d.y + 100) +")");
+        newScale = (screenHeight / 2) / (d.r + 100)
+        d3.select("#dataG").selectAll("circle").style("fill", function(p) {return p == d ? "lightgray" : "white"}) 
+        d3.select("#dataG").selectAll("circle").style("pointer-events", function(p) {return (p.depth == d.depth || p.parent == d) && p != d ? "auto" : "none"}) 
+        d3.select("#dataG").transition().duration(1000).attr("transform", "translate(" + ((screenWidth/2)-(d.x * newScale)) + "," + ((screenHeight/2) -(d.y * newScale)) +")");
+        
+        d3.selectAll("circle.pack")
+        .transition().duration(1000)
+          .attr("r", function(d) {return d.r * newScale})
+          .attr("cx", function(d) {return d.x * newScale})
+          .attr("cy", function(d) {return d.y * newScale})
+
+
+      symbolSize = d3.scale.linear().domain(sizeExtent).range([100 * newScale,180 * newScale])
+
+      d3.selectAll("g.datapoint").transition().duration(1000)
+      .attr("transform", function(d) {return "translate(" + (d.x * newScale) + "," + (d.y * newScale) +")"})
+      .select("path")
+      .each(function(d) {
+      houseSymbol = d3.svg.symbol().type(typeShape[d.type]).size(symbolSize(d.size));
+        d3.select(this).transition().duration(1000).attr("d", houseSymbol);
+      })
+
+      calculateStatistics(d);
+      
+      function calculateStatistics(d) {
+        if (d.name) {
+          d3.select("text.viewTitle").html(d.name);
+          d3.select("#viewValue").html("Value: $" + d.oValue);
+          d3.select("#viewSize").html("Size: " + d.size + " square feet");
+        }
+        else {
+          var allDatapoints = allChildren(d);
+          console.log(allDatapoints)
+          var averageValue = d3.mean(allDatapoints, function(d) {return d.oValue})
+          var averageSize = d3.mean(allDatapoints, function(d) {return d.size})
+          d3.select("text.viewTitle").html(d.depth == 2 ? d.parent.key + " - " + d.key : d.key);
+          d3.select("#viewValue").html("Average Value: $" + d3.format("0,000")(Math.floor(averageValue)));
+          d3.select("#viewSize").html("Average Size: " + d3.format("0,000")(Math.floor(averageSize)) + " square feet");
+        }
+        
+        function allChildren(d) {
+          var childArray = [];
+          for (x in d.values) {
+            if (d.values[x].name) {
+              childArray.push(d.values[x]);
+            }
+            else {
+              childArray = allChildren(d.values[x]);
+            }
+          }
+          return childArray;
+        }
+      }
       }
 
       }
