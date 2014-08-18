@@ -622,7 +622,7 @@
       d3.select("#footer").append("text").attr("class", "viewStats").attr("id", "viewPrice").attr("y", 30).text("Average Size");
       
       function changeView(d) {
-        d3.select("#dataG").selectAll("circle").style("pointer-events", function(p) {return p.depth == d.depth - 1 ? "auto" : "none"}) 
+        d3.select("#dataG").selectAll("circle").style("pointer-events", function(p) {return p.depth == d.depth + 1 ? "auto" : "none"}) 
         d3.select("#dataG").attr("transform", "translate(" + d.x + "," + (d.y + 100) +")");
       }
 
