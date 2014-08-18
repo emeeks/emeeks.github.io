@@ -465,6 +465,8 @@
     d3.select("svg").append("g").attr("id", "xAxisG").attr("class", "axis").attr("transform", "translate(0,"+(screenHeight - 20)+")").call(xAxis);
     d3.select("svg").append("g").attr("id", "yAxisG").attr("class", "axis").attr("transform", "translate(20,0)").call(yAxis);
     d3.select("body").append("button").html("Tablet").on("click", tabletView)
+    
+    phoneView();
      
     function highlightDatapoint(d) {
       d3.selectAll("li.datapoint").style("font-weight", function(p) {return p == d ? 900 : 100})
@@ -503,9 +505,7 @@
       houseSymbol = d3.svg.symbol().type(typeShape[d.type]).size(512);
         d3.select(this).transition().duration(1000).attr("d", houseSymbol);
       })
-      
 
-    
     xScale.range([40,screenWidth-40])
     
     xAxis.orient("bottom").scale(xScale);
@@ -542,7 +542,62 @@
     }
       
     }
+    function phoneView() {
+      nestedTweets = d3.nest()
+      .key(function (d) {return d.location})
+      .entries(data);
+      
+      for (x in nestedTweets) {
+      var subNestedTweets = d3.nest()
+      .key(function (d) {return d.type})
+      .entries(nestedTweets[x].values);
+      nestedTweets[x].values = subNestedTweets;
+      }
 
+      packableTweets = {id: "root", values: nestedTweets}
+
+      d3.select("svg").style("width", "100%");
+
+      screenWidth = parseFloat(d3.select("svg").node().clientWidth || d3.select("svg").node().parentNode.clientWidth);
+      d3.select("#list").remove();
+      d3.selectAll("g.axis").remove();
+
+      circleSize = d3.scale.linear().domain(sizeExtent).range([2,10])
+
+      packChart = d3.layout.pack();
+      packChart.size([screenWidth,screenHeight])
+      .children(function(d) {return d.values})
+      .value(function(d) {return circleSize(d.size)})
+
+      d3.select("svg")
+      .insert("g","g")
+      .attr("transform", "translate(0,0)")
+      .selectAll("circle")
+      .data(packChart(packableTweets))
+      .enter()
+      .append("circle")
+      .attr("r", function(d) {return d.r - (d.depth * 0)})
+      .attr("cx", function(d) {return d.x})
+      .attr("cy", function(d) {return d.y})
+      .style("fill", function(d) {return "white"})
+      .style("stroke", "black")
+      .style("stroke-width", "2px");
+      
+      d3.selectAll("g.datapoint").transition().duration(1000)
+      .attr("transform", function(d) {return "translate(" + d.x + "," + d.y +")"})
+
+      symbolSize = d3.scale.linear().domain(sizeExtent).range([230,460])
+
+      d3.selectAll("g.datapoint").select("path")
+      .on("mouseover", null)
+      .each(function(d) {
+        console.log(d.size)
+        console.log(symbolSize(d.size))
+      houseSymbol = d3.svg.symbol().type(typeShape[d.type]).size(symbolSize(d.size));
+        d3.select(this).transition().duration(1000).attr("d", houseSymbol);
+      })
+
+      }
     }
    }
 </script>
