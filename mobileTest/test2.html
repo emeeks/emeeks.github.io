@@ -451,7 +451,7 @@
       dataG = d3.selectAll("g.datapoint")
       .attr("transform", function(d) {return "translate(" + xScale(d.size) + "," + yScale(d.value) +")"})
       .each(function(d) {
-      houseSymbol = d3.svg.symbol().type(typeShape[d.type]).size(1024);
+      houseSymbol = d3.svg.symbol().type(typeShape[d.type]).size(64);
         d3.select(this).append("path")
         .attr("d", houseSymbol)
         .style("fill", locationScale(d.location))
@@ -464,7 +464,7 @@
     yAxis = d3.svg.axis().scale(yScale).orient("right").tickSize(4);    
     d3.select("svg").append("g").attr("id", "xAxisG").attr("class", "axis").attr("transform", "translate(0,"+(screenHeight - 20)+")").call(xAxis);
     d3.select("svg").append("g").attr("id", "yAxisG").attr("class", "axis").attr("transform", "translate(20,0)").call(yAxis);
-     tabletView()
+    tabletView()
      
     function highlightDatapoint(d) {
       d3.selectAll("li.datapoint").style("font-weight", function(p) {return p == d ? 900 : 100})
@@ -484,7 +484,7 @@
 
       d3.select("#list").remove();
       var cellWidth = screenWidth / 14;
-      var cellHeight = screenHeight / 12;
+      var cellHeight = screenHeight / 14;
       sortedData = data.sort(function(a,b) {
     if (a.value > b.value)
     return 1;
@@ -498,7 +498,13 @@
       .attr("transform", function(d,i) {return "translate("+((Math.floor(i/8) + .5) * cellWidth)+","+((i%8 + .5)*cellHeight)+")"});
 
       d3.selectAll("g.datapoint").select("path")
-      .on("mouseover", null);
+      .on("mouseover", null)
+      .each(function(d) {
+      houseSymbol = d3.svg.symbol().type(typeShape[d.type]).size(512);
+        d3.select(this).transition().duration(1000).attr("d", houseSymbol);
+      })
+      
+
     
     xScale.range([40,screenWidth-40])
     
