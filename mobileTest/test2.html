@@ -464,7 +464,7 @@
     yAxis = d3.svg.axis().scale(yScale).orient("right").tickSize(4);    
     d3.select("svg").append("g").attr("id", "xAxisG").attr("class", "axis").attr("transform", "translate(0,"+(screenHeight - 20)+")").call(xAxis);
     d3.select("svg").append("g").attr("id", "yAxisG").attr("class", "axis").attr("transform", "translate(20,0)").call(yAxis);
-    tabletView()
+    d3.select("body").append("button").html("Tablet").on("click", tabletView)
      
     function highlightDatapoint(d) {
       d3.selectAll("li.datapoint").style("font-weight", function(p) {return p == d ? 900 : 100})
@@ -483,7 +483,7 @@
       screenWidth = parseFloat(d3.select("svg").node().clientWidth || d3.select("svg").node().parentNode.clientWidth);
 
       d3.select("#list").remove();
-      var cellWidth = screenWidth / 14;
+      var cellWidth = screenWidth / 16;
       var cellHeight = screenHeight / 14;
       sortedData = data.sort(function(a,b) {
     if (a.value > b.value)
