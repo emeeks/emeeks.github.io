@@ -60,23 +60,34 @@
     pointer-events: none;
   }
   
-  text.viewTitle {
-    font-size: 30px;
+  div.viewTitle {
+    font-size: 60px;
     font-weight: 900;
-    text-anchor: middle;
-    fill: darkred;
+    color: darkred;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100px;
+    background: rgba(255,255,255,.95);
+    text-align: center;
   }
 
-  text.viewStats {
-    font-size: 24px;
+  div.viewStats {
+    font-size: 40px;
     font-weight: 900;
-    text-anchor: middle;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 100px;
+    background: rgba(255,255,255,.95);
+    text-align: center;
+  }
+  
+  div.viewStats > div {
+    float: left;
+    width: 100%;
   }
 
-        d3.select("#header").append("text").attr("class", "viewTitle")
-
-      d3.select("svg").append("g").attr("id", "footer").attr("transform", "translate(0," + (screenHeight - 100) +")");
-      d3.select("#footer").append("text").attr("class", "viewStats")
 </style>
 <body>
 
@@ -606,12 +617,11 @@
       .on("touchmove", changeView)
       .on("click", changeView);
 
-      d3.select("svg").append("g").attr("id", "header").attr("transform", "translate(" + (screenWidth / 2) + ",50)");
-      d3.select("#header").append("text").attr("class", "viewTitle").text("Current View")
+      d3.select("#vizcontainer").append("div").attr("class", "viewTitle").html("Current View")
 
-      d3.select("svg").append("g").attr("id", "footer").attr("transform", "translate(" + (screenWidth / 2) + "," + (screenHeight - 60) +")");
-      d3.select("#footer").append("text").attr("class", "viewStats").attr("id", "viewValue").text("Average Value");
-      d3.select("#footer").append("text").attr("class", "viewStats").attr("id", "viewSize").attr("y", 30).text("Average Size");
+      var viewStats = d3.select("#vizcontainer").append("div").attr("class", "viewStats");
+      viewStats.append("div").attr("id", "viewValue").html("Average Value");
+      viewStats.append("div").attr("id", "viewSize").html("Average Size");
       
       changeView(packableTweets)
       
@@ -642,7 +652,7 @@
       
       function calculateStatistics(d) {
         if (d.name) {
-          d3.select("text.viewTitle").html(d.name);
+          d3.select("div.viewTitle").html(d.parent.parent.key + " - " + d.parent.key + " - " + d.name);
           d3.select("#viewValue").html("Value: $" + d.oValue);
           d3.select("#viewSize").html("Size: " + d.size + " square feet");
         }
@@ -651,7 +661,7 @@
           console.log(allDatapoints)
           var averageValue = d3.mean(allDatapoints, function(d) {return d.oValue})
           var averageSize = d3.mean(allDatapoints, function(d) {return d.size})
-          d3.select("text.viewTitle").html(d.depth == 2 ? d.parent.key + " - " + d.key : d.key);
+          d3.select("div.viewTitle").html(d.depth == 2 ? d.parent.key + " - " + d.key : d.key);
           d3.select("#viewValue").html("Average Value: $" + d3.format("0,000")(Math.floor(averageValue)));
           d3.select("#viewSize").html("Average Size: " + d3.format("0,000")(Math.floor(averageSize)) + " square feet");
         }
