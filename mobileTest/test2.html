@@ -483,7 +483,7 @@
       screenWidth = parseFloat(d3.select("svg").node().clientWidth || d3.select("svg").node().parentNode.clientWidth);
 
       d3.select("#list").remove();
-      var cellWidth = screenWidth / 16;
+      var cellWidth = screenWidth / 18;
       var cellHeight = screenHeight / 14;
       sortedData = data.sort(function(a,b) {
     if (a.value > b.value)
@@ -495,7 +495,7 @@
       d3.selectAll("g.datapoint").data(sortedData, function(d) {return d.name})
       .transition()
       .duration(1000)
-      .attr("transform", function(d,i) {return "translate("+((Math.floor(i/8) + .5) * cellWidth)+","+((i%8 + .5)*cellHeight)+")"});
+      .attr("transform", function(d,i) {return "translate("+((Math.floor(i/6) + .5) * cellWidth)+","+((i%6 + .5)*cellHeight)+")"});
 
       d3.selectAll("g.datapoint").select("path")
       .on("mouseover", null)
