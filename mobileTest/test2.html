@@ -483,7 +483,7 @@
     d3.select("svg").append("g").attr("id", "yAxisG").attr("class", "axis").attr("transform", "translate(20,0)").call(yAxis);
 //    d3.select("body").append("button").html("Tablet").on("click", tabletView)
     
-    phoneView();
+    tabletView();
      
     function highlightDatapoint(d) {
       d3.selectAll("li.datapoint").style("font-weight", function(p) {return p == d ? 900 : 100})
