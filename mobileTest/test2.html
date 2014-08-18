@@ -59,7 +59,24 @@
     opacity: .5;
     pointer-events: none;
   }
+  
+  text.viewTitle {
+    font-size: 30px;
+    font-weight: 900;
+    text-anchor: middle;
+    fill: darkred;
+  }
 
+  text.viewStats {
+    font-size: 24px;
+    font-weight: 900;
+    text-anchor: middle;
+  }
+
+        d3.select("#header").append("text").attr("class", "viewTitle")
+
+      d3.select("svg").append("g").attr("id", "footer").attr("transform", "translate(0," + (screenHeight - 100) +")");
+      d3.select("#footer").append("text").attr("class", "viewStats")
 </style>
 <body>
 
@@ -441,7 +458,7 @@
       valueExtent = d3.extent(data, function(d) {return d.value})
       xScale = d3.scale.linear().domain(sizeExtent).range([40,screenWidth-40])
       yScale = d3.scale.linear().domain(valueExtent).range([screenHeight-40,40])
-      d3.select("svg").selectAll("g.datapoint").data(data, function(d) {return d.name}).enter()
+      d3.select("svg").append("g").attr("id", "dataG").selectAll("g.datapoint").data(data, function(d) {return d.name}).enter()
       .append("g").attr("class", "datapoint");
       
       
@@ -464,7 +481,7 @@
     yAxis = d3.svg.axis().scale(yScale).orient("right").tickSize(4);    
     d3.select("svg").append("g").attr("id", "xAxisG").attr("class", "axis").attr("transform", "translate(0,"+(screenHeight - 20)+")").call(xAxis);
     d3.select("svg").append("g").attr("id", "yAxisG").attr("class", "axis").attr("transform", "translate(20,0)").call(yAxis);
-    d3.select("body").append("button").html("Tablet").on("click", tabletView)
+//    d3.select("body").append("button").html("Tablet").on("click", tabletView)
     
     phoneView();
      
@@ -543,6 +560,9 @@
       
     }
     function phoneView() {
+      for (x in data) {
+        data[x].oValue = data[x].value;
+      }
       nestedTweets = d3.nest()
       .key(function (d) {return d.location})
       .entries(data);
@@ -554,7 +574,7 @@
       nestedTweets[x].values = subNestedTweets;
       }
 
-      packableTweets = {id: "root", values: nestedTweets}
+      packableTweets = {id: "root", key: "Overall", values: nestedTweets}
 
       d3.select("svg").style("width", "100%");
 
@@ -565,13 +585,12 @@
       circleSize = d3.scale.linear().domain(sizeExtent).range([2,10])
 
       packChart = d3.layout.pack();
-      packChart.size([screenWidth,screenHeight])
+      packChart.size([screenWidth,screenHeight-200])
       .children(function(d) {return d.values})
       .value(function(d) {return circleSize(d.size)})
 
-      d3.select("svg")
-      .insert("g","g")
-      .attr("transform", "translate(0,0)")
+      d3.select("#dataG")
+      .attr("transform", "translate(0,100)")
       .selectAll("circle")
       .data(packChart(packableTweets))
       .enter()
@@ -579,23 +598,32 @@
       .attr("r", function(d) {return d.r - (d.depth * 0)})
       .attr("cx", function(d) {return d.x})
       .attr("cy", function(d) {return d.y})
-      .style("fill", function(d) {return "white"})
+      .style("fill", "rgba(0,0,0,0)")
       .style("stroke", "black")
       .style("stroke-width", "2px");
       
       d3.selectAll("g.datapoint").transition().duration(1000)
       .attr("transform", function(d) {return "translate(" + d.x + "," + d.y +")"})
 
-      symbolSize = d3.scale.linear().domain(sizeExtent).range([230,460])
+      symbolSize = d3.scale.linear().domain(sizeExtent).range([100,180])
 
       d3.selectAll("g.datapoint").select("path")
       .on("mouseover", null)
       .each(function(d) {
-        console.log(d.size)
-        console.log(symbolSize(d.size))
       houseSymbol = d3.svg.symbol().type(typeShape[d.type]).size(symbolSize(d.size));
         d3.select(this).transition().duration(1000).attr("d", houseSymbol);
       })
+      
+      d3.select("svg").append("g").attr("id", "header").attr("transform", "translate(" + (screenWidth / 2) + ",50)");
+      d3.select("#header").append("text").attr("class", "viewTitle").text("Current View")
+
+      d3.select("svg").append("g").attr("id", "footer").attr("transform", "translate(" + (screenWidth / 2) + "," + (screenHeight - 60) +")");
+      d3.select("#footer").append("text").attr("class", "viewStats").attr("id", "viewPrice").text("Average Value");
+      d3.select("#footer").append("text").attr("class", "viewStats").attr("id", "viewPrice").attr("y", 30).text("Average Size");
+      
+      function changeView(d,i) {
+        
+      }
 
       }
     }
