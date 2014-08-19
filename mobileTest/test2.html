@@ -67,13 +67,13 @@
     position: fixed;
     top: 0;
     width: 100%;
-    height: 100px;
+    height: 140px;
     background: rgba(255,255,255,.95);
     text-align: center;
   }
 
   div.viewStats {
-    font-size: 48px;
+    font-size: 54px;
     font-weight: 900;
     position: fixed;
     bottom: 0;
@@ -84,7 +84,6 @@
   }
   
   div.viewStats > div {
-    float: left;
     width: 100%;
   }
 
@@ -571,6 +570,7 @@
       
     }
     function phoneView() {
+      initialLength = 0;
       for (x in data) {
         data[x].oValue = data[x].value;
       }
@@ -585,15 +585,35 @@
       nestedTweets[x].values = subNestedTweets;
       }
 
-      packableTweets = {id: "root", key: "Overall", values: nestedTweets}
+      packableTweets = {id: "root", key: "All Real Estate", values: nestedTweets}
 
-      d3.select("svg").style("width", "100%");
+      d3.select("svg").style("width", "100%")
+      .on("touchstart", pinchInitial)
+      .on("touchend", pinchCheck)
+      ;
+      
+      function pinchInitial() {
+        var touches = d3.touches();
+        if (touches.length > 2) {
+          initialLength = Math.sqrt(Math.abs(initialD[0][0] - initialD[1][0]) + Math.abs(initialD[0][1] - initialD[1][1]));
+        }
+      }
+      
+      function pinchCheck() {
+        var touches = d3.touches();
+        if (touches.length > 2) {
+          if (initialLength > Math.sqrt(Math.abs(initialD[0][0] - initialD[1][0]) + Math.abs(initialD[0][1] - initialD[1][1]))) {
+            changeView(packableTweets);
+          }
+        }        
+      }
 
       screenWidth = parseFloat(d3.select("svg").node().clientWidth || d3.select("svg").node().parentNode.clientWidth);
       d3.select("#list").remove();
       d3.selectAll("g.axis").remove();
 
       circleSize = d3.scale.linear().domain(sizeExtent).range([2,10])
+      circleStroke = d3.scale.linear().domain(valueExtent).range([1,5])
 
       packChart = d3.layout.pack();
       packChart.size([screenWidth,screenHeight-200])
@@ -613,7 +633,7 @@
       .attr("class", "pack")
       .style("fill", "white")
       .style("stroke", "black")
-      .style("stroke-width", "2px")
+      .style("stroke-width", function(d) {return circleStroke(d.oValue)})
       .on("touchmove", changeView)
       .on("click", changeView);
 
@@ -652,7 +672,7 @@
       
       function calculateStatistics(d) {
         if (d.name) {
-          d3.select("div.viewTitle").html(d.parent.parent.key + " - " + d.parent.key + " - " + d.name);
+          d3.select("div.viewTitle").html(d.parent.parent.key + " - " + d.parent.key + "<br>" + d.name);
           d3.select("#viewValue").html("Value: $" + d.oValue);
           d3.select("#viewSize").html("Size: " + d.size + " square feet");
         }
