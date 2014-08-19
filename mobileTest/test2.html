@@ -101,6 +101,15 @@
 </div>
   <footer>
 <script>
+  function screenWidth() {
+    d3.select("#buttons").remove();
+    d3.select("vizcontainer").append("p")
+    .html("ScreenWidth: " + screen.width)
+
+    d3.select("vizcontainer").append("p")
+    .html("ScreenHeight: " + screen.height)
+
+  }
   function touchDemo7() {
     var initialD = [];
     var initialTransform;
@@ -493,10 +502,11 @@
     d3.select("svg").append("g").attr("id", "yAxisG").attr("class", "axis").attr("transform", "translate(20,0)").call(yAxis);
 //    d3.select("body").append("button").html("Tablet").on("click", tabletView)
     
-    if (screenWidth < 400) {
+    var pixRatio = window.devicePixelRatio;
+    if (screenWidth < 768) {
       phoneView();
     }
-    else if (screenWidth < 800) {
+    else if (screenWidth < 1000) {
       tabletView();
     }
      
