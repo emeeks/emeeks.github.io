@@ -104,10 +104,11 @@
 <script>
   function screenWidth() {
     d3.select("#buttons").remove();
-    d3.select("vizcontainer").append("p")
+    d3.select("svg").remove();
+    d3.select("#vizcontainer").append("p")
     .html("ScreenWidth: " + screen.width)
 
-    d3.select("vizcontainer").append("p")
+    d3.select("#vizcontainer").append("p")
     .html("ScreenHeight: " + screen.height)
 
   }
