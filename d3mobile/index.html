@@ -126,7 +126,6 @@
     d3.select("svg").append("g").attr("id", "xAxisG").attr("class", "axis").attr("transform", "translate(0,"+(screenHeight - 20)+")").call(xAxis);
     d3.select("svg").append("g").attr("id", "yAxisG").attr("class", "axis").attr("transform", "translate(20,0)").call(yAxis);
 //    d3.select("body").append("button").html("Tablet").on("click", tabletView)
-    
     var screenSize = screen.width;
     if (screenSize < 480) {
       phoneView();

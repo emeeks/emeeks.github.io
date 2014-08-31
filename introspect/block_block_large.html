@@ -133,7 +133,6 @@
           neighborArray.indexOf(p.target) == -1 ? neighborArray.push(p.target) : null;
           linkArray.push(p);
         })
-//        neighborArray = d3.set(neighborArray).keys();
         return {nodes: neighborArray, links: linkArray};
       }
 

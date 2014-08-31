@@ -1,0 +1,219 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>D3 Mobile Testing</title>
+  <meta charset="utf-8" />
+</head>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/colorbrewer.v1.min.js"></script>
+<style>
+  body, html {
+    width:100%;
+    height:100%;
+  }
+  #vizcontainer {
+    width:100%;
+    height:100%;
+  }
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+  #buttons {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+  }
+  button {
+    width: 100%;
+    height: 15%;
+  }
+  #modal {
+    position: absolute;
+    height: 130px;
+    width: 200px;
+    background: white;
+    box-shadow: 2px 2px 0px #888888;
+    border: 1px #888888 solid;
+    left: -300px;
+    top: -300px;
+  }
+  #modal > p {
+    margin: 2px;
+    padding: 2px;
+  }
+  rect.extent {
+    opacity: .25;
+  }
+  g.resize > circle {
+    fill: lightgray;
+    stroke: black;
+    stroke-width: 5px;
+  }
+  
+  text.brushLabel {
+    font-size: 40px;
+    font-weight: 900;
+    text-anchor: middle;
+    opacity: .5;
+    pointer-events: none;
+  }
+  
+  div.viewTitle {
+    font-size: 54px;
+    font-weight: 900;
+    color: darkred;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 140px;
+    background: rgba(255,255,255,.95);
+    text-align: center;
+  }
+
+  div.viewStats {
+    font-size: 54px;
+    font-weight: 900;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 140px;
+    background: rgba(255,255,255,.95);
+    text-align: center;
+  }
+  
+  div.viewStats > div {
+    width: 100%;
+  }
+
+</style>
+<body onload="mos();">
+
+<div id="vizcontainer">
+<svg></svg>
+</div>
+<div id="buttons">
+  
+</div>
+  <footer>
+<script>
+   function mos() {
+   titleScreen();
+   
+    var screenSize = screen.width;
+    if (screenSize < 480) {
+      phoneView();
+    }
+    else if (screenSize < 1000) {
+      tabletView();
+    }
+
+function phoneView() {
+  
+}
+function tabletView() {
+  
+}
+
+function titleScreen() {
+  vizHeight = parseFloat(d3.select("svg").node().clientHeight || d3.select("svg").node().parentNode.clientHeight);
+  vizWidth = parseFloat(d3.select("svg").node().clientWidth || d3.select("svg").node().parentNode.clientWidth);
+  
+  var svg = d3.select("svg").style("background", "black");
+  svg.append("text")
+  .text("CORE MECHANICS").style("font-size", "38").style("font-weight", 900).style("fill", "white")
+  .style("text-anchor", "middle")
+  .attr("x", 150)
+  .attr("y", 100)
+  .attr("fill-opacity", 0)
+  .transition()
+  .delay(1500)
+  .duration(3000)
+  .attr("x", 300)
+  .attr("y", 150)
+  .style("fill-opacity", 1)
+
+  svg.append("text")
+  .text("in association with")
+  .style("font-size", "24").style("font-weight", 900).style("fill", "white")
+  .style("text-anchor", "middle")
+  .attr("x", 300)
+  .attr("y", 200)
+  .attr("fill-opacity", 0)
+  .transition()
+  .delay(4500)
+  .duration(3000)
+  .style("fill-opacity", 1)
+  
+  svg.append("text")
+  .text(":( Sad Boy Heavy Industries :(")
+  .style("font-size", "38px")
+  .style("font-weight", 900).style("fill", "white")
+  .style("text-anchor", "middle")
+  .attr("x", 300)
+  .attr("y", 280)
+  .attr("fill-opacity", 0)
+  .transition()
+  .delay(7000)
+  .style("font-size", "38px")
+  .style("fill-opacity", 1)
+
+  svg.append("text")
+  .text("&")
+  .style("font-size", "48px")
+  .style("font-weight", 900).style("fill", "white")
+  .style("text-anchor", "middle")
+  .attr("x", 300)
+  .attr("y", 325)
+  .attr("fill-opacity", 0)
+  .transition()
+  .delay(8000)
+  .style("fill-opacity", 1)
+
+  svg.append("text")
+  .text("HeppKNIFE")
+  .style("font-style", "italic")
+  .style("font-size", "38px")
+  .style("font-weight", 900).style("fill", "white")
+  .style("text-anchor", "middle")
+  .attr("x", 300)
+  .attr("y", 360)
+  .attr("fill-opacity", 0)
+  .transition()
+  .delay(8500)
+  .style("fill-opacity", 1)
+
+  svg.append("text")
+  .text("present")
+  .style("font-style", "italic")
+  .style("font-size", "32px")
+  .style("font-weight", 900).style("fill", "white")
+  .style("text-anchor", "middle")
+  .attr("x", 300)
+  .attr("y", 400)
+  .attr("fill-opacity", 0)
+  .transition()
+  .delay(10000)
+  .duration(3000)
+  .style("fill-opacity", 1)
+  .each("end", function() {
+    d3.selectAll("text").remove();
+    d3.select("svg").append("text")
+      .text("MobileOrgSim")
+  .style("font-style", "italic")
+  .style("font-size", "56px")
+  .style("font-weight", 900).style("fill", "white")
+  .style("text-anchor", "middle")
+  .attr("x", 250)
+  .attr("y", 250)
+    
+  })
+
+}
+
+   }
+</script>
+  </footer>
+</body>
+</html>
