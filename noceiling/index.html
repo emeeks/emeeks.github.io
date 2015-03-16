@@ -58,7 +58,7 @@
     .addCartoLayer(topojsonLayer);
 
     function loadData() {
-      d3.json("data/indicators", function(data) {
+      d3.json("data/indicators.json", function(data) {
       var dimensionSelector = d3.select("#buttons").append("select").attr("id", "dimension")
       .on("change", selectDataset);
       var yearSelector = d3.select("#buttons").append("select").attr("id", "year")
