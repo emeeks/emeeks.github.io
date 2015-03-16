@@ -1,0 +1,3 @@
+This shows how you can override the CSS for panning, zooming and layer selector elements with  **[d3.carto.map](https://github.com/emeeks/d3-carto-map)**. It also provides examples of the various map modes and zooming functions and gives an example of how to create a legend.
+
+Notice that this legend is the one from my book [D3.js in Action](http://manning.com/meeks/) and not the more functional (but less readable) one that I made at [d3.svg.legend](http://bl.ocks.org/emeeks/8855733967174fe4b1b4).

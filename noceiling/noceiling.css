@@ -1,0 +1,112 @@
+html,body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+  }
+
+#buttons {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 99;
+}
+
+  #map {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+  }
+
+  #legend {
+    position: absolute;
+    left: 20px;
+    bottom: 20px;
+    width: 600px;
+    height: 95px;
+    background: white;
+    border-radius: 5px;
+    border: 3px double gray;
+    box-shadow: 3px 3px black;
+    z-index: 11;
+  }
+  
+  .legend > rect {
+    fill-opacity: .75;
+  }
+
+  .cityhull {
+    fill: purple;
+    fill-opacity: .5;
+    stroke: black;
+    stroke-width: 1px;
+  }
+
+  .baseCountry {
+    fill: white;
+    stroke: black;
+    stroke-width: 1px;
+  }
+  
+  .point {
+    fill: darkred;
+    stroke: black;
+    stroke-width: 1px;
+  }
+  
+  .randomsvg {
+    fill: AliceBlue;
+    stroke: CornflowerBlue;
+    stroke-width: 1px;
+  }
+
+  .randomcanvas {
+    stroke: AliceBlue;
+    fill: CornflowerBlue;
+    stroke-width: 2px;
+  }
+  
+  #d3MapLayerBox {
+    position: absolute;
+    background: white;
+    color: gray;
+    border-radius: 5px;
+    border: 3px double gray;
+    box-shadow: 3px 3px black;
+    left: auto;
+    right: 20px;
+    top: 50px;
+  }
+  
+  #d3MapPanBox {
+    top: 190px;
+    right: 68px;
+  }
+  
+  #d3MapPanBox > button, #d3MapZoomBox > button {
+    border-radius: 15px;
+    background: white;
+    border: 3px double gray;
+    color: black;
+  }
+
+  #d3MapPanBox > button {
+      font-size: 14px;
+  }
+
+  #d3MapPanBox > button:hover, #d3MapZoomBox > button:hover {
+    color: white;
+    background: darkgray;
+  }
+  
+  #d3MapZoomBox {
+    top: 160px;
+    right: 80px;
+  }
+
+  #d3MapZoomBox > .zoomcontrol {
+    position: absolute;
+  }
+
+  #d3MapZoomBox > #in {
+    position: relative;
+  }

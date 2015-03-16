@@ -1,0 +1,185 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>No Ceilings</title>
+  <meta charset="utf-8" />
+    <link type="text/css" rel="stylesheet" href="d3map.css" />
+    <link type="text/css" rel="stylesheet" href="noceiling.css" />
+</head>
+<script>
+      function makeSomeMaps() {
+      var activeDataset = {};
+      var activeDatasetName = "None";
+      var activeYear = 2010;
+      var activeDatascale = d3.scale.quantize().domain([50,1000]).range(colorbrewer.Reds[5]);
+        
+    map = d3.carto.map();
+    randomLayerArray = [];
+
+    d3.select("#map").call(map);
+
+    map.setScale(1);
+
+    d3.select("#d3MapPanBox > #left").html("&#9664;")
+    d3.select("#d3MapPanBox > #right").html("&#9654;")
+    d3.select("#d3MapPanBox > #up").html("&#9650;")
+    d3.select("#d3MapPanBox > #down").html("&#9660;")
+
+    tileLayer = d3.carto.layer.tile();
+
+    tileLayer
+    .tileType("cartodb")
+    .path("light_nolabels")
+    .label("Terrain");
+
+
+    topojsonLayer = d3.carto.layer.topojson();
+
+    topojsonLayer
+    .path("world.topojson")
+    .cssClass("baseCountry")
+    .renderMode("svg")
+    .on("load", loadData);
+
+    csvLayer = d3.carto.layer.csv();
+    csvLayer
+    .path("all_sites.csv")
+    .label("CSV Points")
+    .cssClass("point")
+    .renderMode("canvas")
+    .markerSize(2)
+    .markerColor(function(d) {return colorScale(d.pop)})
+    .strokeColor("black")
+    .x("xcoord")
+    .y("ycoord");
+
+    map
+    .addCartoLayer(tileLayer)
+//    .addCartoLayer(csvLayer)
+    .addCartoLayer(topojsonLayer);
+
+    function loadData() {
+      d3.json("data/indicators", function(data) {
+      var dimensionSelector = d3.select("#buttons").append("select").attr("id", "dimension")
+      .on("change", selectDataset);
+      var yearSelector = d3.select("#buttons").append("select").attr("id", "year")
+      .on("change", newYear);
+
+      yearSelector.selectAll("option").data(d3.range(18).map(function(d) {return d + 1995}))
+      .enter()
+      .append("option")
+      .html(function(d) {return d})
+      .attr("value", function(d) {return d})
+
+      dimensionHash = {}
+
+        var menuOptions = [];
+        for (x in data) {
+          var thisOptgroup = dimensionSelector.append("optgroup").attr("label",x)
+          for (y in data[x]) {
+            for (z in data[x][y]) {
+              var thisOption = thisOptgroup.append("option").html(data[x][y][z].name);
+              thisOption.attr("value", z)
+              dimensionHash[z] = data[x][y][z];
+            }
+          }
+        }
+        newDataset("RANLPRTL");
+      })
+
+    }
+
+    function selectDataset(){
+      newDataset(this.value);
+    }
+
+    function newDataset(datasetname) {
+      activeDatasetName = datasetname;
+      d3.json("data/json/" + datasetname + ".json", function(data) {
+        activeDataset = data;
+        updateMarkers();
+      })
+    }
+
+    function newYear() {
+      activeYear = this.value;
+      updateMarkers();
+    }
+    function updateMarkers() {
+      flatData = [];
+      for (var x in activeDataset) {
+        flatData.push(activeDataset[x][activeYear]);
+      }
+      activeExtent = d3.extent(flatData);
+
+      activeDatascale.domain(activeExtent);
+
+      d3.selectAll("path.baseCountry")
+      .style("fill-opacity", .5)
+      .style("stroke-width", "1px")
+      .style("stroke",
+function(d) {
+          if (activeDataset[d.properties.iso]) {
+            if (activeDataset[d.properties.iso][activeYear]) {
+            return activeDatascale(activeDataset[d.properties.iso][activeYear]);
+            }
+          }
+            return "lightgray";
+        }
+        )
+      .style("fill",
+function(d) {
+          if (activeDataset[d.properties.iso]) {
+            if (activeDataset[d.properties.iso][activeYear]) {
+            return activeDatascale(activeDataset[d.properties.iso][activeYear]);
+            }
+          }
+            return "none";
+        }
+        )
+
+    console.log(dimensionHash)
+
+    legend = d3.svg.legend().unitLabel(dimensionHash[activeDatasetName].unit)
+    .formatter(d3.format(".0f"))
+    .title(dimensionHash[activeDatasetName].name + " (" + activeYear + ")")
+    .scale(activeDatascale)
+
+  d3.select("#legend").select("svg").remove();
+  
+  d3.select("#legend").append("svg").style("width", "100%").style("height", "100%").append("g").attr("transform", "translate(20,35)").attr("class", "legend").call(legend);
+
+    }
+    
+    function reprojectedCenter() {
+      map.mode("globe");
+      projection = d3.geo.conicEquidistant()
+	.scale(350)
+	.translate([350,600]);
+      map.projection(projection);
+      map.refresh();
+    }
+    
+  }
+  
+</script>
+<body onload="makeSomeMaps()">
+<div id="buttons"></div>
+<div id="legend"></div>
+<div id="map"></div>
+<footer>
+<script src="http://d3js.org/colorbrewer.v1.min.js" charset="utf-8" type="text/javascript"></script>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8" type="text/javascript"></script>
+<script src="http://d3js.org/topojson.v1.min.js" type="text/javascript"></script>
+<script src="legend.js" type="text/javascript">
+</script>
+<script src="http://bl.ocks.org/emeeks/raw/f3105fda25ff785dc5ed/tile.js" type="text/javascript">
+</script>
+<script src="https://rawgit.com/emeeks/d3-carto-map/master/d3.carto.map.js" type="text/javascript">
+</script>
+<script src="http://bl.ocks.org/emeeks/raw/f3105fda25ff785dc5ed/d3.quadtiles.js" type="text/javascript">
+</script>
+<script src="http://bl.ocks.org/emeeks/raw/f3105fda25ff785dc5ed/d3.geo.raster.js" type="text/javascript">
+</script>
+</footer>
+</body>
+</html>
