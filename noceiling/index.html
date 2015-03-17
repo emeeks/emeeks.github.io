@@ -17,7 +17,7 @@
 
     d3.select("#map").call(map);
 
-    map.setScale(1);
+    map.setScale(2);
 
     d3.select("#d3MapPanBox > #left").html("&#9664;")
     d3.select("#d3MapPanBox > #right").html("&#9654;")
@@ -36,6 +36,7 @@
 
     topojsonLayer
     .path("world.topojson")
+    .label("countries")
     .cssClass("baseCountry")
     .renderMode("svg")
     .on("load", loadData);
@@ -54,7 +55,6 @@
 
     map
     .addCartoLayer(tileLayer)
-//    .addCartoLayer(csvLayer)
     .addCartoLayer(topojsonLayer);
 
     function loadData() {
@@ -67,6 +67,7 @@
       yearSelector.selectAll("option").data(d3.range(18).map(function(d) {return d + 1995}))
       .enter()
       .append("option")
+      .attr("selected", function(d) {return d==2010 ? "selected" : null})
       .html(function(d) {return d})
       .attr("value", function(d) {return d})
 
@@ -95,6 +96,15 @@
     function newDataset(datasetname) {
       activeDatasetName = datasetname;
       d3.json("data/json/" + datasetname + ".json", function(data) {
+        var availableYears = d3.keys(d3.set(d3.merge(d3.values(data).map(function(d) {return d3.keys(d)})))._).map(function(d) {return parseInt(d)});
+        d3.selectAll("select#year > option")
+        .style("display", function(d) {return availableYears.indexOf(d) > -1 ? "block" : "none"})
+        .style("selected", function(d) {return availableYears.indexOf(d) > -1 ? "selected" : null});
+
+        activeYear = d3.selectAll("select#year > option").filter(function() {return d3.select(this).attr("selected") == "selected"}).node().value;
+
+        d3.selectAll("select#year").node().value = activeYear;
+
         activeDataset = data;
         updateMarkers();
       })
@@ -137,8 +147,6 @@ function(d) {
         }
         )
 
-    console.log(dimensionHash)
-
     legend = d3.svg.legend().unitLabel(dimensionHash[activeDatasetName].unit)
     .formatter(d3.format(".0f"))
     .title(dimensionHash[activeDatasetName].name + " (" + activeYear + ")")
@@ -152,13 +160,9 @@ function(d) {
     
     function reprojectedCenter() {
       map.mode("globe");
-      projection = d3.geo.conicEquidistant()
-	.scale(350)
-	.translate([350,600]);
-      map.projection(projection);
       map.refresh();
     }
-    
+    d3.select("#buttons").append("button").html("globe").on("click", reprojectedCenter)
   }
   
 </script>
