@@ -67,6 +67,7 @@ h1, h3{
 
 #author {
   color: darkgray;
+  height: 300px;
 }
 
 .mono{
@@ -86,29 +87,40 @@ svg{
 
     <div>
       <h3>Introduction</h3>
-      <p>At a recent talk about the use of Sankey diagrams, I offered up a data visualization quiz that challenged the audience to define several gestalt principles based solely on representative figures. This lead to my approach to data visualization being described as "academic" in opposition, I would imagine, to a "pragmatic" approach that focuses on best practices and prior art evidenced by the growing library of data visualization books and 2-day seminars.</p>
-      <p>But let me suggest that gestalt is very much a pragmatic aspect of creating data visualization, in fact a necessary aspect if you plan to do more than simple bar and line charts. Below is an exploration of some of the most simple gestalt principles, how they operate and how they might act in tandem and in opposition with each other, as well as some general gestures toward how gestalt may already be influencing the way that more complex data visualization is being created.</p>
+      <p>At a recent talk I challenged the audience to define several gestalt principles based solely on representative figures. This "academic" approach to data visualization seems in opposition to a "pragmatic" approach that focuses on best practices and prior art demonstrated in the growing library of data visualization books and 2-day seminars.</p>
+      <p>But let me suggest that gestalt is very much a pragmatic aspect of creating data visualization, in fact a necessary aspect if you plan to do more than simple bar and line charts (and perhaps even for those simple charts). This exploration of three of the most simple gestalt principles focuses on how they operate and how they might act in tandem with and in opposition to each other. I also include some gestures toward how the gestalt may already be influencing what we think of not as cognitive qualities but as design and style in data visualization.</p>
 
     </div>
 
     <div>
       <h3>Similarity</h3>
-      <p>The most commonly known gestalt principle is that graphical elements with shared visual properties will be considered in the same group. Here we see the use of color similarity to indicate two classes of elements: the red ones and the gray ones. This could have also utilized shared symbols (for instance leveraging <span class='mono'>d3.svg.symbol</span> or the like) to show shared category.</p>
-      <p>While gestalt principles themselves are important to crafting effective data visualization, I think the gestalt gaze is equally important. Once we begin to formalize how we are using graphical features to indicate category, quantity, or topology, we also begin to notice features that unintentionally convey meaning. There are ambiguating factors already at play in our figure: there are implied columns in our figure, that seem to indicate 8 other groups. The color red, because of its hue, implies activation, while the subdued gray implies deactivation.</p>
+      <p>The most intuitive gestalt principle is that graphical elements with shared visual properties will be considered in the same group. Here we see the use of color similarity to indicate two classes of elements: the red ones and the gray ones. This could have also utilized shared symbols (for instance leveraging <span class='mono'>d3.svg.symbol</span> or the like) to show shared category; or shared stroke color or width; icons and so on.</p>
+      <p>Hue and saturation are very bad at denoting quantitative values, but very good at denoting categories. This basic example seems uncontroversial to the point that it might seem too facile. But while gestalt principles themselves are important to crafting effective data visualization, I think the gestalt gaze is equally important. Once we formalize how we are using graphical features to indicate category, quantity, or topology--even the most fundamental like color similarity--we also notice features that unintentionally convey meaning.</p>
+      <p>Some of these unintentional graphical signals are already present in this simple figure: the implied columns and rows seeming to indicate 8 or 5 other groups; The color red, because of its hue, implies activation, while the subdued gray implies deactivation; The memory of all circles being initially gray with only half transitioning to red reinforces this activation signal.</p>
     </div>
 
     <div>
       <h3>Proximity</h3>
-      <p>A graphical element being close to another graphical element is a strong indication of similarity. The circles on the right have been split into two groups based simply by making the 10 circles on the left closer to each other than the 30 circles on the right.</p> 
-      <p>We don't typically think that bars in a bar chart are similar simply because they are next to each other, nor do we assume slices in a pie chart are similar to each other because they are neighbors, but that's actually what's being conveyed. Clean chart design that groups bars into categories or sorts them by descending or ascending values works because it aligns the chart to accord with what the reader visually expects (that things near each other are more similar to each other).</p>
-      <p>One major challenge of deploying more complex data visualization methods, such as force-directed networks, sankey diagrams, or circle-packing, is that proximity does not mean similarity. This spatial problem is difficult to solve, especially with complex datasets, and must be planned for in deploying data visualization.</p>
+      <p>A graphical element being close to another graphical element is a strong indication of similarity. The circles on the right have been split into two groups by simply making the 10 circles on the left closer to each other than the 30 circles on the right.</p> 
+      <p>We don't typically think that bars in a bar chart are similar simply because they are next to each other, nor do we assume slices in a pie chart are similar to each other because they are neighbors, but that's actually what's being conveyed. Clean chart design that groups bars into categories or sorts them by descending or ascending values works because it aligns the chart to accord with what the reader visually expects (that things near each other are more similar to each other). In the case of ordering by value, bars are nearest to the bars that they have similar values with, while categorical ordering groups bars based on attribute similarity not conveyed in the length of the bar.</p>
+      <p>One major challenge of deploying more complex data visualization methods, such as force-directed networks, sankey diagrams, or circle-packing, is that often times with such charts proximity does not mean similarity. Instead, similarity is graphically denoted with a container or a visible line connecting one element to another. This spatial problem is difficult to solve, especially with complex datasets, and must be planned for in deploying any data visualization.</p>
     </div>
 
     <div>
       <h3>Enclosure</h3>
-      <p>The use of enclosure--surrounding a group of related elements with a visual element--is not a common technique in data visualization. This is remarkable given how powerful enclosure is. Here we see enclosure alongside similarity and proximity and providing the strongest visual signal.</p>
+      <p>The use of enclosure--surrounding a group of related elements with a visual element--is not a common technique in data visualization. This is remarkable given how powerful enclosure is. Here we see enclosure alongside similarity and proximity and yet providing the strongest visual signal of the three.</p>
       <p>Enclosure is less common in procedural data visualization because it's hard to compute a clean, effective border around a group of elements that are being arranged by an algorithm. There are useful techniques, such as <span class='mono'>d3.geom.hull</span> for computing a convex hull around a set of points on a plane, but it can be hard to deploy. Constraint-based graph drawing, like that found in cola.js, accounts for groups in its algorithm, which allows for <a target="_blank" href="http://marvl.infotech.monash.edu/webcola/examples/sucrosebreakdown.html">more effective use of enclosure in network visualization</a>.</p>
     </div>
+    <div>
+      <h3>Revelation</h3>
+      <p>This isn't, as far as I'm aware, an actual gestalt principle, but note that the order of graphical transition in this figure is also a signal. There are implications of causation as well as currency in animated data visualization which, if unaccounted for, can damage communication. Dynamic data visualization is powerful not simply because it moves and entertains the short attention spans among us, but because it communicates prior positions, colors, and relationships. The memory and order of it need to be thoughtfully deployed.</p>
+      </div>
+
+    <div>
+      <h3>Conclusion</h3>
+      <p>Accounting for the unintentional values being encoded in the basic settings of our data visualization graphics is critical. When a reader sees shapes near each other, or a more saturated color, or an animated transition, and that signal is simply an unintended byproduct of a palette or layout, then that's a failure on the part of the data visualization creator.</p>
+      <p>Likewise, limiting our use of graphical signals to the most basic like color similarity reduces our ability to communicate effectively. In cases where several different categorical distinctions are at play, it limites our ability to communicate in a sophisticated manner. Effective design and implementation of more complex data visualization that relies on enclosure (like treemaps and circle packing) and other gestalt principles not covered in this short essay can only happen if you are aware of the signals those graphics are sending.</p>
+      </div>
 
   </div>
 
@@ -123,11 +135,11 @@ svg{
 <script src="graph-scroll.js"></script>
 <script>
 
-var width = 500,
-    height = 450,
-    r = 40;
+var width = 490,
+    height = 420;
 
 var xScale = d3.scale.linear().domain([0,10]).range([40,560]);
+var yScale = d3.scale.linear().domain([0,10]).range([40,860]);
 
 var svg = d3.select('#graph')
     .append('svg')
@@ -138,7 +150,7 @@ var svg = d3.select('#graph')
       .enter()
       .append("circle")
       .attr("cx", function(d) {return xScale(d.x)})
-      .attr("cy", function(d) {return xScale(d.y)})
+      .attr("cy", function(d) {return yScale(d.y)})
       .attr("r", 15)
       .style("fill", "lightgray")
       .style("stroke", "black")
@@ -149,7 +161,7 @@ var svg = d3.select('#graph')
       .enter()
       .append("rect")
       .attr("class", "enclosure")
-      .attr("height", 250)
+      .attr("height", 370)
       .attr("width", function(d,i) {return i == 0 ? 190 : 250})
       .attr("x", function(d,i) {return i == 0 ? 20 : 220})
       .attr("y", 20)
@@ -192,7 +204,7 @@ function base() {
         .transition()
         .duration(500)
         .attr("cx", function(d) {return xScale(d.x)})
-        .attr("cy", function(d) {return xScale(d.y)})
+        .attr("cy", function(d) {return yScale(d.y)})
         .style("fill", "lightgray")
 }
 
@@ -201,8 +213,8 @@ function similarity() {
         .transition()
         .duration(500)
         .attr("cx", function(d) {return xScale(d.x)})
-        .attr("cy", function(d) {return xScale(d.y)})
-        .style("fill", function(d) {return d.x%2 == 1 ? "red" : "lightgray"})
+        .attr("cy", function(d) {return yScale(d.y)})
+        .style("fill", function(d) {return d.x%2 == 1 ? "#E64949" : "lightgray"})
 }
 
 function proximity() {
@@ -210,8 +222,8 @@ function proximity() {
         .transition()
         .duration(500)
         .attr("cx", function(d) {return d.x < 2 ? xScale(d.x) : xScale(d.x) + 45})
-        .attr("cy", function(d) {return xScale(d.y)})
-        .style("fill", function(d) {return d.x%2 == 1 ? "red" : "lightgray"})
+        .attr("cy", function(d) {return yScale(d.y)})
+        .style("fill", function(d) {return d.x%2 == 1 ? "#E64949" : "lightgray"})
 
         d3.selectAll("rect.enclosure")
         .transition()
@@ -225,8 +237,8 @@ function enclosure() {
         .transition()
         .duration(500)
         .attr("cx", function(d) {return d.x < 2 ? xScale(d.x) : xScale(d.x) + 45})
-        .attr("cy", function(d) {return xScale(d.y)})
-        .style("fill", function(d) {return d.x%2 == 1 ? "red" : "lightgray"});
+        .attr("cy", function(d) {return yScale(d.y)})
+        .style("fill", function(d) {return d.x%2 == 1 ? "#E64949" : "lightgray"});
 
         d3.selectAll("rect.enclosure")
         .transition()
