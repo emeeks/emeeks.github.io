@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body{
+  width: 900px;
+  margin: 0px auto;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#container, #container2{
+  position: relative;
+  width: 100%;
+  overflow: auto;
+}
+
+#sections, #sections2{
+  width: 340px;
+  float: left;
+}
+
+#sections > div, #sections2 > div{
+  background: white;
+  opacity: .2;
+  margin-bottom:120px;
+}
+
+#sections > div.graph-scroll-active, #sections2 > div.graph-scroll-active{
+  opacity: 1;
+}
+
+
+#graph, #graph2{
+  float: left;
+  margin-left: 40px;
+}
+
+#graph.graph-scroll-fixed, #graph2.graph-scroll-fixed{
+  position: fixed;
+  top: 0px;
+  margin-left: 380px;
+}
+
+#graph.graph-scroll-below, #graph2.graph-scroll-below {
+  position: absolute;
+  bottom: 0px;
+  margin-left: 380px;
+}
+
+h1{
+  margin: 50px 50px 0;
+}
+
+#title {
+
+}
+
+#subtitle {
+  color: #565656;
+  text-align: center;
+}
+
+h1, h3{
+  text-align: center;
+}
+
+#author {
+  color: darkgray;
+}
+
+.mono{
+  font-family: monospace;
+}
+
+svg{
+  background-color: #eee;
+}
+
+</style>
+<body>
+<h1 id="title">Gestalt Principles for Data Visualization</h1>
+<h2 id="subtitle">Similarity, Proximity & Enclosure</h2>
+<div id='container'>
+  <div id='sections'>
+
+    <div>
+      <h3>Introduction</h3>
+      <p>At a recent talk about the use of Sankey diagrams, I offered up a data visualization quiz that challenged the audience to define several gestalt principles based solely on representative figures. This lead to my approach to data visualization being described as "academic" in opposition, I would imagine, to a "pragmatic" approach that focuses on best practices and prior art evidenced by the growing library of data visualization books and 2-day seminars.</p>
+      <p>But let me suggest that gestalt is very much a pragmatic aspect of creating data visualization, in fact a necessary aspect if you plan to do more than simple bar and line charts. Below is an exploration of some of the most simple gestalt principles, how they operate and how they might act in tandem and in opposition with each other, as well as some general gestures toward how gestalt may already be influencing the way that more complex data visualization is being created.</p>
+
+    </div>
+
+    <div>
+      <h3>Similarity</h3>
+      <p>The most commonly known gestalt principle is that graphical elements with shared visual properties will be considered in the same group. Here we see the use of color similarity to indicate two classes of elements: the red ones and the gray ones. This could have also utilized shared symbols (for instance leveraging <span class='mono'>d3.svg.symbol</span> or the like) to show shared category.</p>
+      <p>While gestalt principles themselves are important to crafting effective data visualization, I think the gestalt gaze is equally important. Once we begin to formalize how we are using graphical features to indicate category, quantity, or topology, we also begin to notice features that unintentionally convey meaning. There are ambiguating factors already at play in our figure: there are implied columns in our figure, that seem to indicate 8 other groups. The color red, because of its hue, implies activation, while the subdued gray implies deactivation.</p>
+    </div>
+
+    <div>
+      <h3>Proximity</h3>
+      <p>A graphical element being close to another graphical element is a strong indication of similarity. The circles on the right have been split into two groups based simply by making the 10 circles on the left closer to each other than the 30 circles on the right.</p> 
+      <p>We don't typically think that bars in a bar chart are similar simply because they are next to each other, nor do we assume slices in a pie chart are similar to each other because they are neighbors, but that's actually what's being conveyed. Clean chart design that groups bars into categories or sorts them by descending or ascending values works because it aligns the chart to accord with what the reader visually expects (that things near each other are more similar to each other).</p>
+      <p>One major challenge of deploying more complex data visualization methods, such as force-directed networks, sankey diagrams, or circle-packing, is that proximity does not mean similarity. This spatial problem is difficult to solve, especially with complex datasets, and must be planned for in deploying data visualization.</p>
+    </div>
+
+    <div>
+      <h3>Enclosure</h3>
+      <p>The use of enclosure--surrounding a group of related elements with a visual element--is not a common technique in data visualization. This is remarkable given how powerful enclosure is. Here we see enclosure alongside similarity and proximity and providing the strongest visual signal.</p>
+      <p>Enclosure is less common in procedural data visualization because it's hard to compute a clean, effective border around a group of elements that are being arranged by an algorithm. There are useful techniques, such as <span class='mono'>d3.geom.hull</span> for computing a convex hull around a set of points on a plane, but it can be hard to deploy. Constraint-based graph drawing, like that found in cola.js, accounts for groups in its algorithm, which allows for <a target="_blank" href="http://marvl.infotech.monash.edu/webcola/examples/sucrosebreakdown.html">more effective use of enclosure in network visualization</a>.</p>
+    </div>
+
+  </div>
+
+  <div id='graph'></div>
+</div>
+
+<h3 id='author'>Elijah Meeks - March 2015</h3>
+</body>
+
+
+<script src="d3.v3.js"></script>
+<script src="graph-scroll.js"></script>
+<script>
+
+var width = 500,
+    height = 450,
+    r = 40;
+
+var xScale = d3.scale.linear().domain([0,10]).range([40,560]);
+
+var svg = d3.select('#graph')
+    .append('svg')
+    .attr({width: width, height: height})
+
+    svg.selectAll("circle")
+      .data(d3.range(50).map(function(d,i) {return {x: i%8, y: Math.floor(i/10)}}))
+      .enter()
+      .append("circle")
+      .attr("cx", function(d) {return xScale(d.x)})
+      .attr("cy", function(d) {return xScale(d.y)})
+      .attr("r", 15)
+      .style("fill", "lightgray")
+      .style("stroke", "black")
+      .style("stroke-width", "1px");
+
+    svg.selectAll("rect")
+      .data([0,1])
+      .enter()
+      .append("rect")
+      .attr("class", "enclosure")
+      .attr("height", 250)
+      .attr("width", function(d,i) {return i == 0 ? 190 : 250})
+      .attr("x", function(d,i) {return i == 0 ? 20 : 220})
+      .attr("y", 20)
+      .attr("ry", 10)
+      .style("fill", "none")
+      .style("stroke", "black")
+      .style("stroke-width", "3px")
+      .style("stroke-opacity", 0);
+
+
+var colors = ['orange', 'purple', 'steelblue', 'black']
+var gs = graphScroll()
+    .container(d3.select('#container'))
+    .graph(d3.selectAll('#graph'))
+    .sections(d3.selectAll('#sections > div'))
+    .on('active', function(i){
+      switch(i) {
+        case 0:
+        base();
+        break;
+        case 1:
+        similarity();
+        break;
+        case 2:
+        proximity();
+        break;
+        case 3:
+        enclosure();
+        break;
+      }
+
+    })
+
+
+d3.select('#source')
+    .style({'margin-bottom': window.innerHeight - 500 + 'px', padding: '100px'})
+
+function base() {
+        d3.selectAll("circle")
+        .transition()
+        .duration(500)
+        .attr("cx", function(d) {return xScale(d.x)})
+        .attr("cy", function(d) {return xScale(d.y)})
+        .style("fill", "lightgray")
+}
+
+function similarity() {
+        d3.selectAll("circle")
+        .transition()
+        .duration(500)
+        .attr("cx", function(d) {return xScale(d.x)})
+        .attr("cy", function(d) {return xScale(d.y)})
+        .style("fill", function(d) {return d.x%2 == 1 ? "red" : "lightgray"})
+}
+
+function proximity() {
+        d3.selectAll("circle")
+        .transition()
+        .duration(500)
+        .attr("cx", function(d) {return d.x < 2 ? xScale(d.x) : xScale(d.x) + 45})
+        .attr("cy", function(d) {return xScale(d.y)})
+        .style("fill", function(d) {return d.x%2 == 1 ? "red" : "lightgray"})
+
+        d3.selectAll("rect.enclosure")
+        .transition()
+        .duration(500)
+        .style("stroke-opacity", 0);
+
+}
+
+function enclosure() {
+        d3.selectAll("circle")
+        .transition()
+        .duration(500)
+        .attr("cx", function(d) {return d.x < 2 ? xScale(d.x) : xScale(d.x) + 45})
+        .attr("cy", function(d) {return xScale(d.y)})
+        .style("fill", function(d) {return d.x%2 == 1 ? "red" : "lightgray"});
+
+        d3.selectAll("rect.enclosure")
+        .transition()
+        .duration(500)
+        .style("stroke-opacity", 1);
+
+}
+
+
+</script>
