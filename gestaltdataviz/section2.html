@@ -1,0 +1,452 @@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body{
+  width: 900px;
+  margin: 0px auto;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#container, #container2{
+  position: relative;
+  width: 100%;
+  overflow: auto;
+}
+
+#sections, #sections2{
+  width: 340px;
+  float: left;
+}
+
+#sections > div, #sections2 > div{
+  background: white;
+  opacity: .2;
+  margin-bottom:120px;
+}
+
+#sections > div.graph-scroll-active, #sections2 > div.graph-scroll-active{
+  opacity: 1;
+}
+
+
+#graph, #graph2{
+  float: left;
+  margin-left: 40px;
+}
+
+#graph.graph-scroll-fixed, #graph2.graph-scroll-fixed{
+  position: fixed;
+  top: 0px;
+  margin-left: 380px;
+}
+
+#graph.graph-scroll-below, #graph2.graph-scroll-below {
+  position: absolute;
+  bottom: 0px;
+  margin-left: 380px;
+}
+
+h1{
+  margin: 50px 50px 0;
+}
+
+#title {
+
+}
+
+#subtitle {
+  color: #565656;
+  text-align: center;
+}
+
+h1, h3{
+  text-align: center;
+}
+
+#author {
+  color: darkgray;
+  height: 300px;
+}
+
+.mono{
+  font-family: monospace;
+}
+
+svg{
+  background-color: #eee;
+}
+
+</style>
+<body>
+<h1 id="title">Gestalt Principles for Data Visualization</h1>
+<h2 id="subtitle">Common Fate, Parralelism and Connectedness</h2>
+<div id='container'>
+  <div id='sections'>
+
+    <div>
+      <h3>Introduction</h3>
+      <p>Movement and implication of movement can improve the ability of readers to identify patterns being displayed but can also damage that ability if not mindfully implemented. Understanding the gestalt principles related to movement and implied movement is critical to well-crafted data visualization. The basic symbols in use throughout these examples are simply lines and circles but how they move and their angle and their visual relationship with each other will produce different visual structures.</p>
+      <p>Even in charts that don't utilize motion, these principles are important. Graphical primitives such as lines have slope, a sort of visual potential energy, and can mean one kind of relationship in the context of a line chart and a very different kind in the context of a dendrogram or network visualization. Well-designed charts account for unintended disruption of knowledge transmission due to the graphics being interpreted in one way when the chart utilizes them in another.</p>
+
+    </div>
+
+    <div>
+      <h3>Common Fate</h3>
+      <p>Of the traditional gestalt principles, common fate stands out because it refers to visual structure apparent in animated graphics. When we see shapes moving, we group together the shapes that are moving in the same direction and speed.</p>
+      <p>In the case of this example, this signal is accurate. If you examined the code, you'd see there are two groups of circles being called and animated. If it were the case that the movement of circles is accidentally aligned, or external factors not relevant to the data caused shapes to be moved as a group, then this would be a false (and strong) visual signal being sent to a reader.</p>
+    </div>
+
+    <div>
+      <h3>Parralelism</h3>
+      <p>If we draw the paths of the animated circles, we see another principle available for mis/use. Parallelism can be thought of as the fossilized animation of elements, as lines with the same or very similar slopes are visually associated as being part of the same group. Here we see two groups, mirroring the same two groups from the common fate example.*</p>
+      <p>Charts using lines in a traditional way--to show time series--see paralellism always working in their favor. Shared slopes are a meaningful grouping, as it indicates a shared pattern of increase or decrease over time. It's particularly prominent in slopegraphs, which rely on parallelism as their main grouping method. If this were a slopegraph, then we would see three things decreasing in value at the same rate while two things increase in value at the same rate, and those groups would be more meaningful than the fact that two of the datapoints share almost the same destination (the third and fourth lines).</p>
+      <p>But parallelism is also a key principle to account for in other methods of data visualization. That's because so many charts use lines to indicate relationships between elements. In these cases, a line is a topological indicator, showing that two elements are explicitly connected.</p>
+      <p style="font-size:11px;">* We might also see a triangle with radiating bars (an unfortunate side effect of the size of the example). The ability to visually shift between two groups of three parallel lines and the triangle with radiating bars points to importance of multistability in data visualization, a much more complex topic for a later time.</p>
+    </div>
+
+    <div>
+      <h3>Connectedness</h3>
+      <p>To undestand this better, we need to save our lines and bring back our circles and now bring a few more circles for the ends of the lines that are lacking circles. This effectively merges the two lines and three circles in the lower middle of the screen via the principle of connectedness.<p>
+      <p>There now exist four shapes, three of which are made up of two circles and a line and one shape that is made up of three circles and two lines. This could be a very simple network diagram showing people connected to friends. Or it might be a diagram showing where minerals are extracted and where they're refined. In either case, the strong signal coming from the layout of the lines and circles makes a reader want to assume that circles near each other are somehow related and that those connected by similarly sloped lines are related.</p>
+      <p>For this reason, unless there's an unambiguous directionality to a visualization of connectedness, the elements are typically not laid out in discrete steps like this. A genealogical chart, for example, would make sense having steps such as these. For data visualization of networks where there are no obvious steps, a force-directed network layout is a common choice.</p>
+    </div>
+  </div>
+    <div id='graph'></div>
+  </div>
+</div>
+
+<div id='container2'>
+  <div id='sections2'>
+    <div>
+      <h3>Networks</h3>
+      <p>Network visualization is roundly criticized in part because it contains so much noise from these principles. While the basic concept of having symbols like circles represent nodes and lines representing connections between nodes seems to be an attractive one, readers are often befuddled by anything more than a simple visual representation of a network. One primary reason for this is that proximity does not necessarily indicate similarity in network visualization. But most of the other difficulties stem from the principles described in this essay.</p>
+      <p>Connectedness is problematic in network visualizations because some nodes are placed above unrelated edges. False parallelism signals are always at play because node position is only meaningful in a relative sense (this is not a geographic map where position is latitude and longitude) and so lines having the same angles are more likely not related to each other rather than related. During the animation phase of force-directed network layouts, the trajectory of nodes might correctly indicate groups (when connected nodes are dragged along for the ride with a more central node they are conncted to) but in complicated networks with many factors at play, can also indicate false structures.</p> 
+      </div>
+
+    <div>
+      <h3>Complex Edges</h3>
+      <p>Adjustment of the settings of the force algorithm can help combat problems brought on by connectedness. Parallelism is less easily handled. One possible solution is to represent connections with curved edges instead of straight lines. Sometimes curved edges also encode the directionality of the connection.</p>
+      <p>A problem of curved edges is that it increases the length of the lines and therefore increases the graphical space being given to lines on a chart. A line on a dendrogram or network visualization that is stretched out across the screen is not necessarily more important or powerful than a line that is very short. In fact, it is more commonly the case that these lines are less powerful, though possibly more significant due to their representing a connection between otherwise disparate elements. Curving the edges further increases the amount of ink per datapoint.</p>
+      <p>Edge bundling provides an even more sophisticated method for disrupting parallelism and better aligning the graphical display of topological relationship with the data. It also avoids the problem of increasing graphical signal of edges by collapsing them into shared arteries. Unfortunately, like many complex data visualization methods, edge bundling is both difficult and expensive to implement.</p>
+      </div>
+
+    <div>
+      <h3>Conclusion</h3>
+      <p>Complex data visualization methods often use motion and explicit graphical representations of connectedness. In those charts, remember that the sum is not greater than the parts but rather the sum is other than the parts. The individual graphical elements, and the subaltern wholes that those elements create due to connection, parralelism or common fate (or due to other gestalt principles) will always exist for a reader. These will prove attractive escapes from trying to understand the overall pattern if it is presented poorly, further increasing the challenge of using complex data visualization. This is why you see readers fixate on a particularly interesting cluster of a network visualization, or a prominent path in a dendrogram, and declare it to be valuable and powerful while other readers insist that the whole thing is an unreadable "hairball".</p>
+      </div>
+    </div>
+    <div id='graph2'></div>
+  </div>
+
+
+</div>
+
+<h3 id='author'>Elijah Meeks - April 2015</h3>
+</body>
+
+
+<script src="d3.v3.js"></script>
+<script src="graph-scroll.js"></script>
+<script>
+
+var width = 490,
+    height = 420;
+
+var xScale = d3.scale.linear().domain([0,10]).range([40,560]);
+var yScale = d3.scale.linear().domain([0,10]).range([40,860]);
+
+var svg = d3.select('#graph')
+    .append('svg')
+    .attr({width: width, height: height})
+
+    svg.selectAll("circle")
+      .data(d3.range(5).map(function(d,i) {return {x: 3, y: i%8}}))
+      .enter()
+      .append("circle")
+      .attr("class", "fate")
+      .attr("r", 10)
+      .style("fill", "lightgray")
+      .style("stroke", "black")
+      .style("stroke-width", "1px");
+
+var colors = ['orange', 'purple', 'steelblue', 'black'];
+
+var gs = graphScroll()
+    .container(d3.select('#container'))
+    .graph(d3.selectAll('#graph'))
+    .sections(d3.selectAll('#sections > div'))
+    .on('active', function(i){
+      console.log("Active", i);
+      switch(i) {
+        case 0:
+        base();
+        break;
+        case 1:
+        commonFate();
+        break;
+        case 2:
+        parralelism();
+        break;
+        case 3:
+        connectedness();
+        break;
+      }
+
+    })
+
+
+function base() {
+
+        svg.selectAll("circle.fate")
+        .transition("position")
+        .duration(500)
+        .attr("cx", function(d) {return xScale(d.x)})
+        .attr("cy", function(d) {return yScale(d.y)})
+        .style("fill", "lightgray")
+        .style("stroke", "black")
+
+        svg.selectAll("line.parralelism")
+        .transition()
+        .duration(500)
+        .style("opacity", 0)
+
+}
+
+function commonFate() {
+        svg.selectAll("circle.connectedness")
+        .transition("opacity")
+        .duration(500)
+        .style("opacity", 0);
+
+        svg.selectAll("line.parralelism")
+        .transition()
+        .duration(500)
+        .style("opacity", 0)
+
+        svg.selectAll("line.parralelism")
+        .transition()
+        .duration(500)
+        .style("opacity", 0)
+
+        svg.selectAll("circle.fate")
+        .style("opacity", 1)
+        .transition("position")
+        .duration(100)
+        .style("fill", "#C2A3FF")
+        .style("stroke", "#C2A3FF")
+        .each("end", to)
+
+      function to() {
+        svg.selectAll("circle.fate")
+        .transition("position")
+        .ease("linear")
+        .duration(2500)
+        .attr("cx", function(d) {return d.y > 2 ? xScale(d.x) - 100 : xScale(d.x) + 100})
+        .attr("cy", function(d) {return d.y > 2 ? yScale(d.y) + 40 : yScale(d.y) + 40})
+        .each("end", fro)
+
+      }
+      
+      function fro() {
+        svg.selectAll("circle.fate")
+        .transition("position")
+        .ease("linear")
+        .duration(2500)
+        .attr("cx", function(d) {return d.y > 2 ? xScale(d.x) + 100 : xScale(d.x) - 100})
+        .attr("cy", function(d) {return d.y > 2 ? yScale(d.y) - 40 : yScale(d.y) - 40})
+        .each("end", to)
+
+      }
+
+}
+
+function parralelism() {
+
+        svg.selectAll("circle")
+          .style("fill", "#C2A3FF")
+          .style("stroke", "#C2A3FF");
+
+        svg.selectAll("circle.connectedness")
+        .transition("opacity")
+        .duration(500)
+        .style("opacity", 0);
+
+        lineData = d3.range(5).map(function(d) {return {x: 3, y: d}});
+
+        svg.selectAll("line.parralelism")
+        .data(lineData)
+        .enter()
+        .insert("line", "circle")
+        .attr("class", "parralelism")
+        .style("stroke", "black")
+        .style("stroke-width", "1px")
+        .style("opacity", 0)
+        .attr("x1", function(d) {return d.y < 3 ? xScale(d.x) + 100 : xScale(d.x) - 100})
+        .attr("x2", function(d) {return d.y < 3 ? xScale(d.x) - 100 : xScale(d.x) + 100})
+        .attr("y1", function(d) {return d.y < 3 ? yScale(d.y) + 40 : yScale(d.y) + 40})
+        .attr("y2", function(d) {return d.y < 3 ? yScale(d.y) - 40 : yScale(d.y) - 40});
+
+        svg.selectAll("line.parralelism")    
+        .transition("opacity")
+        .duration(500)
+        .style("opacity", 1)
+
+        svg.selectAll("circle.fate")
+        .transition("position")
+        .ease("linear")
+        .duration(2500)
+        .attr("cx", function(d) {return d.y > 2 ? xScale(d.x) + 100 : xScale(d.x) - 100})
+        .attr("cy", function(d) {return d.y > 2 ? yScale(d.y) - 40 : yScale(d.y) - 40})
+        .each("end", function() {svg.selectAll("circle").transition("opacity").duration(500).style("opacity", 0)})
+
+}
+
+function connectedness() {
+        parralelism();
+
+        var connectedData = d3.range(4)
+        .map(function(d,i) {
+          if (i < 2) {
+            return {x: 3, y: i}
+          }
+          return {x: 3, y: i + 1} })
+
+        svg.selectAll("circle.fate")
+        .transition("position")
+        .duration(50)
+        .attr("cx", function(d) {return d.y > 2 ? xScale(d.x) + 100 : xScale(d.x) - 100})
+        .attr("cy", function(d) {return d.y > 2 ? yScale(d.y) - 40 : yScale(d.y) - 40})
+        .transition("opacity")
+        .duration(500)
+        .style("opacity", 1);
+
+        svg.selectAll("circle.connectedness")
+        .data(connectedData)
+        .enter()
+        .append("circle")
+        .attr("class", "connectedness")
+        .style("fill", "#C2A3FF")
+        .style("stroke", "#C2A3FF")
+        .style("opacity", 0)
+        .attr("class", "connectedness")
+        .attr("r", 10);
+
+        svg.selectAll("line")
+        .filter(function(d) {return d.y == 2})
+        .transition()
+        .delay(500)
+        .transition()
+        .duration(500)
+        .style("stroke-width", "5px")
+        .transition()
+        .duration(500)
+        .style("stroke-width", "1px")
+        .each("end", makeMoreEndPoints);
+
+        function makeMoreEndPoints() {
+          svg.selectAll("circle.connectedness")
+            .attr("cx", function(d) {return d.y > 2 ? xScale(d.x) - 100 : xScale(d.x) + 100})
+            .attr("cy", function(d) {return d.y > 2 ? yScale(d.y) + 40 : yScale(d.y) + 40})
+            .style("opacity", 0)
+            .transition("opacity")
+            .delay(500)
+            .transition("opacity")
+            .duration(1000)
+            .style("opacity", 1);
+
+        }
+
+}
+
+var svg2 = d3.select('#graph2')
+  .append('svg')
+    .attr({width: width, height: height})
+
+function randomSource() {
+  return Math.floor(Math.random() * 10) + 10;
+}
+
+function randomTarget() {
+  return Math.floor(Math.random() * 10);
+}
+
+var nodes = d3.range(20).map(function(d) {return {x: 250, y: 250}});
+var edges = d3.range(20).map(function(d) {return {source: nodes[randomSource()], target: nodes[randomTarget()]}});
+
+var curvedEdges = false;
+
+var force = d3.layout.force()
+            .gravity(.1)
+            .charge(-300)
+            .size([500,500])
+            .nodes(nodes)
+            .links(edges)
+            .on("tick", forceTick);
+
+svg2.selectAll("path").data(edges)
+  .enter()
+  .append("path")
+  .attr("class", "edge")
+  .style("fill", "none")
+  .style("stroke", "black")
+  .style("stroke-width", "1px");
+
+  svg2.selectAll("circle").data(nodes)
+    .enter()
+    .append("circle")
+    .attr("class", "node")
+    .attr("r", 10)
+    .style("fill", "#C2A3FF")
+    .style("stroke", "#C2A3FF")
+    .call(force.drag());
+
+function forceTick() {
+  svg2.selectAll("circle.node")
+    .attr("cx", function(d) {return d.x})
+    .attr("cy", function(d) {return d.y});
+
+  if (curvedEdges) {
+    svg2.selectAll("path.edge")
+    .attr("d", linkArc)
+
+  }
+  else {
+    svg2.selectAll("path.edge")
+    .attr("d", function(d) {return "M " + d.source.x+","+d.source.y + " " +d.target.x+","+d.target.y})
+  }
+}
+
+var gs2 = graphScroll()
+    .container(d3.select('#container2'))
+    .graph(d3.selectAll('#graph2'))
+    .sections(d3.selectAll('#sections2 > div'))
+    .on('active', function(i){
+      console.log("Active Two " + i);
+      switch(i) {
+        case 0:
+        curvedEdges = false;
+        force.start();
+        break;
+        case 1:
+        curvedEdges = true;
+        force.start();
+        break;
+        case 2:
+        break;
+      }
+    })
+
+function linkArc(d) {
+  var dx = d.target.x - d.source.x,
+      dy = d.target.y - d.source.y,
+      dr = Math.sqrt(dx * dx + dy * dy);
+  return "M" + d.source.x + "," + d.source.y + "A" + dr + "," + dr + " 0 0,1 " + d.target.x + "," + d.target.y;
+}
+
+d3.select('#source')
+    .style({'margin-bottom': window.innerHeight - 500 + 'px', padding: '100px'})
+
+
+</script>
