@@ -81,7 +81,7 @@ svg{
 </style>
 <body>
 <h1 id="title">Gestalt Principles for Data Visualization</h1>
-<h2 id="subtitle">Common Fate, Parralelism and Connectedness</h2>
+<h2 id="subtitle">Common Fate, parallelism and Connectedness</h2>
 <div id='container'>
   <div id='sections'>
 
@@ -99,9 +99,9 @@ svg{
     </div>
 
     <div>
-      <h3>Parralelism</h3>
+      <h3>Parallelism</h3>
       <p>If we draw the paths of the animated circles, we see another principle available for mis/use. Parallelism can be thought of as the fossilized animation of elements, as lines with the same or very similar slopes are visually associated as being part of the same group. Here we see two groups, mirroring the same two groups from the common fate example.*</p>
-      <p>Charts using lines in a traditional way--to show time series--see paralellism always working in their favor. Shared slopes are a meaningful grouping, as it indicates a shared pattern of increase or decrease over time. It's particularly prominent in slopegraphs, which rely on parallelism as their main grouping method. If this were a slopegraph, then we would see three things decreasing in value at the same rate while two things increase in value at the same rate, and those groups would be more meaningful than the fact that two of the datapoints share almost the same destination (the third and fourth lines).</p>
+      <p>Charts using lines in a traditional way--to show time series--see parallelism always working in their favor. Shared slopes are a meaningful grouping, as it indicates a shared pattern of increase or decrease over time. It's particularly prominent in slopegraphs, which rely on parallelism as their main grouping method. If this were a slopegraph, then we would see three things decreasing in value at the same rate while two things increase in value at the same rate, and those groups would be more meaningful than the fact that two of the datapoints share almost the same destination (the third and fourth lines).</p>
       <p>But parallelism is also a key principle to account for in other methods of data visualization. That's because so many charts use lines to indicate relationships between elements. In these cases, a line is a topological indicator, showing that two elements are explicitly connected.</p>
       <p style="font-size:11px;">* We might also see a triangle with radiating bars (an unfortunate side effect of the size of the example). The ability to visually shift between two groups of three parallel lines and the triangle with radiating bars points to importance of multistability in data visualization, a much more complex topic for a later time.</p>
     </div>
@@ -134,7 +134,7 @@ svg{
 
     <div>
       <h3>Conclusion</h3>
-      <p>Complex data visualization methods often use motion and explicit graphical representations of connectedness. In those charts, remember that the sum is not greater than the parts but rather the sum is other than the parts. The individual graphical elements, and the subaltern wholes that those elements create due to connection, parralelism or common fate (or due to other gestalt principles) will always exist for a reader. These will prove attractive escapes from trying to understand the overall pattern if it is presented poorly, further increasing the challenge of using complex data visualization. This is why you see readers fixate on a particularly interesting cluster of a network visualization, or a prominent path in a dendrogram, and declare it to be valuable and powerful while other readers insist that the whole thing is an unreadable "hairball".</p>
+      <p>Complex data visualization methods often use motion and explicit graphical representations of connectedness. In those charts, remember that the sum is not greater than the parts but rather the sum is other than the parts. The individual graphical elements, and the subaltern wholes that those elements create due to connection, parallelism or common fate (or due to other gestalt principles) will always exist for a reader. These will prove attractive escapes from trying to understand the overall pattern if it is presented poorly, further increasing the challenge of using complex data visualization. This is why you see readers fixate on a particularly interesting cluster of a network visualization, or a prominent path in a dendrogram, and declare it to be valuable and powerful while other readers insist that the whole thing is an unreadable "hairball".</p>
       </div>
     </div>
     <div id='graph2'></div>
@@ -187,7 +187,7 @@ var gs = graphScroll()
         commonFate();
         break;
         case 2:
-        parralelism();
+        parallelism();
         break;
         case 3:
         connectedness();
@@ -207,7 +207,7 @@ function base() {
         .style("fill", "lightgray")
         .style("stroke", "black")
 
-        svg.selectAll("line.parralelism")
+        svg.selectAll("line.parallelism")
         .transition()
         .duration(500)
         .style("opacity", 0)
@@ -220,12 +220,12 @@ function commonFate() {
         .duration(500)
         .style("opacity", 0);
 
-        svg.selectAll("line.parralelism")
+        svg.selectAll("line.parallelism")
         .transition()
         .duration(500)
         .style("opacity", 0)
 
-        svg.selectAll("line.parralelism")
+        svg.selectAll("line.parallelism")
         .transition()
         .duration(500)
         .style("opacity", 0)
@@ -262,7 +262,7 @@ function commonFate() {
 
 }
 
-function parralelism() {
+function parallelism() {
 
         svg.selectAll("circle")
           .style("fill", "#C2A3FF")
@@ -275,11 +275,11 @@ function parralelism() {
 
         lineData = d3.range(5).map(function(d) {return {x: 3, y: d}});
 
-        svg.selectAll("line.parralelism")
+        svg.selectAll("line.parallelism")
         .data(lineData)
         .enter()
         .insert("line", "circle")
-        .attr("class", "parralelism")
+        .attr("class", "parallelism")
         .style("stroke", "black")
         .style("stroke-width", "1px")
         .style("opacity", 0)
@@ -288,7 +288,7 @@ function parralelism() {
         .attr("y1", function(d) {return d.y < 3 ? yScale(d.y) + 40 : yScale(d.y) + 40})
         .attr("y2", function(d) {return d.y < 3 ? yScale(d.y) - 40 : yScale(d.y) - 40});
 
-        svg.selectAll("line.parralelism")    
+        svg.selectAll("line.parallelism")    
         .transition("opacity")
         .duration(500)
         .style("opacity", 1)
@@ -304,7 +304,7 @@ function parralelism() {
 }
 
 function connectedness() {
-        parralelism();
+        parallelism();
 
         var connectedData = d3.range(4)
         .map(function(d,i) {
