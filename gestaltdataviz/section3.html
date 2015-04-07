@@ -121,7 +121,7 @@ svg{
 
     <div>
       <h3>Conclusion</h3>
-      <p>These examples relied on network visualization, but the same problems apply in hierarchical data visualization like circle-packing and dendrograms. Such layouts are designed to efficiently pack shapes and don't generally account for a fixed order or positioning. In circle packs, a reader will expect that circles are in the same order and in the relatively same position if they represent the same category of nested data. In Sankey diagrams a node being near another node implies similarity. Accounting for the mixed signals of proximity and past experience (both in general and in particular when dealing with dynamic charts) is a distinct challenge in pushing for the adoption of complex data visualization.<p>
+      <p>It was easiest to demonstrate these principles with network visualization, but the same problems apply in hierarchical data visualization like circle-packing and dendrograms. Such layouts are designed to efficiently pack shapes and don't generally account for a fixed order or positioning. In circle packs, a reader will expect that circles are in the same order and in the relatively same position if they represent the same category of nested data. In Sankey diagrams a node being near another node implies similarity. Accounting for the mixed signals of proximity and past experience (both in general and in particular when dealing with dynamic charts) is a distinct challenge in pushing for the adoption of complex data visualization.<p>
     </div>
       <div style="opacity:1;">
         <h3 id='author'>Elijah Meeks - April 2015</h3>
@@ -369,9 +369,9 @@ function randomizeLayout() {
     node.lastX = node.x;
     node.lastY = node.y;
     node.x = Math.random() * width;
-    node.px = Math.random() * width;
+    node.px = node.x;
     node.y = Math.random() * height;
-    node.py = Math.random() * height;
+    node.py = node.y;
   })
   force.start();
 }
