@@ -264,7 +264,7 @@ function highlightProblemNodes() {
   svg.selectAll("circle.node")
     .style("fill", function(d) {return spResults.problemNodes.indexOf(d.id) > -1 ? "#A31947" : "#C2A3FF"});
 
-    d3.select("#spExplanation").html("Nodes that are " + (spResults.egoSize + 1) + " steps away from other nodes that are closer than " + (spResults.distance - 20) + " pixels on-screen.");
+    d3.select("#spExplanation").html("Red nodes are " + (spResults.egoSize + 1) + " steps away from other nodes that are closer than " + (spResults.distance - 20) + " pixels on-screen.");
 
     if (memory == true) {
       showDifference();
