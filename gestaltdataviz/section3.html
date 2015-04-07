@@ -1,0 +1,418 @@
+
+<!DOCTYPE html>
+
+<head>
+  <title>Gestalt Principles for Data Visualization: Proximity and Past Experience with Network Visualization</title>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:creator" content="@Elijah_Meeks">
+  <meta name="twitter:title" content="Gestalt Principles for Data Visualization: Proximity and Past Experience with Network Visualization">
+  <meta name="twitter:description" content="How proximity and past experience interfere with understanding network visualization.">
+  <meta name="twitter:image:src" content="http://emeeks.github.io/gestaltdataviz/gestalt3.png">
+</head>
+<meta charset="utf-8">
+<style>
+
+body{
+  width: 900px;
+  margin: 0px auto;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#container, #container2{
+  position: relative;
+  width: 100%;
+  overflow: auto;
+}
+
+#sections, #sections2{
+  width: 340px;
+  float: left;
+}
+
+#sections > div, #sections2 > div{
+  background: white;
+  opacity: .2;
+  margin-bottom:120px;
+}
+
+#sections > div.graph-scroll-active, #sections2 > div.graph-scroll-active{
+  opacity: 1;
+}
+
+
+#graph, #graph2{
+  float: left;
+  margin-left: 40px;
+}
+
+#graph.graph-scroll-fixed, #graph2.graph-scroll-fixed{
+  position: fixed;
+  top: 0px;
+  margin-left: 380px;
+}
+
+#graph.graph-scroll-below, #graph2.graph-scroll-below {
+  position: absolute;
+  bottom: 0px;
+  margin-left: 380px;
+}
+
+h1{
+  margin: 50px 50px 0;
+}
+
+#title {
+
+}
+
+#subtitle {
+  color: #565656;
+  text-align: center;
+}
+
+h1, h3{
+  text-align: center;
+}
+
+#author {
+  color: darkgray;
+  height: 1200px;
+}
+
+.mono{
+  font-family: monospace;
+}
+
+svg{
+  background-color: #eee;
+  margin-top: 20px;
+}
+
+</style>
+<body>
+<h1 id="title">Gestalt Principles for Data Visualization</h1>
+<h2 id="subtitle">Proximity and Past Experience with Network Visualization</h2>
+<div id='container'>
+  <div id='sections'>
+
+    <div>
+      <h3>Introduction</h3>
+      <p>Position of graphical elements in charts cannot be left to chance, even when position does not directly encode a dimension of the data. Contrast the scatterplot, where the XY position of a symbol is directly related to the two dimensions of data being analyzed, with the force-directed network, where the XY position of a symbol is based on a merchanical simulation that pushes disconnected nodes away from each other and pulls connected nodes toward each other. Such a network diagram, like the kind on the right, embodies the problems of position in charts, but these issues are shared by any chart that lays out data based on principles other than direct representation of quantitative dimensions.</p>
+      <p>Force-directed networks are one of a multidude of methods of representing networks (or graphs). The circles represent some kind of actor or other object (typically referred to as nodes) and the lines (referred to as links or edges) indicate explicit connections between them. As the tension between nodes relaxes, the network finally stops laying out with the most optimized possible representation. You can click on and drag the nodes and see how the structure of the network self-organizes based on the competing push and pull simulated.</p>
+    </div>
+
+    <div>
+      <h3>Proximity</h3>
+      <p>Position in charts is problematic firstly because proximity indicates similarity. The basic philosophy of the force-directed network embraces this fact, and attempts to keep related nodes (that is, connected nodes) near each other. But too many connections and too much complexity invariably leads to unrelated nodes displayed visually closer to each other than they should be. In a network, all that matters is network distance: the number of steps from one node to another. Nodes that are entirely disconnected from each other, where no path can be drawn from one to the other, can be considered at an infinite distance as far as the network perspective is concerned. The only reason such disconnected parts of the network are kept on-screen is a canvas gravity built into the force-directed algorithm soley to counteract this.</p>
+      <p>This time, when the layout has finished running, some nodes will be highlighted in red. These red nodes are displayed on-screen in closer proximity than is warranted by their distance from each other on the network. Because this is a randomly generated network, and the force-directed algorithm can easily be perturbed to produce a slightly different final layout, the affected nodes and the distance will change.</p>
+      <p>You can try to drag nodes around and adjust the inaccuracy of the layout but, like a linoleum floor, this will not remove the spatial problem of visualizing networks, it will only at best reduce it or move it to a different part of the netowrk.</p>
+      <p id="spExplanation" style="font-weight:400;color:#A31947;">Once the network algorithm finishes, we can calculate the nodes that demonstrate this problem.</p>
+      <button onclick="randomizeLayout();">Again</button>
+    </div>
+
+    <div>
+      <h3>Past Experience</h3>
+      <p>Data visualization readers come to a chart with certain assumptions, and as they interact with a chart that is dynamic, they develop certain assumptions. Force-directed networks, like any layout that attempts to efficiently use on-screen space, can be non-deterministic in their results and this rightly confuses readers. The network on the right has had all of its nodes moved to random points and then the force-directed layout is re-run. The results, from exactly the same settings using exactly the same algorithm, is invariably different.</p>
+      <p>The principle of past experience is once again on the side of the reader, who expects that an accurate chart will look the same if the same parameters and the same data are put into. But even a reader familiar with the vagaries of force-directed layouts suffers when their experience with the very same network and the very same layout changes so much. Just how different can each layout of such a simple network actually be? The old network is kept in light green, and arrows are drawn to show the change in position from the last layout to the new one. A combination of mirroring, rotation, and randomization of where disconnected components are placed all leads to very different visual representations of the same system.</p>
+      <p>One way to begin to address this difficulty, as suggested by Katy Börner, is the use of a network base map. The force-directed layout algorithm is used in an initial phase to effectively represent a network and then it is frozen and any later filters only affect color, size and the existence of links and nodes. The problem with this approach is that it also runs afoul of past experience, since the presence or existence of nodes and edges does not merely affect the measurements of the data represented by those elements, it would affect the forces that were used to lay out the entire network.</p>
+      <p>A better approach would be to develop deterministic qualities of network layouts that account for rotation, direction and the placement of disconnected components. A curated force layout like that could also optimize based on the original position of nodes to prefer to maintain similar visual structure.</p>
+      <button onclick="randomizeLayout();">Again</button>
+    </div>
+
+    <div>
+      <h3>Conclusion</h3>
+      <p>These examples relied on network visualization, but the same problems apply in hierarchical data visualization like circle-packing and dendrograms. Such layouts are designed to efficiently pack shapes and don't generally account for a fixed order or positioning. In circle packs, a reader will expect that circles are in the same order if they represent the same category of nested data. In Sankey diagrams a node being near another node implies similarity. Accounting for the mixed signals of proximity and past experience (both in general and in particular when dealing with dynamic charts) is an immense challenge in these cases.<p>
+    </div>
+      <div style="opacity:1;">
+        <h3 id='author'>Elijah Meeks - April 2015</h3>
+      </div>
+  </div>
+    <div id='graph'></div>
+  </div>
+</div>
+
+
+</div>
+
+</body>
+
+
+<script src="d3.v3.js"></script>
+<script src="graph-scroll.js"></script>
+<script>
+
+var width = 490,
+    height = 420;
+
+var xScale = d3.scale.linear().domain([0,10]).range([40,760]);
+var yScale = d3.scale.linear().domain([0,10]).range([60,830]);
+
+var svg = d3.select('#graph')
+    .append('svg')
+    .attr({width: width, height: height});
+
+svg.append("defs").append("marker")
+  .attr("id", "arrowhead")
+            .attr("refX", 12)
+            .attr("refY", 6)
+            .attr("markerUnits", 'userSpaceOnUse')
+            .attr("markerWidth", 12)
+            .attr("markerHeight", 18)
+            .attr("orient", 'auto')
+            .append('path')
+            .style("fill", "#244700")
+            .style("fill-opacity", .5)
+            .attr("d", 'M 0 0 12 6 0 12 3 6');
+
+var colors = ['orange', 'purple', 'steelblue', 'black'];
+
+var memory = false;
+var calculateSpatialProblem = false;
+
+var gs = graphScroll()
+    .container(d3.select('#container'))
+    .graph(d3.selectAll('#graph'))
+    .sections(d3.selectAll('#sections > div'))
+    .on('active', function(i){
+      console.log("Active", i);
+      switch(i) {
+        case 0:
+        calculateSpatialProblem = false;
+        memory = false;
+        break;
+        case 1:
+        calculateSpatialProblem = true;
+        memory = false;
+        force.start();
+        break;
+        case 2:
+        calculateSpatialProblem = true;
+        memory = true;
+        randomizeLayout();
+        break;
+        case 3:
+      
+        break;
+        case 4:
+      
+        break;
+      }
+
+    })
+
+function randomSource() {
+  return Math.floor(Math.random() * 15) + 15;
+}
+
+function randomTarget() {
+  return Math.floor(Math.random() * 15);
+}
+
+var nodes = d3.range(30).map(function(d) {return {x: 250, y: 250, id: d}});
+var links = d3.range(30).map(function(d) {return {source: nodes[randomSource()], target: nodes[randomTarget()]}});
+
+var force = d3.layout.force()
+            .gravity(.1)
+            .charge(-300)
+            .size([500,500])
+            .nodes(nodes)
+            .links(links)
+            .on("tick", forceTick)
+            .on("end", highlightProblemNodes)
+            .on("start", cleanUpNetwork);
+
+svg.selectAll("path").data(links)
+  .enter()
+  .append("path")
+  .attr("class", "edge")
+  .style("fill", "none")
+  .style("stroke", "black")
+  .style("stroke-width", "1px");
+
+  svg.selectAll("circle").data(nodes)
+    .enter()
+    .append("circle")
+    .attr("class", "node")
+    .attr("r", 10)
+    .style("fill", "#C2A3FF")
+    .style("stroke", "#C2A3FF")
+    .call(force.drag());
+
+force.start();
+
+function forceTick() {
+  svg.selectAll("circle.node")
+    .attr("cx", function(d) {return d.x})
+    .attr("cy", function(d) {return d.y});
+
+
+    svg.selectAll("path.edge")
+    .attr("d", function(d) {return "M " + d.source.x+","+d.source.y + " " +d.target.x+","+d.target.y})
+
+}
+
+
+d3.select('#source')
+    .style({'margin-bottom': window.innerHeight - 500 + 'px', padding: '100px'})
+
+function highlightProblemNodes() {
+  if (!calculateSpatialProblem) {
+    return
+  }
+  var spResults = spatialProblem();
+
+  svg.selectAll("circle.node")
+    .style("fill", function(d) {return spResults.problemNodes.indexOf(d.id) > -1 ? "#A31947" : "#C2A3FF"});
+
+    d3.select("#spExplanation").html("Nodes that are " + (spResults.egoSize + 1) + " steps away from other nodes that are closer than " + (spResults.distance - 20) + " pixels on-screen.");
+
+    if (memory == true) {
+      showDifference();
+    }
+}
+
+function showDifference() {
+  svg.selectAll("line.difference")
+  .data(nodes)
+  .enter()
+  .append("line")
+  .attr("class", "difference")
+  .attr("marker-end", "url(#arrowhead)")
+  .style("stroke", "#477519")
+  .style("stroke-width", "2px")
+  .style("stroke-opacity", .5)
+  .attr("x1", function(d) {return d.lastX})
+  .attr("x2", function(d) {return d.lastX})
+  .attr("y1", function(d) {return d.lastY})
+  .attr("y2", function(d) {return d.lastY});
+
+  svg.selectAll("line.difference")
+  .transition()
+  .duration(1000)
+  .attr("x1", function(d) {return d.lastX})
+  .attr("x2", function(d) {return d.x})
+  .attr("y1", function(d) {return d.lastY})
+  .attr("y2", function(d) {return d.y})
+
+}
+
+function spatialProblem() {
+  var closeNodes = [];
+
+//We can decrement the ego network size
+var egoNetworkSize = 5;
+var kill = 0;
+while (closeNodes.length == 0 && kill < 10) {
+  console.log(kill);
+  kill++;
+egoNetworkSize--;
+
+var computedEgoObject = findEgoNetwork(0, egoNetworkSize, false,"aggregate");
+var problemDistance = 20;
+
+//The while statement means run this until we get to a distance where there are some nodes that violate this principle
+while (closeNodes.length == 0 && (problemDistance < 100 || egoNetworkSize == 2)) {  
+  for (x in nodes) {
+    for (y in nodes) {
+    if (computedEgoObject[nodes[x].id].indexOf(nodes[y].id) == -1) {
+      if (Math.sqrt(Math.pow((nodes[x].x - nodes[y].x),2) + Math.pow((nodes[x].y - nodes[y].y),2)) < problemDistance) {
+        closeNodes.push(nodes[x].id);
+        closeNodes.push(nodes[y].id);
+      }
+    }
+    }
+  }
+  problemDistance += 20;
+}
+}
+
+console.log({problemNodes: closeNodes, egoSize: egoNetworkSize, distance: problemDistance});
+
+return {problemNodes: closeNodes, egoSize: egoNetworkSize, distance: problemDistance}
+}
+
+function findEgoNetwork(searchNode, egoNetworkDegree, isDirected, searchType) {
+  var egoNetwork = {};
+  for (x in nodes) {
+    if (nodes[x].id == searchNode || searchType == "aggregate") {
+    egoNetwork[nodes[x].id] = [nodes[x].id];
+    var z = 0;
+    while (z < egoNetworkDegree) {
+      var thisEgoRing = egoNetwork[nodes[x].id].slice(0);
+    for (y in links) {
+        if (thisEgoRing.indexOf(links[y].source.id) > -1 && thisEgoRing.indexOf(links[y].target.id) == -1) {
+        egoNetwork[nodes[x].id].push(links[y].target.id)
+        }
+        else if (thisEgoRing.indexOf(links[y].source.id) == -1 && thisEgoRing.indexOf(links[y].target.id) > -1) {
+        egoNetwork[nodes[x].id].push(links[y].source.id)
+        }
+    }
+    z++;
+    }
+    }
+  }
+  if (searchType == "aggregate") {
+    //if it's checking the entire network, pass back the entire object of arrays
+    return egoNetwork;
+  }
+  else {
+    //Otherwise only give back the array that corresponds with the search node
+    return egoNetwork[searchNode];
+  }
+}
+
+function randomizeLayout() {
+  force.stop();
+  nodes.forEach(function(node) {
+    node.lastX = node.x;
+    node.lastY = node.y;
+    node.x = Math.random() * width;
+    node.px = Math.random() * width;
+    node.y = Math.random() * height;
+    node.py = Math.random() * height;
+  })
+  force.start();
+}
+
+function cleanUpNetwork() {
+    svg.selectAll("line.difference").remove();
+    svg.selectAll("circle.difference").remove();
+    svg.selectAll("line.differenceEdge").remove();
+
+    svg.selectAll("circle.node").style("fill", "#C2A3FF");
+
+    if (memory) {
+  svg.selectAll("circle.difference")
+  .data(nodes)
+  .enter()
+  .insert("circle", "circle")
+  .attr("class", "difference")
+  .attr("r", 10)
+  .style("fill", "#C2A3FF")
+  .attr("cx", function(d) {return d.lastX})
+  .attr("cy", function(d) {return d.lastY})
+  .transition()
+  .duration(1500)
+  .attr("r", 5)
+  .style("fill", "#477519")
+  .style("fill-opacity", .5);
+
+svg.selectAll("line.differenceEdge")
+  .data(links)
+  .enter()
+  .insert("line", "circle")
+  .attr("class", "differenceEdge")
+  .style("stroke", "black")
+  .attr("x1", function(d) {return d.source.lastX})
+  .attr("x2", function(d) {return d.target.lastX})
+  .attr("y1", function(d) {return d.source.lastY})
+  .attr("y2", function(d) {return d.target.lastY})
+  .transition()
+  .duration(1500)
+  .style("stroke-width", "1px")
+  .style("stroke-opacity", .15);
+
+
+    }
+}
+</script>
