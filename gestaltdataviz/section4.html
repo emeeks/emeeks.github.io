@@ -188,9 +188,7 @@ function createLineChart(olddata) {
 
   data = [];
   olddata.forEach(function(d,i) {
-    if (i%7 == 0) {
       data.push(d);
-    }
   })
   data.forEach(function(d) {
     d.approve = parseInt(d.b_a);
