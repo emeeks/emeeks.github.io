@@ -1,0 +1,526 @@
+
+<!DOCTYPE html>
+
+<head>
+  <title>Gestalt Principles for Data Visualization: Figure/Ground and Metastability</title>
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:creator" content="@Elijah_Meeks">
+  <meta name="twitter:title" content="Gestalt Principles for Data Visualization: Figure/Ground and Metastability">
+  <meta name="twitter:description" content="How metastability and distinguishing between figure and ground influence data visualization.">
+  <meta name="twitter:image:src" content="http://emeeks.github.io/gestaltdataviz/gestalt4.png">
+</head>
+<meta charset="utf-8">
+<style>
+
+body{
+  width: 900px;
+  margin: 0px auto;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+#container, #container2{
+  position: relative;
+  width: 100%;
+  overflow: auto;
+}
+
+#sections, #sections2{
+  width: 340px;
+  float: left;
+}
+
+#sections > div, #sections2 > div{
+  background: white;
+  opacity: .2;
+  margin-bottom:120px;
+}
+
+#sections > div.graph-scroll-active, #sections2 > div.graph-scroll-active{
+  opacity: 1;
+}
+
+
+#graph, #graph2{
+  float: left;
+  margin-left: 40px;
+}
+
+#graph.graph-scroll-fixed, #graph2.graph-scroll-fixed{
+  position: fixed;
+  top: 0px;
+  margin-left: 380px;
+}
+
+#graph.graph-scroll-below, #graph2.graph-scroll-below {
+  position: absolute;
+  bottom: 0px;
+  margin-left: 380px;
+}
+
+h1{
+  margin: 50px 50px 0;
+}
+
+#title {
+
+}
+
+#subtitle {
+  color: #565656;
+  text-align: center;
+}
+
+h1, h3{
+  text-align: center;
+}
+
+#author {
+  color: darkgray;
+  height: 1200px;
+}
+
+.mono{
+  font-family: monospace;
+}
+
+svg{
+  background-color: #eee;
+  margin-top: 20px;
+}
+
+path.domain {
+  fill: none;
+}
+
+g.tick > line {
+  stroke: white;
+  stroke-width: 1px;
+}
+
+</style>
+<body>
+<h1 id="title">Gestalt Principles for Data Visualization</h1>
+<h2 id="subtitle">Figure/Ground and Metastability</h2>
+<div id='container'>
+  <div id='sections'>
+
+    <div>
+      <h3>Introduction</h3>
+      <p>The classic examples of figure/ground and metastability principles in gestalt literature involve representations of human faces or familiar objects, and so it might not seem that they have bearing on data visualization. But the graphical elements that make up a data visualization, even a simple one like a line chart, can present some ambiguity as to what the figure is. By recognizing that, a designer can shift a reader's attention from one figure within the chart to another.</p>
+      <p>To illustrate figure/ground, we have a bar chart, or two bar charts, depending on how you look at it.</p>
+    </div>
+
+    <div>
+      <h3>Figure/Ground</h3>
+      <p>Simply by outlining the rectangles in the region that could be a horizontal bar chart, we establish it as the figure and the orange area, which has a stronger hue and saturation signal, recedes into the background.</p>
+    </div>
+
+    <div>
+      <p>If we reverse this process, and use outlines to create a horizontal bar chart, then the reverse occurs. The pink region recedes and becomes the ground while the orange region becomes the figure. In either case, metastability issues are present both because of the strong color signals and our memory of the chart without outlines and in its previous horizontal bar chart form.</p>
+    </div>
+
+    <div>
+      <p>Transitioning between the two. We use past experience to signal figure from ground with a neutral hue, low saturation color like light gray. This reduces the prominence of the secondary bar chart region, even when the charts are shown in animated succession.</p>
+      <p>But this may seem like a contrived example, and not indicative of real figure/ground and metastability issues at play in data visualization. After all, it's rare that someone uses a strong hue, highly saturated background color, or constrains a bar chart such that there is a second possible bar chart in the same area.</p>
+    </div>
+
+    <div>
+      <h3>Implied Figure/Ground in Line Charts</h3>
+      <p>Here we see a line chart of approval ratings of the last two US presidential administrations correlated over the course of the administration until early April of the seventh year. Approval ratings of the Bush administration are in green and the Obama administration in red. The ground seems obvious, given the axis and the muted background color, but the reader naturally transitions between three figures displayed.</p>
+      </div>
+
+    <div>
+      <p>The first two figures are the area under the lines. Line charts like these implicitly enclose an area, which is explicitly shown on the right. As readers interrogate the story of one administration or the other, they measure the increase and decrease in approval ratings against a scale enumerated by the axis. The boost in approval during the Bush administration after 9/11 is one of the phenomena prominent in this kind of figure. In this way, the lines are relative to the bottom of the chart and self-relative to the slope of the lines locally.</p>
+    </div>
+
+    <div>
+      <p>A third view is in the region constrained by the two lines themselves. When highlighted graphically, as is done on the right, this is known as a difference chart, first seen from Playfair in the 18th century. Now we see periods in the administrations when the performance of one administration, as measured by public approval, were better or worse than the other.</p>
+    </div>
+
+    <div>
+      <h3>Conclusion</h3>
+      <p>The critical point to recognize is that the phenomenon being graphically represented by shading the difference between approval ratings existed all along in the chart. By shading those regions, we emphasize it and better distinguish it from the other possible figures being represented in the chart. Even when more explicitly highlighting this figure, the other figures, that is to say the performance of each administration as a story of the administration alone, still exist perceptually to the user, and they can visually switch between those figures. The job of data visualization is to facilitate this switching when necessary, as well as to deccentuate possible figures so as to reduce metastability when that will disrupt the desired reading.<p>
+      <p>Data from the<a href="http://www.presidency.ucsb.edu/data/popularity.php">American Presidency Project at UCSB</a> and <a href="http://www.gallup.com/poll/116500/presidential-approval-ratings-george-bush.aspx">Gallup</a>.</p>
+    </div>
+      <div style="opacity:1;">
+        <h3 id='author'>Elijah Meeks - April 2015</h3>
+      </div>
+  </div>
+    <div id='graph'></div>
+  </div>
+</div>
+
+
+</div>
+
+</body>
+
+
+<script src="d3.v3.js"></script>
+<script src="graph-scroll.js"></script>
+<script>
+
+var width = 510,
+    height = 500;
+
+var vBarchartData = [0,1,2,3,4];
+var hBarchartData = [5,4,3,2,1];
+
+var xScale = d3.scale.linear().domain([0,10]).range([40,760]);
+var yScale = d3.scale.linear().domain([0,10]).range([60,830]);
+
+var svg = d3.select('#graph')
+    .append('svg')
+    .attr({width: width, height: height});
+
+svg.append("g").attr("class", "barchart").attr("transform", "translate(0,500)");
+
+barchart = svg.select("g.barchart");
+
+  svg.append("g").attr("class","linechart").style("opacity", 0);
+
+  linechart = d3.select("g.linechart");
+
+
+barchart.selectAll("rect.vertical")
+.data(vBarchartData)
+.enter()
+.append("rect")
+.attr("class", "vertical")
+.attr("fill", "red")
+.style("stroke", "black")
+.style("stroke-width", "1px")
+.style("stroke-opacity", 0)
+.attr("x", function(d,i) {return i * 102})
+.attr("y", function(d) {return -(d * 100)})
+.attr("height", function(d) {return (d * 100)})
+.attr("width", 102)
+;
+
+barchart.selectAll("rect.horizontal")
+.data(hBarchartData)
+.enter()
+.append("rect")
+.attr("class", "horizontal")
+.attr("fill", "green")
+.style("stroke", "black")
+.style("stroke-width", "1px")
+.style("stroke-opacity", 0)
+.attr("y", function(d,i) {return (i * 100) - 500})
+.attr("x", 0)
+.attr("width", function(d) {return (d * 102)})
+.attr("height", 100)
+;
+
+var gs = graphScroll()
+    .container(d3.select('#container'))
+    .graph(d3.selectAll('#graph'))
+    .sections(d3.selectAll('#sections > div'))
+    .on('active', function(i){
+      console.log("Active", i);
+      switch(i) {
+        case 0:
+        initialBarchart();
+        break;
+        case 1:
+        initialBarchart();
+        verticalFigure();
+        break;
+        case 2:
+        initialBarchart();
+        horizontalFigure();
+        break;
+        case 3:
+        initialBarchart();
+        animatedFigureGround();
+      
+        break;
+        case 4:
+        lineChartActive();
+        linesOnly();
+        break;
+
+        case 5:
+        lineChartActive();
+        areasOnly();
+        break;
+
+        case 6:
+        lineChartActive();
+        differenceOnly();
+        break;
+
+        case 7:
+        lineChartActive();
+        break;
+      }
+
+    })
+
+d3.json("bush_obama.json", createLineChart);
+
+function createLineChart(olddata) {
+
+  data = [];
+  olddata.forEach(function(d,i) {
+    if (i%7 == 0) {
+      data.push(d);
+    }
+  })
+  data.forEach(function(d) {
+    d.approve = parseInt(d.b_a);
+    d.disapprove = parseInt(d.o_a);
+    d.approve_avg = parseInt(d.b_a);
+    d.disapprove_avg = parseInt(d.o_a);
+  });
+
+  approveExtent = d3.extent(data, function(d) {return d.approve});
+  disapproveExtent = d3.extent(data, function(d) {return d.disapprove});
+
+  chartExtent = ([Math.min(approveExtent[0],disapproveExtent[0]) - 5, Math.max(approveExtent[1],disapproveExtent[1]) + 5]);
+
+  xScale = d3.scale.linear().domain([data.length, 0]).range([20,480]);
+  yScale = d3.scale.linear().domain(chartExtent).range([480,20]);
+
+  var axis = d3.svg.axis().scale(yScale)
+.orient("right")
+.ticks(8)
+.tickSize(-460)
+.tickSubdivide(true);
+
+  approveLine = d3.svg.line().x(function(d,i) {return xScale(i)}).y(function(d) {return yScale(d.approve_avg)}).interpolate("linear");
+  disapproveLine = d3.svg.line().x(function(d,i) {return xScale(i)}).y(function(d) {return yScale(d.disapprove_avg)}).interpolate("linear");
+
+  approveArea = d3.svg.area().x(function(d,i) {return xScale(i)})
+  .y(function(d) {return yScale(d.approve_avg)})
+  .y0(yScale(chartExtent[0]))
+  .interpolate("linear");
+  
+  disapproveArea = d3.svg.area().x(function(d,i) {return xScale(i)})
+  .y(function(d) {return yScale(d.disapprove_avg)})
+  .y0(yScale(chartExtent[0]))
+  .interpolate("linear");
+
+  approveDifference = d3.svg.area().x(function(d,i) {return xScale(i)})
+  .y(function(d) {return yScale(Math.max(d.approve_avg,d.disapprove_avg))})
+  .y0(function(d) {return yScale(d.disapprove_avg)})
+  .interpolate("linear");
+  
+  disapproveDifference = d3.svg.area().x(function(d,i) {return xScale(i)})
+  .y(function(d) {return yScale(Math.max(d.disapprove_avg,d.approve_avg))})
+  .y0(function(d) {return yScale(d.approve_avg)})
+  .interpolate("linear");
+
+  linechart.append("g").attr("transform", "translate(480,0)").call(axis);
+
+  linechart.append("path")
+  .style("fill", "green")
+  .style("fill-opacity", .5)
+  .attr("class", "difference")
+  .attr("d", approveDifference(data))
+
+  linechart.append("path")
+  .style("fill", "red")
+  .style("fill-opacity", .5)
+  .attr("class", "difference")
+  .attr("d", disapproveDifference(data))
+
+  linechart.append("path")
+  .style("fill", "darkred")
+  .style("fill-opacity", .75)
+  .attr("class", "area approve")
+  .attr("d", approveArea(data))
+
+  linechart.append("path")
+  .style("fill", "darkgreen")
+  .style("fill-opacity", .75)
+  .attr("class", "area disapprove")
+  .attr("d", disapproveArea(data))
+
+  linechart.append("path")
+  .style("fill", "none")
+  .style("stroke-width", "1px")
+  .style("stroke", "darkgreen")
+  .attr("class", "line")
+  .attr("d", approveLine(data))
+
+  linechart.append("path")
+  .style("fill", "none")
+  .style("stroke-width", "1px")
+  .style("stroke", "darkred")
+  .attr("class", "line")
+  .attr("d", disapproveLine(data))
+
+}
+
+function initialBarchart() {
+  linechart
+    .transition("animated")
+    .duration(1000)
+    .style("opacity", 0);
+  
+  barchart
+    .transition("animated")
+    .duration(1000)
+    .style("opacity", 1);
+
+  barchart.selectAll("rect")
+    .transition("stroke")
+    .duration(1000)
+    .style("stroke-opacity", 0);
+
+  barchart.selectAll("rect.vertical")
+    .style("fill", "pink");
+  barchart.selectAll("rect.horizontal")
+    .style("fill", "orange");
+}
+
+function verticalFigure() {
+  barchart.selectAll("rect.vertical")
+  .transition("stroke")
+  .duration(1000)
+    .style("stroke-opacity", 1)
+    .style("stroke", "black");
+}
+
+function horizontalFigure() {
+  barchart.selectAll("rect.horizontal")
+  .transition("stroke")
+  .duration(1000)
+    .style("stroke-opacity", 1)
+    .style("stroke", "black");
+}
+
+function animatedFigureGround() {
+  initialBarchart();
+
+  barchart.selectAll("rect")
+  .transition("animated")
+  .duration(500)
+  .each("end", vertAnimated);
+
+  function vertAnimated() {
+    barchart.selectAll("rect.horizontal")
+      .transition("animated")
+      .duration(1000)
+      .style("fill", "#EEE")
+      .style("stroke-opacity", 0);
+
+    barchart.selectAll("rect.vertical")
+      .transition("animated")
+      .duration(1000)
+      .style("fill", "darkred")
+      .style("stroke-opacity", 1)
+      .transition("animated")
+      .delay(2000)
+      .each("end", horiAnimated)
+      ;
+  }
+
+  function horiAnimated() {
+    barchart.selectAll("rect.vertical")
+      .transition("animated")
+      .duration(1000)
+      .style("fill", "#EEE")
+      .style("stroke-opacity", 0);
+
+    barchart.selectAll("rect.horizontal")
+      .transition("animated")
+      .duration(1000)
+      .style("fill", "darkred")
+      .style("stroke-opacity", 1)
+      .transition("animated")
+      .delay(2000)
+      .each("end", vertAnimated);
+  }
+}
+
+function lineChartActive() {
+  linechart
+    .transition("animated")
+    .duration(1000)
+    .style("opacity", 1);
+
+  barchart
+    .transition("animated")
+    .duration(1000)
+    .style("opacity", 0);
+
+      barchart.selectAll("rect")
+      .transition("animated")
+      .duration(1000)
+      .style("fill", "#EEE")
+      .style("stroke-opacity", 0);
+}
+
+function linesOnly() {
+  linechart.selectAll("path.area, path.difference")
+  .transition("animated")
+  .duration(1000)
+  .style("opacity", 0);
+
+  linechart.selectAll("path.line")
+  .transition("animated")
+  .duration(1000)
+  .style("stroke-width", "2px")
+  .style("opacity", 1);
+
+}
+
+function areasOnly() {
+  linechart.selectAll("path.line, path.difference")
+  .transition("animated")
+  .duration(1000)
+  .style("opacity", 0);
+
+  linechart.selectAll("path.area")
+  .transition("animated")
+  .duration(1000)
+  .style("opacity", 1)
+  .each("end", firstAnimated);
+
+  function firstAnimated() {
+    linechart.selectAll("path.area.approve")
+      .transition("animated")
+      .duration(1000)
+      .style("fill-opacity", 1);
+
+    linechart.selectAll("path.area.disapprove")
+      .transition("animated")
+      .duration(1000)
+      .style("fill-opacity", 0)
+      .transition("animated")
+      .delay(2000)
+      .each("end", secondAnimated)
+      ;
+  }
+
+  function secondAnimated() {
+    linechart.selectAll("path.area.disapprove")
+      .transition("animated")
+      .duration(1000)
+      .style("fill-opacity", 1);
+
+    linechart.selectAll("path.area.approve")
+      .transition("animated")
+      .duration(1000)
+      .style("fill-opacity", 0)
+      .transition("animated")
+      .delay(2000)
+      .each("end", firstAnimated);
+      ;
+  }
+}
+
+function differenceOnly() {
+  linechart.selectAll("path.line, path.difference")
+    .transition("animated")
+    .duration(1000)
+    .style("opacity", 1);
+
+  linechart.selectAll("path.area")
+    .transition("animated")
+    .duration(1000)
+    .style("opacity", 0);
+}
+</script>
