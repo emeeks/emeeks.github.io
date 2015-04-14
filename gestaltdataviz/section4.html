@@ -106,7 +106,7 @@ g.tick > line {
 
     <div>
       <h3>Introduction</h3>
-      <p>The classic examples of figure/ground and metastability principles in gestalt literature involve representations of human faces or familiar objects, and so it might not seem that they have bearing on data visualization. But the graphical elements that make up a data visualization, even a simple one like a line chart, can present some ambiguity as to what the figure is. By recognizing that, a designer can shift a reader's attention from one figure within the chart to another.</p>
+      <p>The classic examples of figure/ground and metastability in gestalt literature involve representations of human faces or familiar objects, and so it might not seem that they have bearing on data visualization. But the graphical elements that make up a data visualization, even a simple one like a line chart, can present some ambiguity as to what the figure is. Due to this ambiguity, a reader can unintentionally shift between the available discernable figures in such a way as to reduce the effectiveness of the data visualization By recognizing this, a designer can focus a reader's attention or influence the shifting attention in such a way that complements rather than competes with the design of the chart.</p>
       <p>To illustrate figure/ground, we have a bar chart, or two bar charts, depending on how you look at it.</p>
     </div>
 
@@ -116,7 +116,7 @@ g.tick > line {
     </div>
 
     <div>
-      <p>If we reverse this process, and use outlines to create a horizontal bar chart, then the reverse occurs. The pink region recedes and becomes the ground while the orange region becomes the figure. In either case, metastability issues are present both because of the strong color signals and our memory of the chart without outlines and in its previous horizontal bar chart form.</p>
+      <p>If we reverse this process, and use outlines to create a horizontal bar chart, then the reverse occurs. The pink region recedes and becomes the ground while the orange region becomes the figure. In either case, metastability issues are present both because of the strong color signals and our memory of the chart in its previous horizontal bar chart form.</p>
     </div>
 
     <div>
@@ -126,7 +126,7 @@ g.tick > line {
 
     <div>
       <h3>Implied Figure/Ground in Line Charts</h3>
-      <p>Here we see a line chart of approval ratings of the last two US presidential administrations correlated over the course of the administration until early April of the seventh year. Approval ratings of the Bush administration are in green and the Obama administration in red. The ground seems obvious, given the axis and the muted background color, but the reader naturally transitions between three figures displayed.</p>
+      <p>Here we see a line chart of approval ratings of the last two US presidential administrations correlated over the course of the administrations from their start until early April of the seventh year. Approval ratings of the Bush administration are in green and the Obama administration in red. The ground seems obvious, given the axis and the muted background color, but the reader naturally transitions between three figures displayed.</p>
       </div>
 
     <div>
@@ -135,12 +135,13 @@ g.tick > line {
 
     <div>
       <p>A third view is in the region constrained by the two lines themselves. When highlighted graphically, as is done on the right, this is known as a difference chart, first seen from Playfair in the 18th century. Now we see periods in the administrations when the performance of one administration, as measured by public approval, were better or worse than the other.</p>
+      <p>The number of pieces of this new figure depend on your story. If it's simply trying to point out the difference in perception, you would highlight this region in a neutral color. Here, though, the difference is highlighted in the color indicating which administration had a higher approval rating during that period. In effect, this creates two figures from one, with color indicating similar periods. Depending on how one interprets the resulting graphic, there might also be three or more figures made up of regions of commonality throughout these periods.</p>
     </div>
 
     <div>
       <h3>Conclusion</h3>
-      <p>The critical point to recognize is that the phenomenon being graphically represented by shading the difference between approval ratings existed all along in the chart. By shading those regions, we emphasize it and better distinguish it from the other possible figures being represented in the chart. Even when more explicitly highlighting this figure, the other figures, that is to say the performance of each administration as a story of the administration alone, still exist perceptually to the user, and they can visually switch between those figures. The job of data visualization is to facilitate this switching when necessary, as well as to deccentuate possible figures so as to reduce metastability when that will disrupt the desired reading.<p>
-      <p>Data from the<a href="http://www.presidency.ucsb.edu/data/popularity.php">American Presidency Project at UCSB</a> and <a href="http://www.gallup.com/poll/116500/presidential-approval-ratings-george-bush.aspx">Gallup</a>.</p>
+      <p>The phenomenon being graphically represented by shading the difference between approval ratings existed all along in the chart. By shading those regions, we emphasize it and better distinguish it from the other possible figures being represented in the chart. Even when more explicitly highlighting this figure, the other figures, that is to say the performance of each administration as a story of the administration alone, still exist perceptually to the user, and they can visually switch between those figures. The job of data visualization is to facilitate this switching when necessary, as well as to deccentuate possible figures so as to reduce metastability when that will disrupt the desired reading.<p>
+      <p style="font-size:12px;">Data from the <a href="http://www.presidency.ucsb.edu/data/popularity.php">American Presidency Project at UCSB</a> and <a href="http://www.gallup.com/poll/116500/presidential-approval-ratings-george-bush.aspx">Gallup</a>.</p>
     </div>
       <div style="opacity:1;">
         <h3 id='author'>Elijah Meeks - April 2015</h3>
@@ -163,13 +164,13 @@ g.tick > line {
 var width = 510,
     height = 500;
 
-var vBarchartData = [0,1,2,3,4];
-var hBarchartData = [5,4,3,2,1];
+vBarchartData = [0,1,2,3,4];
+hBarchartData = [5,4,3,2,1];
 
-var xScale = d3.scale.linear().domain([0,10]).range([40,760]);
-var yScale = d3.scale.linear().domain([0,10]).range([60,830]);
+xScale = d3.scale.linear().domain([0,10]).range([40,760]);
+yScale = d3.scale.linear().domain([0,10]).range([60,830]);
 
-var svg = d3.select('#graph')
+svg = d3.select('#graph')
     .append('svg')
     .attr({width: width, height: height});
 
@@ -180,82 +181,6 @@ barchart = svg.select("g.barchart");
   svg.append("g").attr("class","linechart").style("opacity", 0);
 
   linechart = d3.select("g.linechart");
-
-
-barchart.selectAll("rect.vertical")
-.data(vBarchartData)
-.enter()
-.append("rect")
-.attr("class", "vertical")
-.attr("fill", "red")
-.style("stroke", "black")
-.style("stroke-width", "1px")
-.style("stroke-opacity", 0)
-.attr("x", function(d,i) {return i * 102})
-.attr("y", function(d) {return -(d * 100)})
-.attr("height", function(d) {return (d * 100)})
-.attr("width", 102)
-;
-
-barchart.selectAll("rect.horizontal")
-.data(hBarchartData)
-.enter()
-.append("rect")
-.attr("class", "horizontal")
-.attr("fill", "green")
-.style("stroke", "black")
-.style("stroke-width", "1px")
-.style("stroke-opacity", 0)
-.attr("y", function(d,i) {return (i * 100) - 500})
-.attr("x", 0)
-.attr("width", function(d) {return (d * 102)})
-.attr("height", 100)
-;
-
-var gs = graphScroll()
-    .container(d3.select('#container'))
-    .graph(d3.selectAll('#graph'))
-    .sections(d3.selectAll('#sections > div'))
-    .on('active', function(i){
-      console.log("Active", i);
-      switch(i) {
-        case 0:
-        initialBarchart();
-        break;
-        case 1:
-        initialBarchart();
-        verticalFigure();
-        break;
-        case 2:
-        initialBarchart();
-        horizontalFigure();
-        break;
-        case 3:
-        initialBarchart();
-        animatedFigureGround();
-      
-        break;
-        case 4:
-        lineChartActive();
-        linesOnly();
-        break;
-
-        case 5:
-        lineChartActive();
-        areasOnly();
-        break;
-
-        case 6:
-        lineChartActive();
-        differenceOnly();
-        break;
-
-        case 7:
-        lineChartActive();
-        break;
-      }
-
-    })
 
 d3.json("bush_obama.json", createLineChart);
 
@@ -351,7 +276,90 @@ function createLineChart(olddata) {
   .attr("class", "line")
   .attr("d", disapproveLine(data))
 
+  continueViz();
 }
+
+function continueViz() {
+  barchart.selectAll("rect.vertical")
+.data(vBarchartData)
+.enter()
+.append("rect")
+.attr("class", "vertical")
+.attr("fill", "red")
+.style("stroke", "black")
+.style("stroke-width", "1px")
+.style("stroke-opacity", 0)
+.attr("x", function(d,i) {return i * 102})
+.attr("y", function(d) {return -(d * 100)})
+.attr("height", function(d) {return (d * 100)})
+.attr("width", 102)
+;
+
+barchart.selectAll("rect.horizontal")
+.data(hBarchartData)
+.enter()
+.append("rect")
+.attr("class", "horizontal")
+.attr("fill", "green")
+.style("stroke", "black")
+.style("stroke-width", "1px")
+.style("stroke-opacity", 0)
+.attr("y", function(d,i) {return (i * 100) - 500})
+.attr("x", 0)
+.attr("width", function(d) {return (d * 102)})
+.attr("height", 100)
+;
+
+var gs = graphScroll()
+    .container(d3.select('#container'))
+    .graph(d3.selectAll('#graph'))
+    .sections(d3.selectAll('#sections > div'))
+    .on('active', function(i){
+      console.log("Active", i);
+      switch(i) {
+        case 0:
+        initialBarchart();
+        break;
+        case 1:
+        initialBarchart();
+        verticalFigure();
+        break;
+        case 2:
+        initialBarchart();
+        horizontalFigure();
+        break;
+        case 3:
+        initialBarchart();
+        animatedFigureGround();
+      
+        break;
+        case 4:
+        lineChartActive();
+        linesOnly();
+        break;
+
+        case 5:
+        lineChartActive();
+        areasOnly();
+        break;
+
+        case 6:
+        lineChartActive();
+        differenceOnly();
+        break;
+
+        case 7:
+        lineChartActive();
+        differenceOnly();
+        break;
+
+        case 8:
+        lineChartActive();
+        differenceOnly();
+        break;
+      }
+
+    })
 
 function initialBarchart() {
   linechart
@@ -412,7 +420,7 @@ function animatedFigureGround() {
       .style("fill", "darkred")
       .style("stroke-opacity", 1)
       .transition("animated")
-      .delay(2000)
+      .delay(5000)
       .each("end", horiAnimated)
       ;
   }
@@ -522,5 +530,6 @@ function differenceOnly() {
     .transition("animated")
     .duration(1000)
     .style("opacity", 0);
+}
 }
 </script>
