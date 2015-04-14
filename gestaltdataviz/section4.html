@@ -106,7 +106,7 @@ g.tick > line {
 
     <div>
       <h3>Introduction</h3>
-      <p>The classic examples of figure/ground and metastability in gestalt literature involve representations of human faces or familiar objects, and so it might not seem that they have bearing on data visualization. But the graphical elements that make up a data visualization, even a simple one like a line chart, can present some ambiguity as to what the figure is. Due to this ambiguity, a reader can unintentionally shift between the available discernable figures in such a way as to reduce the effectiveness of the data visualization. By recognizing this, a designer can focus a reader's attention or influence the shifting attention in such a way that complements rather than competes with the design of the chart.</p>
+      <p>The classic examples of figure/ground and metastability in gestalt literature involve representations of human faces or familiar objects, and so it might not seem that they have bearing on data visualization. But the graphical elements that make up a data visualization, even a simple one like a line chart, can present some ambiguity as to what the figure is. Due to this ambiguity, a reader can unintentionally shift between the available discernable figures in such a way as to reduce the effectiveness of the data visualization. By recognizing this, a designer can focus a reader's attention--or influence the shifting attention--in such a way that complements rather than competes with the design of the chart.</p>
       <p>To illustrate figure/ground, we have a bar chart, or two bar charts, depending on how you look at it.</p>
     </div>
 
@@ -211,28 +211,28 @@ function createLineChart(olddata) {
 .tickSize(-460)
 .tickSubdivide(true);
 
-  approveLine = d3.svg.line().x(function(d,i) {return xScale(i)}).y(function(d) {return yScale(d.approve_avg)}).interpolate("linear");
-  disapproveLine = d3.svg.line().x(function(d,i) {return xScale(i)}).y(function(d) {return yScale(d.disapprove_avg)}).interpolate("linear");
+  approveLine = d3.svg.line().x(function(d,i) {return xScale(i)}).y(function(d) {return yScale(d.approve_avg)}).interpolate("basis");
+  disapproveLine = d3.svg.line().x(function(d,i) {return xScale(i)}).y(function(d) {return yScale(d.disapprove_avg)}).interpolate("basis");
 
   approveArea = d3.svg.area().x(function(d,i) {return xScale(i)})
   .y(function(d) {return yScale(d.approve_avg)})
   .y0(yScale(chartExtent[0]))
-  .interpolate("linear");
+  .interpolate("basis");
   
   disapproveArea = d3.svg.area().x(function(d,i) {return xScale(i)})
   .y(function(d) {return yScale(d.disapprove_avg)})
   .y0(yScale(chartExtent[0]))
-  .interpolate("linear");
+  .interpolate("basis");
 
   approveDifference = d3.svg.area().x(function(d,i) {return xScale(i)})
   .y(function(d) {return yScale(Math.max(d.approve_avg,d.disapprove_avg))})
   .y0(function(d) {return yScale(d.disapprove_avg)})
-  .interpolate("linear");
+  .interpolate("basis");
   
   disapproveDifference = d3.svg.area().x(function(d,i) {return xScale(i)})
   .y(function(d) {return yScale(Math.max(d.disapprove_avg,d.approve_avg))})
   .y0(function(d) {return yScale(d.approve_avg)})
-  .interpolate("linear");
+  .interpolate("basis");
 
   linechart.append("g").attr("transform", "translate(480,0)").call(axis);
 
@@ -522,6 +522,7 @@ function differenceOnly() {
   linechart.selectAll("path.line, path.difference")
     .transition("animated")
     .duration(1000)
+    .style("stroke-width", "1px")
     .style("opacity", 1);
 
   linechart.selectAll("path.area")
